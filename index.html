@@ -279,7 +279,7 @@
                     <!-- BOTÓN WHATSAPP -->
                     <div class="pt-4">
                         <button type="button" onclick="enviarPedidoWhatsApp()" class="w-full bg-gradient-to-r from-emerald-500 via-green-500 to-emerald-600 text-slate-950 font-black py-4 px-6 rounded-2xl shadow-xl shadow-green-600/20 hover:scale-[1.02] active:scale-[0.98] transition flex items-center justify-center gap-2.5 cursor-pointer text-sm sm:text-base">
-                            <span class="text-xl">📲</span> Enviar Datos y Diseño por WhatsApp
+                            <span class="text-xl">📲</span> Descargar Mockup y Enviar por WhatsApp
                         </button>
                     </div>
 
@@ -526,19 +526,33 @@
                 return;
             }
 
-            const texto = document.getElementById('input-texto').value || "Ninguno";
-            const selectFuente = document.getElementById('select-fuente');
-            const fuente = selectFuente.options[selectFuente.selectedIndex].text;
-            const selectColor = document.getElementById('select-color-texto');
-            const colorTexto = selectColor.options[selectColor.selectedIndex].text;
-            const ubicacion = document.getElementById('select-ubicacion').value;
-            const selectMarco = document.getElementById('select-marco');
-            const estiloMarco = selectMarco.options[selectMarco.selectedIndex].text;
-            const nombreArchivo = archivoInput.files[0].name;
+            // OCULTAR GUÍAS Y GENERAR LA IMAGEN HD DEL MOCKUP PARA AUTODESCARTARLA
+            const estabaLimpio = modoLimpioActivo;
+            if (!estabaLimpio) mockupContainer.classList.add('modo-limpio');
 
-            const telefonoWhatsApp = "34650013500";
+            html2canvas(mockupContainer, { backgroundColor: null, scale: 2, useCORS: true }).then(canvas => {
+                if (!estabaLimpio) mockupContainer.classList.remove('modo-limpio');
 
-            let mensaje = `📋 *NUEVO PEDIDO - ELOI'S CUSTOM GEAR*
+                // 1. DESCARGAR AUTOMÁTICAMENTE EL MOCKUP GENERADO AL ORDENADOR/MÓVIL DEL CLIENTE
+                const enlaceDescarga = document.createElement('a');
+                enlaceDescarga.download = `Mockup-${productoActual.replace(/\s+/g, '-')}-${Date.now()}.png`;
+                enlaceDescarga.href = canvas.toDataURL('image/png');
+                enlaceDescarga.click();
+
+                // 2. PREPARAR DATOS PARA WHATSAPP
+                const texto = document.getElementById('input-texto').value || "Ninguno";
+                const selectFuente = document.getElementById('select-fuente');
+                const fuente = selectFuente.options[selectFuente.selectedIndex].text;
+                const selectColor = document.getElementById('select-color-texto');
+                const colorTexto = selectColor.options[selectColor.selectedIndex].text;
+                const ubicacion = document.getElementById('select-ubicacion').value;
+                const selectMarco = document.getElementById('select-marco');
+                const estiloMarco = selectMarco.options[selectMarco.selectedIndex].text;
+                const nombreArchivo = archivoInput.files[0].name;
+
+                const telefonoWhatsApp = "34650013500";
+
+                let mensaje = `📋 *NUEVO PEDIDO - ELOI'S CUSTOM GEAR*
 
 👤 *DATOS DE FACTURACIÓN Y ENVÍO:*
 • Nombre: ${nombreNombre}
@@ -554,10 +568,15 @@
 • Texto añadido: "${texto}"
 • Tipografía: ${fuente} (${colorTexto})
 
-*(Nota: Adjunto también la imagen original y la captura del mockup generado en este chat de WhatsApp para proceder con el pago y producción)*`;
+⚠️ *¡IMPORTANTE:* El sistema acaba de descargar automáticamente en tu dispositivo la **imagen del Mockup** generada. Por favor, adjúntala aquí junto con tu **archivo original** para proceder con el pago y producción!`;
 
-            const urlWap = `https://wa.me/${telefonoWhatsApp}?text=${encodeURIComponent(mensaje)}`;
-            window.open(urlWap, '_blank');
+                const urlWap = `https://wa.me/${telefonoWhatsApp}?text=${encodeURIComponent(mensaje)}`;
+                window.open(urlWap, '_blank');
+
+            }).catch(err => {
+                if (!estabaLimpio) mockupContainer.classList.remove('modo-limpio');
+                alert("Hubo un error al preparar los archivos de diseño.");
+            });
         }
     </script>
 </body>
