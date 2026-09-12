@@ -3,450 +3,239 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eloi's Custom Gear | Estudio de Personalización</title>
+    <title>Eloi's Custom Gear - Personalizador Avanzado</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            50: '#fdf8f6',
-                            100: '#fbe8e6',
-                            500: '#e056fd',
-                            600: '#c0392b',
-                            700: '#962d22',
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Cinzel:wght@700&family=Montserrat:wght@400;700&family=Pacifico&family=Press+Start+2P&family=Permanent+Marker&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    
-    <!-- Html2Canvas -->
+    <!-- Librería para capturar el mockup -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-
-    <style>
-        .font-bungee { font-family: 'Bungee', cursive; }
-        .font-pacifico { font-family: 'Pacifico', cursive; }
-        .font-cinzel { font-family: 'Cinzel', serif; }
-        .font-marker { font-family: 'Permanent+Marker', cursive; }
-        .font-pixel { font-family: 'Press Start 2P', cursive; }
-        .font-montserrat { font-family: 'Montserrat', sans-serif; }
-        .font-roboto { font-family: 'Roboto', sans-serif; }
-    </style>
 </head>
-<body class="bg-slate-950 text-slate-100 font-montserrat min-h-screen flex flex-col justify-between">
+<body class="bg-slate-950 text-slate-100 min-h-screen p-4 md:p-8">
 
-    <!-- HEADER -->
-    <header class="bg-slate-900 border-b border-slate-800 sticky top-0 z-50 shadow-md">
-        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col sm:flex-row justify-between items-center gap-4">
-            <div class="flex items-center space-x-3">
-                <div class="bg-gradient-to-tr from-amber-500 to-rose-500 text-slate-950 font-black p-2.5 rounded-xl shadow-lg font-bungee text-xl tracking-wider">
-                    ECG
-                </div>
-                <div>
-                    <h1 class="text-xl font-black tracking-tight bg-gradient-to-r from-white via-slate-200 to-amber-400 bg-clip-text text-transparent">Eloi's Custom Gear</h1>
-                    <p class="text-xs text-slate-400">Estudio Profesional de DTF y Sublimación</p>
-                </div>
-            </div>
-            <div class="flex items-center gap-3">
-                <span class="text-xs px-3 py-1 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-full font-medium flex items-center gap-1.5">
-                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Sistema Activo
-                </span>
-            </div>
-        </div>
-    </header>
+    <div class="max-w-6xl mx-auto space-y-8">
+        <!-- Cabecera -->
+        <header class="text-center space-y-2">
+            <h1 class="text-3xl font-extrabold tracking-tight text-amber-400">Eloi's Custom Gear</h1>
+            <p class="text-sm text-slate-400">Diseña tu producto personalizado y haz tu pedido al instante</p>
+        </header>
 
-    <!-- MAIN CONTENT -->
-    <main class="max-w-7xl mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8 w-full flex-grow">
-        
-        <!-- COLUMNA IZQUIERDA: ÁREA DE VISTA PREVIA Y DISEÑO (7 Cols) -->
-        <div class="lg:col-span-7 flex flex-col gap-6">
-            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl flex flex-col items-center justify-center relative min-h-[480px] overflow-hidden group">
-                
-                <!-- Botón Modo Limpio -->
-                <div class="absolute top-4 right-4 z-20 flex gap-2">
-                    <button onclick="alternarModoLimpio()" id="btn-modo-limpio" title="Ocultar controles visuales para captura" class="bg-slate-800/80 hover:bg-slate-700 text-slate-300 p-2.5 rounded-xl backdrop-blur-sm border border-slate-700 transition shadow-lg">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                        </svg>
-                    </button>
-                </div>
-
-                <!-- CONTENEDOR DEL MOCKUP -->
-                <div id="mockup-container" class="relative w-full max-w-md aspect-square flex items-center justify-center p-4 transition-all duration-300 bg-slate-950/40 rounded-2xl border border-slate-800/50">
-                    
-                    <!-- IMAGEN BASE DEL SOPORTE (Con crossorigin y enlace directo seguro) -->
-                    <img id="imagen-soporte" crossorigin="anonymous" src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=800&q=80" alt="Soporte Personalizable" class="w-full h-full object-contain pointer-events-none select-none drop-shadow-2xl">
-
-                    <!-- ZONA ARRASTRABLE DEL LOGO -->
-                    <div id="zona-logo-flotante" class="absolute cursor-move select-none touch-none flex items-center justify-center p-2 z-10" style="left: 50%; top: 45%; transform: translate(-50%, -50%);">
-                        <div id="marco-imagen-wrapper" class="p-0 transition-all duration-300">
-                            <!-- Placeholder -->
-                            <div id="upload-placeholder" class="border-2 border-dashed border-slate-600 hover:border-amber-400 bg-slate-900/80 backdrop-blur-sm rounded-xl p-6 text-center flex flex-col items-center justify-center w-36 h-36 transition">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-amber-400 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                </svg>
-                                <span class="text-xs text-slate-300 font-semibold">Sube tu diseño</span>
-                            </div>
-                            <!-- Imagen Cargada -->
-                            <img id="img-preview" crossorigin="anonymous" class="hidden max-h-36 max-w-[150px] object-contain pointer-events-none drop-shadow-md" alt="Tu diseño">
-                        </div>
-                    </div>
-
-                    <!-- ZONA ARRASTRABLE DEL TEXTO -->
-                    <div id="zona-texto-flotante" class="absolute cursor-move select-none touch-none hidden p-1 z-20" style="left: 50%; top: 70%; transform: translate(-50%, -50%);">
-                        <span id="preview-texto" class="text-xl font-bold drop-shadow-md px-3 py-1 font-montserrat text-white">Tu Texto</span>
-                    </div>
-
-                </div>
-
-                <!-- Barra de Instrucciones -->
-                <div class="mt-4 flex items-center justify-between w-full px-4 text-xs text-slate-400 border-t border-slate-800/80 pt-4">
-                    <span>💡 <strong>Tip:</strong> Arrastra tu logo o texto libremente sobre la prenda.</span>
-                    <button onclick="generarVistaPrevia()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-4 py-2 rounded-xl transition shadow-lg flex items-center gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
-                        </svg>
-                        Previa HD
-                    </button>
-                </div>
-            </div>
-
-            <!-- Selector de Soportes -->
-            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl">
-                <h3 class="text-sm font-bold uppercase tracking-wider text-amber-400 mb-4">1. Elige tu Soporte</h3>
-                <div class="grid grid-cols-3 gap-4">
-                    <button onclick="cambiarSoporte('Camiseta', 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=800&q=80', 15.00)" class="soporte-btn border-2 border-amber-500 bg-slate-800/50 rounded-xl p-3 flex flex-col items-center gap-2 transition hover:border-amber-400">
-                        <span class="text-2xl">👕</span>
-                        <span class="text-xs font-bold">Camiseta</span>
-                        <span class="text-[10px] text-amber-400 font-semibold">15.00 €</span>
-                    </button>
-                    <button onclick="cambiarSoporte('Taza', 'https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?auto=format&fit=crop&w=800&q=80', 10.00)" class="soporte-btn border-2 border-slate-800 bg-slate-900/50 rounded-xl p-3 flex flex-col items-center gap-2 transition hover:border-slate-600">
-                        <span class="text-2xl">☕</span>
-                        <span class="text-xs font-bold">Taza</span>
-                        <span class="text-[10px] text-amber-400 font-semibold">10.00 €</span>
-                    </button>
-                    <button onclick="cambiarSoporte('Gorra', 'https://images.unsplash.com/photo-1588850561407-ed78c282e89b?auto=format&fit=crop&w=800&q=80', 12.00)" class="soporte-btn border-2 border-slate-800 bg-slate-900/50 rounded-xl p-3 flex flex-col items-center gap-2 transition hover:border-slate-600">
-                        <span class="text-2xl">🧢</span>
-                        <span class="text-xs font-bold">Gorra</span>
-                        <span class="text-[10px] text-amber-400 font-semibold">12.00 €</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- COLUMNA DERECHA: CONFIGURADOR Y FORMULARIO (5 Cols) -->
-        <div class="lg:col-span-5 flex flex-col gap-6">
+        <div class="grid lg:grid-cols-12 gap-8">
             
-            <!-- PANEL DE PERSONALIZACIÓN -->
-            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl flex flex-col gap-5">
-                <h3 class="text-sm font-bold uppercase tracking-wider text-amber-400">2. Tu Diseño, Posición y Marcos</h3>
-                
-                <!-- Subir Archivo -->
-                <div>
-                    <label class="block text-xs font-medium text-slate-300 mb-2">Archivo de imagen original (Obligatorio)</label>
-                    <input type="file" id="input-archivo" accept="image/*" onchange="manejarSubidaArchivo(event)" class="w-full text-xs text-slate-400 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-amber-500 file:text-slate-950 hover:file:bg-amber-400 file:cursor-pointer transition">
-                </div>
-
-                <!-- Estilo de Marco y Ubicación -->
-                <div class="grid grid-cols-2 gap-3">
-                    <div>
-                        <label class="block text-[11px] text-slate-400 mb-1">Estilo de Borde</label>
-                        <select id="select-marco" onchange="actualizarMarco()" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-2.5 py-2 text-xs text-slate-200 focus:outline-none focus:border-amber-500">
-                            <option value="sin-marco">Sin borde</option>
-                            <option value="marco-blanco">Marco Blanco Sólido</option>
-                            <option value="marco-oro">Marco Dorado</option>
-                            <option value="marco-neon">Neón Brillante</option>
-                            <option value="marco-redondo">Circular</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-[11px] text-slate-400 mb-1">Ubicación</label>
-                        <select class="w-full bg-slate-950 border border-slate-800 rounded-xl px-2.5 py-2 text-xs text-slate-200 focus:outline-none focus:border-amber-500">
-                            <option>Frente / Centrado principal</option>
-                            <option>Espalda / Superior</option>
-                            <option>Pecho izquierdo</option>
-                        </select>
-                    </div>
-                </div>
-
-                <hr class="border-slate-800 my-1">
-
-                <!-- Texto Personalizado -->
-                <div class="flex flex-col gap-3">
-                    <label class="block text-xs font-medium text-slate-300">3. Texto y Tipografías Pro</label>
-                    <input type="text" id="input-texto" placeholder="Escribe tu frase o nombre..." oninput="actualizarTexto()" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-amber-500 transition">
+            <!-- Columna Izquierda: Vista Previa / Mockup (7 columnas) -->
+            <div class="lg:col-span-7 flex flex-col items-center justify-center">
+                <div id="captura-area" class="bg-slate-900 border border-slate-800 rounded-3xl p-8 relative shadow-2xl w-full aspect-square max-w-[500px] flex items-center justify-center overflow-hidden">
                     
-                    <div class="grid grid-cols-2 gap-3">
-                        <div>
-                            <label class="block text-[11px] text-slate-400 mb-1">Selecciona la Fuente</label>
-                            <select id="select-fuente" onchange="actualizarFuente()" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-2.5 py-2 text-xs text-slate-200 focus:outline-none focus:border-amber-500">
-                                <option value="font-montserrat">Montserrat</option>
-                                <option value="font-roboto">Roboto</option>
-                                <option value="font-bungee">Bungee</option>
-                                <option value="font-pacifico">Pacifico</option>
-                                <option value="font-cinzel">Cinzel</option>
-                                <option value="font-marker">Marker</option>
-                                <option value="font-pixel">Pixel Arcade</option>
-                            </select>
+                    <!-- Badge del producto actual -->
+                    <span id="nombre-soporte-badge" class="absolute top-6 left-6 z-20 bg-amber-500/10 text-amber-400 border border-amber-500/20 text-xs font-bold px-3.5 py-1.5 rounded-full uppercase tracking-wider">Camiseta</span>
+
+                    <!-- Contenedor del Mockup y Elementos Arrastrables -->
+                    <div class="relative w-full h-full flex items-center justify-center">
+                        <!-- Imagen Base del Mockup (Tus archivos de GitHub) -->
+                        <img id="imagen-soporte" crossorigin="anonymous" src="camiseta.png" alt="Soporte" class="w-full h-full object-contain pointer-events-none select-none drop-shadow-2xl">
+
+                        <!-- Elemento de Imagen Subida (Arrastrable) -->
+                        <div id="user-image-container" class="absolute cursor-move hidden" style="width: 150px; top: 35%; left: 35%;">
+                            <img id="user-uploaded-image" src="" class="w-full h-full object-contain pointer-events-none drop-shadow-md">
                         </div>
-                        <div>
-                            <label class="block text-[11px] text-slate-400 mb-1">Color del Texto</label>
-                            <select id="select-color-texto" onchange="actualizarColorTexto()" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-2.5 py-2 text-xs text-slate-200 focus:outline-none focus:border-amber-500">
-                                <option value="text-white">Blanco puro</option>
-                                <option value="text-amber-400">Dorado Destacado</option>
-                                <option value="text-rose-500">Rojo Pasión</option>
-                                <option value="text-sky-400">Azul Neón</option>
-                            </select>
+
+                        <!-- Elemento de Texto Personalizado (Arrastrable) -->
+                        <div id="user-text-container" class="absolute cursor-move hidden" style="top: 60%; left: 35%;">
+                            <span id="user-rendered-text" class="text-2xl font-black drop-shadow-md select-none" style="color: #ffffff;">Tu Texto</span>
                         </div>
                     </div>
                 </div>
+                <p class="text-xs text-slate-500 mt-3">💡 Puedes arrastrar la imagen o el texto con el ratón dentro del área del producto.</p>
             </div>
 
-            <!-- FORMULARIO DE PEDIDO -->
-            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl flex flex-col gap-4">
-                <div class="flex justify-between items-center">
-                    <h3 class="text-sm font-bold uppercase tracking-wider text-amber-400">4. Datos de Facturación y Envío</h3>
-                    <div class="text-right">
-                        <span id="precio-total-display" class="text-xl font-black text-amber-400">15.00 €</span>
+            <!-- Columna Derecha: Controles y Formulario (5 columnas) -->
+            <div class="lg:col-span-5 space-y-6">
+                
+                <!-- 1. Selector de Soportes -->
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl space-y-4">
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-amber-400">1. Elige tu Soporte</h3>
+                    <div class="grid grid-cols-3 gap-3">
+                        <button onclick="cambiarSoporte('Camiseta', 'camiseta.png', 15.00)" class="soporte-btn border-2 border-amber-500 bg-slate-800/50 rounded-xl p-3 flex flex-col items-center gap-1.5 transition hover:border-amber-400">
+                            <span class="text-xl">👕</span>
+                            <span class="text-xs font-bold">Camiseta</span>
+                            <span class="text-[10px] text-amber-400 font-semibold">15.00 €</span>
+                        </button>
+                        <button onclick="cambiarSoporte('Taza', 'taza.png', 10.00)" class="soporte-btn border-2 border-slate-800 bg-slate-900/50 rounded-xl p-3 flex flex-col items-center gap-1.5 transition hover:border-slate-600">
+                            <span class="text-xl">☕</span>
+                            <span class="text-xs font-bold">Taza</span>
+                            <span class="text-[10px] text-amber-400 font-semibold">10.00 €</span>
+                        </button>
+                        <button onclick="cambiarSoporte('Gorra', 'gorra.png', 12.00)" class="soporte-btn border-2 border-slate-800 bg-slate-900/50 rounded-xl p-3 flex flex-col items-center gap-1.5 transition hover:border-slate-600">
+                            <span class="text-xl">🧢</span>
+                            <span class="text-xs font-bold">Gorra</span>
+                            <span class="text-[10px] text-amber-400 font-semibold">12.00 €</span>
+                        </button>
                     </div>
                 </div>
 
-                <form id="order-form" action="https://api.web3forms.com/submit" method="POST" class="flex flex-col gap-3">
-                    <input type="hidden" name="access_key" value="YOUR-WEB3FORMS-ACCESS-KEY">
-                    <input type="hidden" name="subject" value="Nuevo Pedido desde Eloi's Custom Gear">
-                    <input type="hidden" id="input-imagen-oculta" name="imagen_mockup">
+                <!-- 2. Subir Diseño o Texto -->
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl space-y-4">
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-amber-400">2. Tu Diseño</h3>
+                    
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 mb-1">Subir Imagen / Logo</label>
+                        <input type="file" id="subir-imagen" accept="image/*" class="w-full text-xs text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-amber-500/10 file:text-amber-400 hover:file:bg-amber-500/20 cursor-pointer">
+                    </div>
 
                     <div>
-                        <label class="block text-xs text-slate-300 mb-1">Nombre y Apellidos / Empresa *</label>
-                        <input type="text" id="fact-nombre" name="nombre" required placeholder="Ej. Juan Pérez" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-amber-500">
+                        <label class="block text-xs font-semibold text-slate-400 mb-1">Añadir Texto Personalizado</label>
+                        <input type="text" id="input-texto" placeholder="Escribe tu texto..." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-100 focus:outline-none focus:border-amber-500">
                     </div>
+
                     <div class="grid grid-cols-2 gap-3">
                         <div>
-                            <label class="block text-xs text-slate-300 mb-1">Teléfono de contacto *</label>
-                            <input type="tel" id="fact-telefono" name="telefono" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-amber-500">
+                            <label class="block text-[10px] font-semibold text-slate-400 mb-1">Tamaño del Diseño</label>
+                            <input type="range" id="range-escala" min="50" max="300" value="150" class="w-full accent-amber-500">
                         </div>
                         <div>
-                            <label class="block text-xs text-slate-300 mb-1">Email</label>
-                            <input type="email" id="fact-email" name="email" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-amber-500">
+                            <label class="block text-[10px] font-semibold text-slate-400 mb-1">Color del Texto</label>
+                            <input type="color" id="color-texto" value="#ffffff" class="w-full h-8 bg-slate-950 border border-slate-800 rounded-xl cursor-pointer">
                         </div>
                     </div>
-                    <div>
-                        <label class="block text-xs text-slate-300 mb-1">Dirección completa</label>
-                        <textarea id="fact-direccion" name="direccion" rows="2" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-amber-500" placeholder="Calle, número, piso, ciudad..."></textarea>
-                    </div>
+                </div>
 
-                    <button type="button" onclick="enviarPedidoConArchivos()" class="w-full bg-gradient-to-r from-amber-500 to-rose-500 hover:from-amber-400 hover:to-rose-400 text-slate-950 font-bold py-3 px-4 rounded-xl transition shadow-xl mt-2 flex items-center justify-center gap-2 cursor-pointer">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                        </svg>
-                        Enviar Pedido por Email y WhatsApp
-                    </button>
-                </form>
-            </div>
-        </div>
-    </main>
+                <!-- 3. Formulario de Datos y Envío -->
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl space-y-4">
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-amber-400">3. Tus Datos de Envío</h3>
+                    
+                    <form id="order-form" class="space-y-3" onsubmit="event.preventDefault(); enviarPedido();">
+                        <div>
+                            <label class="block text-[11px] font-semibold text-slate-400 mb-1">Nombre y Apellidos *</label>
+                            <input type="text" id="fact-nombre" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-100 focus:outline-none focus:border-amber-500">
+                        </div>
+                        <div class="grid grid-cols-2 gap-2">
+                            <div>
+                                <label class="block text-[11px] font-semibold text-slate-400 mb-1">Teléfono / WhatsApp *</label>
+                                <input type="tel" id="fact-telefono" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-100 focus:outline-none focus:border-amber-500">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-semibold text-slate-400 mb-1">Email</label>
+                                <input type="email" id="fact-email" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-100 focus:outline-none focus:border-amber-500">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-semibold text-slate-400 mb-1">Dirección de Entrega</label>
+                            <textarea id="fact-direccion" rows="2" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-100 focus:outline-none focus:border-amber-500"></textarea>
+                        </div>
 
-    <!-- MODAL DE VISTA PREVIA -->
-    <div id="modal-preview" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 flex items-center justify-center hidden p-4">
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 max-w-lg w-full flex flex-col items-center gap-4 shadow-2xl relative">
-            <h3 class="text-base font-bold text-amber-400">¡Vista Previa Generada con Éxito!</h3>
-            <p class="text-xs text-slate-300 text-center">Captura exacta lista para producción:</p>
-            <div id="contenedor-imagen-resultado" class="bg-slate-950 p-3 rounded-xl border border-slate-800 flex justify-center w-full"></div>
-            <div class="flex gap-3 w-full">
-                <button onclick="cerrarPreview()" class="flex-1 bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold py-2.5 rounded-xl text-xs transition">Cerrar</button>
+                        <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-3 rounded-xl transition shadow-lg shadow-amber-500/10 text-xs uppercase tracking-wider">
+                            Finalizar Pedido por WhatsApp
+                        </button>
+                    </form>
+                </div>
+
             </div>
         </div>
     </div>
 
-    <!-- FOOTER -->
-    <footer class="bg-slate-900 border-t border-slate-800 text-center py-4 text-xs text-slate-500 mt-12">
-        <p>&copy; 2026 Eloi's Custom Gear. Todos los derechos reservados.</p>
-    </footer>
-
-    <!-- SCRIPT -->
+    <!-- Script de Lógica Avanzada y Arrastre -->
     <script>
         let productoActual = 'Camiseta';
         let precioActual = 15.00;
-        let modoLimpioActivo = false;
 
-        function hacerArrastrable(elementoId, contenedorId) {
-            const elm = document.getElementById(elementoId);
-            const container = document.getElementById(contenedorId);
-            let isDragging = false;
-            let startX, startY, initialX, initialY;
-
-            elm.addEventListener('pointerdown', dragStart);
-
-            function dragStart(e) {
-                isDragging = true;
-                elm.setPointerCapture(e.pointerId);
-                const rect = elm.getBoundingClientRect();
-                const parentRect = container.getBoundingClientRect();
-                
-                initialX = rect.left - parentRect.left + (rect.width / 2);
-                initialY = rect.top - parentRect.top + (rect.height / 2);
-                
-                startX = e.clientX;
-                startY = e.clientY;
-
-                elm.addEventListener('pointermove', drag);
-                elm.addEventListener('pointerup', dragEnd);
-                elm.addEventListener('pointercancel', dragEnd);
-            }
-
-            function drag(e) {
-                if (!isDragging) return;
-                e.preventDefault();
-                const dx = e.clientX - startX;
-                const dy = e.clientY - startY;
-                const newX = initialX + dx;
-                const newY = initialY + dy;
-                
-                const pctX = (newX / container.clientWidth) * 100;
-                const pctY = (newY / container.clientHeight) * 100;
-                
-                elm.style.left = `${pctX}%`;
-                elm.style.top = `${pctY}%`;
-                elm.style.transform = 'translate(-50%, -50%)';
-            }
-
-            function dragEnd(e) {
-                if (!isDragging) return;
-                isDragging = false;
-                elm.releasePointerCapture(e.pointerId);
-                elm.removeEventListener('pointermove', drag);
-                elm.removeEventListener('pointerup', dragEnd);
-                elm.removeEventListener('pointercancel', dragEnd);
-            }
-        }
-
-        hacerArrastrable('zona-logo-flotante', 'mockup-container');
-        hacerArrastrable('zona-texto-flotante', 'mockup-container');
-
-        function cambiarSoporte(nombre, urlImagen, precio) {
+        function cambiarSoporte(nombre, imagenUrl, precio) {
             productoActual = nombre;
             precioActual = precio;
-            const imgSoporte = document.getElementById('imagen-soporte');
-            imgSoporte.src = urlImagen;
-            document.getElementById('precio-total-display').innerText = precio.toFixed(2) + ' €';
-
-            document.querySelectorAll('.soporte-btn').forEach(btn => {
-                btn.classList.remove('border-amber-500', 'bg-slate-800/50');
-                btn.classList.add('border-slate-800', 'bg-slate-900/50');
-            });
-            event.currentTarget.classList.remove('border-slate-800', 'bg-slate-900/50');
-            event.currentTarget.classList.add('border-amber-500', 'bg-slate-800/50');
+            document.getElementById('imagen-soporte').src = imagenUrl;
+            document.getElementById('nombre-soporte-badge').innerText = nombre;
         }
 
-        function alternarModoLimpio() {
-            modoLimpioActivo = !modoLimpioActivo;
-            const btn = document.getElementById('btn-modo-limpio');
-            if (modoLimpioActivo) {
-                btn.classList.add('bg-amber-500', 'text-slate-950');
-                btn.classList.remove('bg-slate-800/80', 'text-slate-300');
-            } else {
-                btn.classList.remove('bg-amber-500', 'text-slate-950');
-                btn.classList.add('bg-slate-800/80', 'text-slate-300');
-            }
-        }
-
-        function manejarSubidaArchivo(event) {
-            const archivo = event.target.files[0];
-            if (archivo) {
-                const lector = new FileReader();
-                lector.onload = function(e) {
-                    const imgPreview = document.getElementById('img-preview');
-                    const placeholder = document.getElementById('upload-placeholder');
-                    
-                    imgPreview.src = e.target.result;
-                    imgPreview.classList.remove('hidden');
-                    placeholder.classList.add('hidden');
+        // Subida de imagen de diseño
+        document.getElementById('subir-imagen').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const imgContainer = document.getElementById('user-image-container');
+                    const imgElement = document.getElementById('user-uploaded-image');
+                    imgElement.src = event.target.result;
+                    imgContainer.classList.remove('hidden');
                 }
-                lector.readAsDataURL(archivo);
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Control de texto personalizado
+        const inputTexto = document.getElementById('input-texto');
+        const textContainer = document.getElementById('user-text-container');
+        const renderedText = document.getElementById('user-rendered-text');
+        const colorTexto = document.getElementById('color-texto');
+
+        inputTexto.addEventListener('input', function(e) {
+            if (e.target.value.trim() !== '') {
+                renderedText.innerText = e.target.value;
+                textContainer.classList.remove('hidden');
+            } else {
+                textContainer.classList.add('hidden');
+            }
+        });
+
+        colorTexto.addEventListener('input', function(e) {
+            renderedText.style.color = e.target.value;
+        });
+
+        // Control de escala de la imagen
+        document.getElementById('range-escala').addEventListener('input', function(e) {
+            document.getElementById('user-image-container').style.width = e.target.value + 'px';
+        });
+
+        // Sistema de arrastre (Drag & Drop táctil y ratón) para elementos
+        function hacerArrastrable(elmnt) {
+            let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+            elmnt.onmousedown = dragMouseDown;
+
+            function dragMouseDown(e) {
+                e.preventDefault();
+                pos3 = e.clientX;
+                pos4 = e.clientY;
+                document.onmouseup = closeDragElement;
+                document.onmousemove = elementDrag;
+            }
+
+            function elementDrag(e) {
+                e.preventDefault();
+                pos1 = pos3 - e.clientX;
+                pos2 = pos4 - e.clientY;
+                pos3 = e.clientX;
+                pos4 = e.clientY;
+                elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+                elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+            }
+
+            function closeDragElement() {
+                document.onmouseup = null;
+                document.onmousemove = null;
             }
         }
 
-        function actualizarMarco() {
-            const estilo = document.getElementById('select-marco').value;
-            const wrapper = document.getElementById('marco-imagen-wrapper');
-            wrapper.className = "p-0 transition-all duration-300";
-            
-            if (estilo === 'marco-blanco') wrapper.className = "p-3 bg-white rounded-xl shadow-2xl transition-all duration-300";
-            if (estilo === 'marco-oro') wrapper.className = "p-3 bg-gradient-to-tr from-amber-500 to-yellow-300 rounded-xl shadow-2xl transition-all duration-300";
-            if (estilo === 'marco-neon') wrapper.className = "p-3 bg-slate-900 border-2 border-sky-400 rounded-xl shadow-[0_0_20px_rgba(56,189,248,0.5)] transition-all duration-300";
-            if (estilo === 'marco-redondo') wrapper.className = "p-2 bg-slate-900/80 rounded-full overflow-hidden border-2 border-amber-400 shadow-xl aspect-square flex items-center justify-center transition-all duration-300";
-        }
+        hacerArrastrable(document.getElementById('user-image-container'));
+        hacerArrastrable(document.getElementById('user-text-container'));
 
-        function actualizarTexto() {
-            const texto = document.getElementById('input-texto').value;
-            const zonaTexto = document.getElementById('zona-texto-flotante');
-            document.getElementById('preview-texto').innerText = texto;
-            if (texto.trim() !== "") zonaTexto.classList.remove('hidden');
-            else zonaTexto.classList.add('hidden');
-        }
-
-        function actualizarFuente() {
-            const fuente = document.getElementById('select-fuente').value;
-            const preview = document.getElementById('preview-texto');
-            preview.className = preview.className.replace(/font-\S+/g, '');
-            preview.classList.add(fuente, 'font-bold', 'drop-shadow-md', 'px-3', 'py-1');
-        }
-
-        function actualizarColorTexto() {
-            const color = document.getElementById('select-color-texto').value;
-            const preview = document.getElementById('preview-texto');
-            preview.className = preview.className.replace(/text-\S+/g, '');
-            preview.className += " " + color;
-        }
-
-        function generarVistaPrevia() {
-            html2canvas(document.getElementById('mockup-container'), {
-                backgroundColor: null,
-                scale: 2,
-                useCORS: true
-            }).then(canvas => {
-                const imgData = canvas.toDataURL('image/png');
-                document.getElementById('contenedor-imagen-resultado').innerHTML = `<img src="${imgData}" class="max-h-64 object-contain rounded-lg shadow-lg">`;
-                document.getElementById('modal-preview').classList.remove('hidden');
-                document.getElementById('input-imagen-oculta').value = imgData;
-            });
-        }
-
-        function cerrarPreview() {
-            document.getElementById('modal-preview').classList.add('hidden');
-        }
-
-        function enviarPedidoConArchivos() {
+        // Función de Envío por WhatsApp blindada sin errores
+        function enviarPedido() {
             const nombre = document.getElementById('fact-nombre').value;
             const telefono = document.getElementById('fact-telefono').value;
+            const direccion = document.getElementById('fact-direccion').value;
+            const email = document.getElementById('fact-email').value;
+
             if (!nombre || !telefono) {
-                alert("Completa tu nombre y teléfono por favor.");
+                alert("Por favor, completa al menos tu nombre y teléfono.");
                 return;
             }
 
-            html2canvas(document.getElementById('mockup-container'), { backgroundColor: null, scale: 2, useCORS: true }).then(canvas => {
-                document.getElementById('input-imagen-oculta').value = canvas.toDataURL('image/png');
-                const form = document.getElementById('order-form');
-                
-                fetch(form.action, { method: 'POST', body: new FormData(form) }).then(res => {
-                    if (res.ok) {
-                        const txt = `Hola! Nuevo pedido en Eloi's Custom Gear:%0A*Soporte:* ${productoActual} (${precioActual.toFixed(2)}€)%0A*Cliente:* ${encodeURIComponent(nombre)}%0A*Tel:* ${encodeURIComponent(telefono)}`;
-                        window.open(`https://wa.me/34600000000?text=${txt}`, '_blank');
-                        alert("¡Pedido enviado correctamente!");
-                    } else {
-                        alert("Error al enviar el formulario.");
-                    }
-                });
-            });
+            const textoWhatsApp = `*¡Nuevo Pedido - Eloi's Custom Gear!*%0A%0A` +
+                `👕 *Soporte:* ${productoActual} (${precioActual.toFixed(2)}€)%0A` +
+                `👤 *Cliente:* ${encodeURIComponent(nombre)}%0A` +
+                `📞 *Teléfono:* ${encodeURIComponent(telefono)}%0A` +
+                `📧 *Email:* ${encodeURIComponent(email || 'No especificado')}%0A` +
+                `🏠 *Dirección:* ${encodeURIComponent(direccion || 'No especificada')}`;
+
+            // Abrir WhatsApp con los datos completos
+            window.open(`https://wa.me/34600000000?text=${textoWhatsApp}`, '_blank');
+            alert("¡Pedido generado con éxito! Se ha abierto WhatsApp con todos los detalles.");
         }
     </script>
 </body>
