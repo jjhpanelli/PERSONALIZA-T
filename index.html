@@ -30,9 +30,9 @@
                     <div class="relative w-full h-full flex items-center justify-center">
                         <img id="imagen-soporte" crossorigin="anonymous" src="camiseta.png" alt="Soporte" class="w-full h-full object-contain pointer-events-none select-none drop-shadow-2xl">
 
-                        <!-- Imagen del usuario (Arrastrable) -->
-                        <div id="user-image-container" class="absolute cursor-move hidden" style="width: 150px; top: 35%; left: 35%;">
-                            <img id="user-uploaded-image" src="" class="w-full h-full object-contain pointer-events-none drop-shadow-md">
+                        <!-- Imagen del usuario (Arrastrable con fusión realista para adaptarse a los pliegues) -->
+                        <div id="user-image-container" class="absolute cursor-move hidden" style="width: 150px; top: 35%; left: 35%; mix-blend-mode: multiply;">
+                            <img id="user-uploaded-image" src="" class="w-full h-full object-contain pointer-events-none">
                         </div>
 
                         <!-- Texto del usuario (Arrastrable) -->
@@ -275,7 +275,7 @@
                     `_*(La imagen de tu diseño se ha descargado en tu dispositivo para que puedas adjuntarla aquí)*_`;
 
                 // REEMPLAZA 34000000000 por tu número real de WhatsApp con prefijo de país
-                window.open(`https://wa.me/34650013500?text=${textoWhatsApp}`, '_blank');
+                window.open(`https://wa.me/34000000000?text=${textoWhatsApp}`, '_blank');
                 alert("¡Diseño guardado! Se ha descargado la imagen en tu dispositivo y se ha abierto WhatsApp.");
             }).catch(err => {
                 console.error("Error al capturar imagen:", err);
