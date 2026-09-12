@@ -38,33 +38,35 @@
                 Crea tu propio estilo <span class="text-amber-400">Urbano & Casual</span>
             </h1>
             <p class="text-slate-400 max-w-2xl mx-auto text-sm md:text-base">
-                Personaliza prendas de alta calidad con impresión DTF y sublimación. Visualiza tu diseño en tiempo real y haz tu pedido directo al WhatsApp.
+                Personaliza prendas de alta calidad con impresión DTF y sublimación. Visualiza tu diseño sobre modelo en tiempo real y haz tu pedido por WhatsApp.
             </p>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             
-            <!-- COLUMNA IZQUIERDA: VISTA PREVIA (Mockup interactivo) -->
+            <!-- COLUMNA IZQUIERDA: VISTA PREVIA CON MODELO REAL -->
             <div class="lg:col-span-6 bg-slate-800/60 border border-slate-700/60 rounded-3xl p-6 shadow-2xl relative flex flex-col items-center sticky top-24">
-                <div class="absolute top-4 left-4 bg-slate-900/80 border border-slate-700 text-xs px-3 py-1 rounded-full text-amber-400 font-semibold z-20">
-                    Vista Previa Interactiva
+                <div class="absolute top-4 left-4 bg-slate-900/80 border border-slate-700 text-xs px-3 py-1 rounded-full text-amber-400 font-semibold z-30">
+                    Mockup Real con Modelo
                 </div>
 
-                <!-- Contenedor del Mockup de la prenda -->
-                <div id="mockup-container" class="w-full h-80 md:h-96 flex flex-col items-center justify-center relative my-6 bg-slate-950/60 rounded-2xl border border-slate-800 overflow-hidden transition-colors duration-300">
+                <!-- Contenedor de la Imagen del Modelo -->
+                <div id="mockup-container" class="w-full h-96 md:h-[420px] flex items-center justify-center relative my-6 bg-slate-950 rounded-2xl border border-slate-800 overflow-hidden shadow-inner">
                     
-                    <!-- Imagen de la prenda base -->
-                    <div id="prenda-icono" class="text-7xl mb-2 select-none">👕</div>
+                    <!-- Fotografía de Modelo de fondo (Cambiable según la prenda) -->
+                    <img id="imagen-modelo" src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover opacity-85 transition-opacity duration-300" alt="Modelo con Camiseta">
                     
-                    <!-- Contenedor donde aparecerá la imagen que suba el cliente -->
-                    <div id="preview-imagen-container" class="w-28 h-28 my-1 flex items-center justify-center border-2 border-dashed border-slate-700 rounded-xl bg-slate-900/40 overflow-hidden relative">
-                        <span id="placeholder-texto-imagen" class="text-[10px] text-slate-500 text-center px-1">Tu diseño aquí</span>
-                        <img id="preview-imagen-subida" class="max-w-full max-h-full object-contain hidden" alt="Diseño subido">
-                    </div>
+                    <!-- Capa oscura sutil para que resalte la zona de estampado -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-slate-950/20 pointer-events-none"></div>
 
-                    <!-- Elemento de texto superpuesto -->
-                    <div id="preview-texto-container" class="text-center mt-1">
-                        <span id="preview-texto" class="font-bold drop-shadow-md text-white text-xs"></span>
+                    <!-- Zona de Estampado Flotante sobre el torso del modelo -->
+                    <div id="zona-estampado" class="absolute top-[35%] flex flex-col items-center justify-center transition-all duration-150 z-20 max-w-[50%] text-center" style="transform: scale(1);">
+                        <!-- Imagen subida por el cliente -->
+                        <img id="preview-imagen-subida" class="max-h-28 w-auto object-contain drop-shadow-2xl hidden mb-1" alt="Diseño subido">
+                        <span id="placeholder-texto-imagen" class="text-[11px] text-amber-300/80 font-medium bg-slate-950/70 px-2.5 py-1 rounded-full backdrop-blur-xs border border-slate-700/50 mb-1">Sube tu diseño aquí 🎨</span>
+
+                        <!-- Texto superpuesto -->
+                        <span id="preview-texto" class="font-bold drop-shadow-lg text-white text-xs"></span>
                     </div>
                 </div>
 
@@ -88,54 +90,40 @@
 
                 <form id="order-form" class="space-y-6">
                     
-                    <!-- 1. Elige tu prenda -->
+                    <!-- 1. Elige tu prenda con modelo -->
                     <div>
                         <label class="block text-sm font-semibold mb-3 text-slate-300">1. Elige tu prenda</label>
                         <div class="grid grid-cols-3 gap-4">
-                            <button type="button" onclick="setPrenda('Camiseta', 15, '👕')" class="prenda-btn group border-2 border-amber-500 bg-amber-500/10 rounded-2xl p-4 text-center cursor-pointer transition">
-                                <span class="block text-3xl mb-1.5">👕</span>
-                                <span class="text-xs font-bold">Camiseta</span>
-                                <span class="block text-[11px] text-amber-400 font-semibold mt-1">15.00 €</span>
+                            <button type="button" onclick="setPrenda('Camiseta', 15, 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop')" class="prenda-btn group border-2 border-amber-500 bg-amber-500/10 rounded-2xl p-3 text-center cursor-pointer transition">
+                                <span class="block text-2xl mb-1">👕</span>
+                                <span class="text-xs font-bold block">Camiseta</span>
+                                <span class="text-[11px] text-amber-400 font-semibold">15.00 €</span>
                             </button>
-                            <button type="button" onclick="setPrenda('Sudadera', 28, '🧥')" class="prenda-btn group border-2 border-slate-700 bg-slate-900/60 rounded-2xl p-4 text-center cursor-pointer transition hover:border-slate-500">
-                                <span class="block text-3xl mb-1.5">🧥</span>
-                                <span class="text-xs font-bold">Sudadera</span>
-                                <span class="block text-[11px] text-amber-400 font-semibold mt-1">28.00 €</span>
+                            <button type="button" onclick="setPrenda('Sudadera', 28, 'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?q=80&w=800&auto=format&fit=crop')" class="prenda-btn group border-2 border-slate-700 bg-slate-900/60 rounded-2xl p-3 text-center cursor-pointer transition hover:border-slate-500">
+                                <span class="block text-2xl mb-1">🧥</span>
+                                <span class="text-xs font-bold block">Sudadera</span>
+                                <span class="text-[11px] text-amber-400 font-semibold">28.00 €</span>
                             </button>
-                            <button type="button" onclick="setPrenda('Gorra', 12, '🧢')" class="prenda-btn group border-2 border-slate-700 bg-slate-900/60 rounded-2xl p-4 text-center cursor-pointer transition hover:border-slate-500">
-                                <span class="block text-3xl mb-1.5">🧢</span>
-                                <span class="text-xs font-bold">Gorra</span>
-                                <span class="block text-[11px] text-amber-400 font-semibold mt-1">12.00 €</span>
+                            <button type="button" onclick="setPrenda('Gorra', 12, 'https://images.unsplash.com/photo-1588850561407-ed78c282e89b?q=80&w=800&auto=format&fit=crop')" class="prenda-btn group border-2 border-slate-700 bg-slate-900/60 rounded-2xl p-3 text-center cursor-pointer transition hover:border-slate-500">
+                                <span class="block text-2xl mb-1">🧢</span>
+                                <span class="text-xs font-bold block">Gorra</span>
+                                <span class="text-[11px] text-amber-400 font-semibold">12.00 €</span>
                             </button>
                         </div>
                     </div>
 
-                    <!-- 2. Elige el Color -->
-                    <div>
-                        <label class="block text-sm font-semibold mb-3 text-slate-300">2. Color base de la prenda</label>
-                        <div class="flex flex-wrap gap-3">
-                            <button type="button" onclick="setColor('Negro', '#020617')" class="w-10 h-10 rounded-full bg-slate-950 border-2 border-amber-400 ring-2 ring-offset-2 ring-offset-slate-900 ring-amber-400 cursor-pointer hover:scale-110 transition-transform"></button>
-                            <button type="button" onclick="setColor('Blanco', '#f8fafc')" class="w-10 h-10 rounded-full bg-slate-50 border-2 border-slate-300 cursor-pointer hover:scale-110 transition-transform"></button>
-                            <button type="button" onclick="setColor('Azul Marino', '#172554')" class="w-10 h-10 rounded-full bg-blue-950 border-2 border-blue-900 cursor-pointer hover:scale-110 transition-transform"></button>
-                            <button type="button" onclick="setColor('Gris Jaspe', '#64748b')" class="w-10 h-10 rounded-full bg-slate-500 border-2 border-slate-400 cursor-pointer hover:scale-110 transition-transform"></button>
-                            <button type="button" onclick="setColor('Rojo', '#dc2626')" class="w-10 h-10 rounded-full bg-red-600 border-2 border-red-500 cursor-pointer hover:scale-110 transition-transform"></button>
-                        </div>
-                    </div>
-
-                    <hr class="border-slate-700/70 my-5">
-
-                    <!-- 3. Opciones de Diseño -->
-                    <div class="space-y-5">
-                        <h3 class="text-base font-bold text-amber-400">Personaliza tu Diseño</h3>
+                    <!-- 2. Opciones de Diseño -->
+                    <div class="space-y-5 pt-2">
+                        <h3 class="text-base font-bold text-amber-400">Detalles del Estampado</h3>
                         
                         <!-- Subir diseño y ubicación -->
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-xs font-medium text-slate-400 mb-1.5">4. Sube tu diseño (Logo/Arte)</label>
+                                <label class="block text-xs font-medium text-slate-400 mb-1.5">2. Sube tu diseño (Logo/Arte)</label>
                                 <input type="file" id="input-archivo" accept="image/*" class="w-full text-xs text-slate-300 bg-slate-950/50 rounded-xl border border-slate-700 p-2 file:mr-3 file:py-1.5 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-amber-500/10 file:text-amber-400 hover:file:bg-amber-500/20 cursor-pointer" onchange="manejarSubidaArchivo(event)">
                             </div>
                             <div>
-                                <label class="block text-xs font-medium text-slate-400 mb-1.5">5. Ubicación del estampado</label>
+                                <label class="block text-xs font-medium text-slate-400 mb-1.5">3. Ubicación del estampado</label>
                                 <select id="select-ubicacion" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-amber-400 transition">
                                     <option value="Pecho (Frente)">Pecho (Frente)</option>
                                     <option value="Espalda">Espalda</option>
@@ -145,7 +133,7 @@
 
                         <!-- Añade tu texto -->
                         <div class="space-y-3 pt-2">
-                            <label class="block text-xs font-medium text-slate-400">Opcional: Añadir texto</label>
+                            <label class="block text-xs font-medium text-slate-400">Opcional: Añadir texto personalizado</label>
                             <input type="text" id="input-texto" placeholder="Escribe tu frase o nombre..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-slate-100 focus:outline-none focus:border-amber-400 transition" oninput="actualizarTexto()">
                             
                             <div class="grid grid-cols-2 gap-4 pt-1">
@@ -171,10 +159,10 @@
                             <!-- Escala / Tamaño manual -->
                             <div>
                                 <div class="flex justify-between items-center mb-1">
-                                    <label class="block text-xs font-medium text-slate-400">Tamaño del diseño (Escala)</label>
+                                    <label class="block text-xs font-medium text-slate-400">Tamaño del diseño (Ajuste manual)</label>
                                     <span id="label-escala" class="text-xs font-bold text-amber-400">100%</span>
                                 </div>
-                                <input type="range" id="slider-escala" min="60" max="150" value="100" class="w-full accent-amber-500 cursor-pointer" oninput="actualizarEscala()">
+                                <input type="range" id="slider-escala" min="50" max="150" value="100" class="w-full accent-amber-500 cursor-pointer" oninput="actualizarEscala()">
                             </div>
                         </div>
                     </div>
@@ -197,13 +185,12 @@
     <script>
         let prendaActual = "Camiseta";
         let precioActual = 15.00;
-        let colorPrendaActual = "Negro";
 
-        function setPrenda(nombre, precio, icono) {
+        function setPrenda(nombre, precio, urlModelo) {
             prendaActual = nombre;
             precioActual = precio;
             document.getElementById('precio-total').innerText = precio.toFixed(2) + " €";
-            document.getElementById('prenda-icono').innerText = icono;
+            document.getElementById('imagen-modelo').src = urlModelo;
 
             const botones = document.querySelectorAll('.prenda-btn');
             botones.forEach(btn => {
@@ -212,11 +199,6 @@
             });
             event.currentTarget.classList.remove('border-slate-700', 'bg-slate-900/60');
             event.currentTarget.classList.add('border-amber-500', 'bg-amber-500/10');
-        }
-
-        function setColor(nombreColor, hexColor) {
-            colorPrendaActual = nombreColor;
-            document.getElementById('mockup-container').style.backgroundColor = hexColor;
         }
 
         function manejarSubidaArchivo(event) {
@@ -242,25 +224,26 @@
 
         function actualizarFuente() {
             const fuente = document.getElementById('select-fuente').value;
-            document.getElementById('preview-texto').className = `font-bold drop-shadow-md text-white text-xs ${fuente}`;
+            document.getElementById('preview-texto').className = `font-bold drop-shadow-lg text-xs ${fuente}`;
         }
 
         function actualizarColorTexto() {
             const color = document.getElementById('select-color-texto').value;
             const contenedor = document.getElementById('preview-texto');
-            contenedor.className = `font-bold drop-shadow-md text-xs ${color}`;
+            const fuenteActual = document.getElementById('select-fuente').value;
+            contenedor.className = `font-bold drop-shadow-lg text-xs ${color} ${fuenteActual}`;
         }
 
         function actualizarEscala() {
             const escala = document.getElementById('slider-escala').value;
             document.getElementById('label-escala').innerText = escala + "%";
-            const contenedor = document.getElementById('preview-imagen-container');
-            contenedor.style.transform = `scale(${escala / 100})`;
+            const zonaEstampado = document.getElementById('zona-estampado');
+            zonaEstampado.style.transform = `scale(${escala / 100})`;
         }
 
         function enviarPedidoWhatsApp() {
             const texto = document.getElementById('input-texto').value || "Ninguno";
-            const fuente = document.getElementById('select-fuente').options[document.getElementById('select-fuente').selectedIndex].text;
+            const fuente = document.getElementById('select-fuente').options[document.getElementById('select-fuenteselectedIndex'] ? document.getElementById('select-fuente').selectedIndex : 0].text;
             const colorTexto = document.getElementById('select-color-texto').options[document.getElementById('select-color-texto').selectedIndex].text;
             const escala = document.getElementById('slider-escala').value + "%";
             const ubicacion = document.getElementById('select-ubicacion').value;
@@ -269,15 +252,14 @@
 
             const telefono = "34600000000"; // Reemplaza con tu número
 
-            const mensaje = `¡Hola! Quiero hacer un pedido personalizado en Eloi's Custom Gear:
+            const mensaje = `¡Hola! Quiero hacer un pedido con modelo en Eloi's Custom Gear:
 
-• Prenda: ${prendaActual} (${colorPrendaActual})
+• Prenda: ${prendaActual}
 • Precio estimado: ${precioActual.toFixed(2)} €
 • Ubicación: ${ubicacion}
 • Archivo de diseño: ${nombreArchivo}
-• Texto añadido: ${texto}
-• Fuente: ${fuente} (${colorTexto})
-• Escala del diseño: ${escala}
+• Tamaño / Escala: ${escala}
+• Texto añadido: ${texto} (${fuente}, ${colorTexto})
 
 Por favor, confirmadme los detalles y el pago. ¡Gracias!`;
 
