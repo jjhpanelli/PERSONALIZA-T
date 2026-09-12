@@ -1,442 +1,372 @@
-<!DOCTYPE html><html lang="es" class="scroll-smooth"><head>
+<!DOCTYPE html>
+<html lang="es">
+<head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Eloi's Custom Gear | Estudio de Personalización Pro</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eloi's Custom Gear | Estudio de Personalización</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tailwind Config para fuentes personalizadas si es necesario -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#fdf8f6',
+                            100: '#fbe8e6',
+                            500: '#e056fd',
+                            600: '#c0392b',
+                            700: '#962d22',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts para tipografías variadas -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Cinzel:wght@700&family=Montserrat:wght@400;700&family=Pacifico&family=Press+Start+2P&family=Permanent+Marker&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Html2Canvas para la captura de pantalla del mockup -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&family=Bebas+Neue&family=Permanent+Marker&family=Cinzel:wght@700&family=Montserrat:wght@800&family=VT323&family=Pacifico&family=Press+Start+2P&family=Anton&family=Rye&family=Creepster&family=Rubik+Glitch&family=Special+Elite&family=Bungee&display=stylesheet" rel="stylesheet">
-    <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; touch-action: pan-x pan-y; }
-        .elemento-interactivo { touch-action: none; cursor: grab; }
-        .elemento-interactivo:active { cursor: grabbing; }
-        
-        .elemento-interactivo img, 
-        .elemento-interactivo span, 
-        .elemento-interactivo div {
-            pointer-events: none !important;
-        }
-        
-        .font-urban { font-family: 'Plus Jakarta Sans', sans-serif; }
-        .font-bebas { font-family: 'Bebas Neue', sans-serif; letter-spacing: 1px; }
-        .font-marker { font-family: 'Permanent Marker', cursive; }
-        .font-cinzel { font-family: 'Cinzel', serif; }
-        .font-montserrat { font-family: 'Montserrat', sans-serif; }
-        .font-retro { font-family: 'VT323', monospace; }
-        .font-pacifico { font-family: 'Pacifico', cursive; }
-        .font-arcade { font-family: 'Press Start 2P', monospace; font-size: 10px !important; }
-        .font-anton { font-family: 'Anton', sans-serif; letter-spacing: 0.5px; }
-        .font-rye { font-family: 'Rye', serif; }
-        .font-creepster { font-family: 'Creepster', cursive; }
-        .font-glitch { font-family: 'Rubik Glitch', cursive; }
-        .font-typewriter { font-family: 'Special Elite', cursive; }
-        .font-bungee { font-family: 'Bungee', cursive; font-size: 11px !important; }
 
-        .modo-limpio .guia-ui { display: none !important; }
-        .modo-limpio .elemento-interactivo {
-            border: none !important;
-            background: transparent !important;
-            backdrop-filter: none !important;
-        }
-    </style></head><body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-amber-500 selection:text-slate-950">
+    <style>
+        .font-bungee { font-family: 'Bungee', cursive; }
+        .font-pacifico { font-family: 'Pacifico', cursive; }
+        .font-cinzel { font-family: 'Cinzel', serif; }
+        .font-marker { font-family: 'Permanent+Marker', cursive; }
+        .font-pixel { font-family: 'Press Start 2P', cursive; }
+        .font-montserrat { font-family: 'Montserrat', sans-serif; }
+        .font-roboto { font-family: 'Roboto', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-montserrat min-h-screen flex flex-col justify-between">
 
     <!-- HEADER -->
-    <header class="border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-xl sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+    <header class="bg-slate-900 border-b border-slate-800 sticky top-0 z-50 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col sm:flex-row justify-between items-center gap-4">
             <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-500 to-orange-500 flex items-center justify-center shadow-lg shadow-amber-500/20">
-                    <span class="text-slate-950 font-black text-xl">E</span>
+                <div class="bg-gradient-to-tr from-amber-500 to-rose-500 text-slate-950 font-black p-2.5 rounded-xl shadow-lg font-bungee text-xl tracking-wider">
+                    ECG
                 </div>
                 <div>
-                    <span class="text-lg sm:text-xl font-extrabold tracking-tight bg-gradient-to-r from-white via-slate-200 to-amber-400 bg-clip-text text-transparent block leading-tight">
-                        Eloi's Custom Gear
-                    </span>
-                    <span class="text-[10px] text-amber-400/80 font-bold tracking-widest uppercase block">Merch & Streetwear Lab</span>
+                    <h1 class="text-xl font-black tracking-tight bg-gradient-to-r from-white via-slate-200 to-amber-400 bg-clip-text text-transparent">Eloi's Custom Gear</h1>
+                    <p class="text-xs text-slate-400">Estudio Profesional de DTF y Sublimación</p>
                 </div>
             </div>
-            
-            <a href="#estudio" class="bg-gradient-to-r from-amber-400 to-orange-500 text-slate-950 font-extrabold px-5 py-2.5 rounded-full shadow-lg shadow-orange-500/20 hover:scale-105 active:scale-95 transition text-xs sm:text-sm">
-                Diseñar Ahora ⚡
-            </a>
+            <div class="flex items-center gap-3">
+                <span class="text-xs px-3 py-1 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-full font-medium flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Sistema Activo
+                </span>
+            </div>
         </div>
     </header>
 
-    <!-- ESTUDIO PRINCIPAL -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12 flex-grow w-full" id="estudio">
+    <!-- MAIN CONTENT -->
+    <main class="max-w-7xl mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8 w-full flex-grow">
         
-        <div class="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
-            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-bold mb-4 tracking-wide uppercase">
-                <span>✨</span> Estudio de Diseño Interactivo Pro
+        <!-- COLUMNA IZQUIERDA: ÁREA DE VISTA PREVIA Y DISEÑO (7 Cols) -->
+        <div class="lg:col-span-7 flex flex-col gap-6">
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl flex flex-col items-center justify-center relative min-h-[480px] overflow-hidden group">
+                
+                <!-- Botones de Control Rápido Flotantes -->
+                <div class="absolute top-4 right-4 z-20 flex gap-2">
+                    <button onclick="alternarModoLimpio()" id="btn-modo-limpio" title="Ocultar controles visuales para captura" class="bg-slate-800/80 hover:bg-slate-700 text-slate-300 p-2.5 rounded-xl backdrop-blur-sm border border-slate-700 transition shadow-lg">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- CONTENEDOR DEL MOCKUP -->
+                <div id="mockup-container" class="relative w-full max-w-md aspect-square flex items-center justify-center p-4 transition-all duration-300">
+                    
+                    <!-- Imagen Base del Soporte (Camiseta, Taza, etc.) -->
+                    <img id="imagen-soporte" src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=600&q=80" alt="Soporte Personalizable" class="w-full h-full object-contain pointer-events-none select-none drop-shadow-2xl">
+
+                    <!-- ZONA ARRASTRABLE DEL LOGO -->
+                    <div id="zona-logo-flotante" class="absolute cursor-move select-none touch-none flex items-center justify-center p-2" style="left: 50%; top: 45%; transform: translate(-50%, -50%);">
+                        <div id="marco-imagen-wrapper" class="p-0 transition-all duration-300">
+                            <!-- Placeholder para imagen subida -->
+                            <div id="upload-placeholder" class="border-2 border-dashed border-slate-600 hover:border-amber-400 bg-slate-900/60 backdrop-blur-sm rounded-xl p-6 text-center flex flex-col items-center justify-center w-36 h-36 transition">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-amber-400 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                </svg>
+                                <span class="text-xs text-slate-300 font-semibold">Sube tu diseño</span>
+                            </div>
+                            <!-- Imagen Cargada -->
+                            <img id="img-preview" class="hidden max-h-36 max-w-[150px] object-contain pointer-events-none drop-shadow-md" alt="Tu diseño">
+                        </div>
+                    </div>
+
+                    <!-- ZONA ARRASTRABLE DEL TEXTO PERSONALIZADO -->
+                    <div id="zona-texto-flotante" class="absolute cursor-move select-none touch-none hidden p-1 z-10" style="left: 50%; top: 70%; transform: translate(-50%, -50%);">
+                        <span id="preview-texto" class="text-xl font-bold drop-shadow-md px-3 py-1 font-montserrat text-white">Tu Texto</span>
+                    </div>
+
+                </div>
+
+                <!-- Barra de Instrucciones Rápidas -->
+                <div class="mt-4 flex items-center justify-between w-full px-4 text-xs text-slate-400 border-t border-slate-800/80 pt-4">
+                    <span>💡 <strong>Tip:</strong> Puedes arrastrar libremente tu logo y el texto sobre la prenda.</span>
+                    <button onclick="generarVistaPrevia()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-4 py-2 rounded-xl transition shadow-lg flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                        </svg>
+                        Generar Vista Previa
+                    </button>
+                </div>
             </div>
-            <h1 class="text-3xl sm:text-6xl font-black tracking-tight mb-4 leading-tight">
-                Personaliza sin límites. <br><span class="bg-gradient-to-r from-amber-400 via-orange-400 to-yellow-300 bg-clip-text text-transparent">Diseña, factura y encarga</span>
-            </h1>
-            <p class="text-slate-400 text-sm sm:text-base leading-relaxed">
-                Genera tu mockup con tus bases reales, añade tus datos y envía el pedido completo al instante.
-            </p>
+
+            <!-- Selector de Soportes / Productos -->
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl">
+                <h3 class="text-sm font-bold uppercase tracking-wider text-amber-400 mb-4">1. Elige tu Soporte</h3>
+                <div class="grid grid-cols-3 gap-4">
+                    <button onclick="cambiarSoporte('camiseta', 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=600&q=80', 18.50)" class="soporte-btn border-2 border-amber-500 bg-slate-800/50 rounded-xl p-3 flex flex-col items-center gap-2 transition hover:border-amber-400">
+                        <span class="text-2xl">👕</span>
+                        <span class="text-xs font-bold">Camiseta</span>
+                        <span class="text-[10px] text-amber-400 font-semibold">18.50 €</span>
+                    </button>
+                    <button onclick="cambiarSoporte('taza', 'https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?auto=format&fit=crop&w=600&q=80', 12.00)" class="soporte-btn border-2 border-slate-800 bg-slate-900/50 rounded-xl p-3 flex flex-col items-center gap-2 transition hover:border-slate-600">
+                        <span class="text-2xl">☕</span>
+                        <span class="text-xs font-bold">Taza Premium</span>
+                        <span class="text-[10px] text-amber-400 font-semibold">12.00 €</span>
+                    </button>
+                    <button onclick="cambiarSoporte('sudadera', 'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=600&q=80', 29.90)" class="soporte-btn border-2 border-slate-800 bg-slate-900/50 rounded-xl p-3 flex flex-col items-center gap-2 transition hover:border-slate-600">
+                        <span class="text-2xl">🧥</span>
+                        <span class="text-xs font-bold">Sudadera</span>
+                        <span class="text-[10px] text-amber-400 font-semibold">29.90 €</span>
+                    </button>
+                </div>
+            </div>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <!-- COLUMNA DERECHA: CONFIGURADOR Y FORMULARIO (5 Cols) -->
+        <div class="lg:col-span-5 flex flex-col gap-6">
             
-            <!-- COLUMNA IZQUIERDA: MOCKUP -->
-            <div class="lg:col-span-7 bg-slate-900/60 border border-slate-800/80 rounded-3xl p-5 sm:p-6 shadow-2xl relative flex flex-col items-center backdrop-blur-md sticky top-24">
+            <!-- PANEL DE PERSONALIZACIÓN -->
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl flex flex-col gap-5">
+                <h3 class="text-sm font-bold uppercase tracking-wider text-amber-400">2. Personaliza tu Diseño</h3>
                 
-                <div class="absolute top-4 left-4 right-4 flex justify-between items-center z-30 pointer-events-none">
-                    <button type="button" id="btn-modo-limpio" onclick="alternarModoLimpio()" class="bg-slate-900/90 hover:bg-slate-800 border border-slate-700 text-slate-200 text-xs font-bold px-3 py-2 rounded-xl shadow-lg transition flex items-center gap-1.5 cursor-pointer pointer-events-auto active:scale-95">
-                        <span id="icono-ojo">👁️</span> <span id="texto-modo-limpio">Ocultar Guías</span>
-                    </button>
+                <!-- Subir Archivo -->
+                <div>
+                    <label class="block text-xs font-medium text-slate-300 mb-2">Sube tu Logo / Imagen (PNG o JPG)</label>
+                    <input type="file" id="input-archivo" accept="image/*" onchange="manejarSubidaArchivo(event)" class="w-full text-xs text-slate-400 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-amber-500 file:text-slate-950 hover:file:bg-amber-400 file:cursor-pointer transition">
+                </div>
+
+                <!-- Estilo de Marco -->
+                <div>
+                    <label class="block text-xs font-medium text-slate-300 mb-2">Estilo de Marco para el Logo</label>
+                    <select id="select-marco" onchange="actualizarMarco()" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-amber-500 transition">
+                        <option value="sin-marco">Sin marco / Original</option>
+                        <option value="marco-blanco">Marco Blanco Sólido</option>
+                        <option value="marco-oro">Marco Elegante Dorado</option>
+                        <option value="marco-neon">Borde Neón Brillante</option>
+                        <option value="marco-redondo">Corte Circular Estilizado</option>
+                        <option value="marco-desgastado">Estilo Vintage / Desgastado</option>
+                        <option value="marco-difuminado">Capa Oscura Difuminada</option>
+                        <option value="marco-sombra">Elevación con Sombra Profunda</option>
+                        <option value="marco-polaroid">Estilo Polaroid Clásico</option>
+                        <option value="marco-doble">Doble Borde de Diseñador</option>
+                    </select>
+                </div>
+
+                <hr class="border-slate-800 my-1">
+
+                <!-- Texto Personalizado -->
+                <div class="flex flex-col gap-3">
+                    <label class="block text-xs font-medium text-slate-300">Texto Personalizado Adicional</label>
+                    <input type="text" id="input-texto" placeholder="Escribe tu frase o nombre..." oninput="actualizarTexto()" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-amber-500 transition">
                     
-                    <button type="button" onclick="generarVistaPrevia()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-black px-3.5 py-2 rounded-xl shadow-lg transition flex items-center gap-1.5 cursor-pointer pointer-events-auto active:scale-95">
-                        <span>📸</span> Previa HD
-                    </button>
-                </div>
-
-                <div id="mockup-container" class="w-full h-[420px] sm:h-[500px] flex items-center justify-center relative my-4 bg-slate-950 rounded-2xl border border-slate-800/80 overflow-hidden shadow-2xl select-none group">
-                    <!-- IMAGEN BASE DE TUS ARCHIVOS LOCALES CON SISTEMA DE RESPALDO -->
-                    <img id="imagen-producto" src="camiseta.png" onerror="intentarOtraRuta(this)" class="w-full h-full object-contain p-4 opacity-95 transition-all duration-500 pointer-events-none" alt="Mockup base">
-                    
-                    <div class="absolute inset-0 bg-radial from-transparent via-slate-950/10 to-slate-950/40 pointer-events-none"></div>
-
-                    <!-- ZONA LOGO -->
-                    <div id="zona-estampado" class="elemento-interactivo absolute flex flex-col items-center justify-center z-20 text-center p-4 rounded-2xl border-2 border-dashed border-amber-400/40 hover:border-amber-400 bg-amber-500/5 transition-colors shadow-2xl backdrop-blur-[2px]" style="transform: translate(0px, -20px) scale(1) rotate(0deg);">
-                        <div class="guia-ui absolute -top-3.5 bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 text-[10px] font-black px-2.5 py-0.5 rounded-full shadow-md pointer-events-none uppercase tracking-wider">
-                            🎨 Logo (Arrastra / Zoom)
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-[11px] text-slate-400 mb-1">Tipografía</label>
+                            <select id="select-fuente" onchange="actualizarFuente()" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-2.5 py-2 text-xs text-slate-200 focus:outline-none focus:border-amber-500">
+                                <option value="font-montserrat">Montserrat</option>
+                                <option value="font-roboto">Roboto</option>
+                                <option value="font-bungee">Bungee</option>
+                                <option value="font-pacifico">Pacifico</option>
+                                <option value="font-cinzel">Cinzel</option>
+                                <option value="font-marker">Marker</option>
+                                <option value="font-pixel">Pixel Arcade</option>
+                            </select>
                         </div>
-                        
-                        <div id="marco-imagen-wrapper" class="p-0 transition-all duration-300">
-                            <img id="preview-imagen-subida" class="max-h-36 sm:max-h-44 w-auto object-contain drop-shadow-2xl hidden pointer-events-none" alt="Diseño cliente">
-                        </div>
-
-                        <div id="placeholder-arte" class="guia-ui flex flex-col items-center justify-center p-4 pointer-events-none">
-                            <span class="text-2xl mb-1">🖼️</span>
-                            <span class="text-[11px] text-amber-300 font-bold bg-slate-950/90 px-3 py-1 rounded-full border border-slate-800 shadow">Sube tu diseño aquí</span>
+                        <div>
+                            <label class="block text-[11px] text-slate-400 mb-1">Estilo / Color</label>
+                            <select id="select-color-texto" onchange="actualizarColorTexto()" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-2.5 py-2 text-xs text-slate-200 focus:outline-none focus:border-amber-500">
+                                <option value="text-white">Blanco Clásico</option>
+                                <option value="text-slate-950 bg-white px-2 rounded">Caja Blanca Sólida</option>
+                                <option value="text-amber-400">Dorado Destacado</option>
+                                <option value="text-rose-500">Rojo Pasión</option>
+                                <option value="text-sky-400">Azul Neón</option>
+                                <option value="text-emerald-400 font-black">Verde Esmeralda</option>
+                            </select>
                         </div>
                     </div>
-
-                    <!-- ZONA TEXTO -->
-                    <div id="zona-texto-flotante" class="elemento-interactivo absolute flex flex-col items-center justify-center z-30 text-center p-3 rounded-xl border border-dashed border-sky-400/40 hover:border-sky-400 bg-sky-500/5 transition-colors hidden shadow-2xl backdrop-blur-[2px]" style="transform: translate(0px, 100px) scale(1) rotate(0deg);">
-                        <div class="guia-ui absolute -top-3 bg-gradient-to-r from-sky-400 to-blue-500 text-slate-950 text-[9px] font-black px-2 py-0.5 rounded-full shadow-md pointer-events-none uppercase tracking-wider">
-                            ✍️ Texto (Arrastra / Zoom)
-                        </div>
-                        <span id="preview-texto" class="font-bold drop-shadow-md text-white text-xl pointer-events-none px-3 py-1 font-urban"></span>
-                    </div>
-
-                </div>
-
-                <!-- Modal de Vista Previa -->
-                <div id="modal-preview" class="w-full bg-slate-950 border border-slate-800 rounded-2xl p-4 hidden mt-2 animate-fade-in">
-                    <div class="flex justify-between items-center mb-2">
-                        <h4 class="text-xs font-bold text-amber-400 uppercase tracking-wider">✨ Vista Previa Capturada</h4>
-                        <button type="button" onclick="cerrarPreview()" class="text-slate-400 hover:text-white text-xs font-bold px-2 py-0.5 rounded bg-slate-900 border border-slate-800">✕ Cerrar</button>
-                    </div>
-                    <div id="contenedor-imagen-resultado" class="w-full flex justify-center rounded-xl overflow-hidden border border-slate-800 bg-slate-950 max-h-56"></div>
-                    <p class="text-[10px] text-slate-400 text-center mt-2">💡 Esta vista previa se adjuntará automáticamente a tu pedido.</p>
-                </div>
-
-                <div class="w-full bg-slate-950/80 border border-slate-800 rounded-2xl p-4 flex justify-between items-center backdrop-blur-md mt-2">
-                    <div>
-                        <span class="text-[11px] font-medium text-slate-400 uppercase tracking-wider block">Total Estimado</span>
-                        <span class="text-2xl sm:text-3xl font-black text-amber-400" id="precio-total">15.00 €</span>
-                    </div>
-                    <span class="text-xs bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-3 py-1.5 rounded-xl font-bold">🛡️ DTF Premium</span>
                 </div>
             </div>
 
-            <!-- COLUMNA DERECHA: CONFIGURACIÓN Y FACTURACIÓN -->
-            <div class="lg:col-span-5 bg-slate-900/40 border border-slate-800/80 rounded-3xl p-6 sm:p-8 backdrop-blur-md shadow-xl">
-                <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-800">
-                    <h2 class="text-lg font-bold flex items-center gap-2.5 text-amber-400">
-                        <span class="p-2 rounded-xl bg-amber-500/10 border border-amber-500/20">🎛️</span> Panel de Configuración
-                    </h2>
+            <!-- FORMULARIO DE PEDIDO Y FACTURACIÓN -->
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl flex flex-col gap-4">
+                <div class="flex justify-between items-center">
+                    <h3 class="text-sm font-bold uppercase tracking-wider text-amber-400">3. Finalizar Pedido</h3>
+                    <div class="text-right">
+                        <span class="text-xs text-slate-400 block">Total Estimado</span>
+                        <span id="precio-total-display" class="text-xl font-black text-amber-400">18.50 €</span>
+                    </div>
                 </div>
 
-                <!-- FORMULARIO INTEGRADO CON WEB3FORMS -->
-                <form id="order-form" action="https://api.web3forms.com/submit" method="POST" class="space-y-6">
-                    
-                    <input type="hidden" name="access_key" value="TU_CLAVE_DE_ACCES_AQUÍ">
-                    <input type="hidden" name="subject" value="Nuevo Pedido desde la Web de Eloi's Custom Gear">
-                    <input type="hidden" name="imagen_mockup" id="input-imagen-oculta">
-                    
-                    <!-- 1. Soporte -->
+                <!-- Formulario conectado a Web3Forms o similar (puedes cambiar la action key) -->
+                <form id="order-form" action="https://api.web3forms.com/submit" method="POST" class="flex flex-col gap-3">
+                    <!-- Clave de acceso de ejemplo (reemplazar por tu API key de Web3Forms) -->
+                    <input type="hidden" name="access_key" value="YOUR-WEB3FORMS-ACCESS-KEY">
+                    <input type="hidden" name="subject" value="Nuevo Pedido desde Eloi's Custom Gear">
+                    <input type="hidden" id="input-imagen-oculta" name="imagen_mockup">
+
                     <div>
-                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">1. Selecciona el soporte</label>
-                        <div class="grid grid-cols-3 gap-3">
-                            <button type="button" onclick="setProducto('Camiseta', 15, 'camiseta.png')" class="producto-btn group border-2 border-amber-500 bg-amber-500/10 rounded-2xl p-3 text-center cursor-pointer transition">
-                                <span class="block text-2xl mb-1">👕</span>
-                                <span class="text-xs font-bold block text-slate-200">Camiseta</span>
-                                <span class="text-[11px] text-amber-400 font-extrabold">15.00 €</span>
-                            </button>
-                            <button type="button" onclick="setProducto('Taza de Cerámica', 10, 'taza.png')" class="producto-btn group border-2 border-slate-800 bg-slate-950/60 rounded-2xl p-3 text-center cursor-pointer transition">
-                                <span class="block text-2xl mb-1">☕</span>
-                                <span class="text-xs font-bold block text-slate-300">Taza</span>
-                                <span class="text-[11px] text-amber-400 font-extrabold">10.00 €</span>
-                            </button>
-                            <button type="button" onclick="setProducto('Gorra Trucker', 12, 'gorra.png')" class="producto-btn group border-2 border-slate-800 bg-slate-950/60 rounded-2xl p-3 text-center cursor-pointer transition">
-                                <span class="block text-2xl mb-1">🧢</span>
-                                <span class="text-xs font-bold block text-slate-300">Gorra</span>
-                                <span class="text-[11px] text-amber-400 font-extrabold">12.00 €</span>
-                            </button>
+                        <label class="block text-xs text-slate-300 mb-1">Nombre Completo *</label>
+                        <input type="text" id="fact-nombre" name="nombre" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-amber-500">
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs text-slate-300 mb-1">Teléfono (WhatsApp) *</label>
+                            <input type="tel" id="fact-telefono" name="telefono" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-amber-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs text-slate-300 mb-1">Email de Contacto</label>
+                            <input type="email" id="fact-email" name="email" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-amber-500">
                         </div>
                     </div>
-
-                    <!-- 2. Archivo, Ubicación y Marcos -->
-                    <div class="space-y-4 pt-2">
-                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-400">2. Tu diseño, posición y marcos</label>
-                        <div class="space-y-3">
-                            <div>
-                                <label class="block text-[11px] font-medium text-slate-400 mb-1.5">Archivo de imagen original (Obligatorio)</label>
-                                <input type="file" id="input-archivo" name="archivo_diseno" accept="image/*" class="w-full text-xs text-slate-300 bg-slate-950/80 rounded-xl border border-slate-800 p-2.5 file:mr-3 file:py-1.5 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-amber-500/10 file:text-amber-400 cursor-pointer transition" onchange="manejarSubidaArchivo(event)">
-                            </div>
-                            
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                <div>
-                                    <label class="block text-[10px] uppercase font-bold text-slate-500 mb-1">Estilo de Marco / Borde</label>
-                                    <select id="select-marco" name="estilo_marco" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-amber-300 font-bold focus:outline-none focus:border-amber-400 transition" onchange="actualizarMarco()">
-                                        <option value="sin-marco">Sin borde</option>
-                                        <option value="marco-blanco">Borde Blanco Sólido</option>
-                                        <option value="marco-oro">Borde Oro / Ámbar</option>
-                                        <option value="marco-neon">Neón Eléctrico</option>
-                                        <option value="marco-redondo">Corte Circular Suave</option>
-                                        <option value="marco-desgastado">Vintage / Desgastado</option>
-                                        <option value="marco-difuminado">Difuminado / Vignette</option>
-                                        <option value="marco-sombra">Sombra Elevada 3D</option>
-                                        <option value="marco-polaroid">Estilo Polaroid</option>
-                                        <option value="marco-doble">Doble Marco Fino</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label class="block text-[10px] uppercase font-bold text-slate-500 mb-1">Ubicación principal</label>
-                                    <select id="select-ubicacion" name="ubicacion_estampado" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-amber-400 transition">
-                                        <option value="Frente / Centrado">Frente / Centrado principal</option>
-                                        <option value="Espalda / Reverso">Espalda / Reverso completo</option>
-                                        <option value="Pecho Izquierdo (Logo)">Pecho Izquierdo (Logo)</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
+                    <div>
+                        <label class="block text-xs text-slate-300 mb-1">Dirección de Envío / Notas</label>
+                        <textarea id="fact-direccion" name="direccion" rows="2" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-amber-500" placeholder="Calle, Ciudad, Código Postal u observaciones..."></textarea>
                     </div>
 
-                    <!-- 3. Texto y Tipografías -->
-                    <div class="space-y-4 pt-2 border-t border-slate-800/80">
-                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-400">3. Texto y Tipografías Pro</label>
-                        
-                        <div class="space-y-3">
-                            <input type="text" id="input-texto" name="texto_personalizado" placeholder="Escribe tu frase o nombre..." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-xs sm:text-sm text-slate-100 focus:outline-none focus:border-amber-400 transition shadow-inner" oninput="actualizarTexto()">
-                            
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                <div>
-                                    <label class="block text-[10px] uppercase font-bold text-slate-500 mb-1">Selecciona la Fuente</label>
-                                    <select id="select-fuente" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-amber-300 font-bold focus:outline-none focus:border-amber-400 transition" onchange="actualizarFuente()">
-                                        <option value="font-urban" class="font-urban text-sm">Abc Urban Modern</option>
-                                        <option value="font-bebas" class="font-bebas text-base">ABC BEBAS STREET</option>
-                                        <option value="font-anton" class="font-anton text-base">ABC ANTON HEAVY</option>
-                                        <option value="font-bungee" class="font-bungee text-xs">ABC 3D BUNGEE</option>
-                                        <option value="font-marker" class="font-marker text-sm">Abc Graffiti Marker</option>
-                                        <option value="font-rye" class="font-rye text-sm">ABC RYE WESTERN</option>
-                                        <option value="font-cinzel" class="font-cinzel text-sm">ABC CINZEL LUXURY</option>
-                                        <option value="font-montserrat" class="font-montserrat text-sm">ABC MONTSERRAT</option>
-                                        <option value="font-glitch" class="font-glitch text-sm">ABC GLITCH CYBER</option>
-                                        <option value="font-creepster" class="font-creepster text-sm">ABC CREEPSTER ROCK</option>
-                                        <option value="font-typewriter" class="font-typewriter text-xs">ABC TYPEWRITER</option>
-                                        <option value="font-retro" class="font-retro text-base">Abc Retro Digital</option>
-                                        <option value="font-pacifico" class="font-pacifico text-sm">Abc Pacifico Script</option>
-                                        <option value="font-arcade" class="font-arcade text-xs">ABC 8-BIT ARCADE</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label class="block text-[10px] uppercase font-bold text-slate-500 mb-1">Color del texto</label>
-                                    <select id="select-color-texto" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-slate-300 focus:outline-none focus:border-amber-400 transition" onchange="actualizarColorTexto()">
-                                        <option value="text-white">Blanco puro</option>
-                                        <option value="text-amber-400">Ámbar / Oro brillante</option>
-                                        <option value="text-slate-950 bg-white px-2 py-0.5 rounded font-black">Negro sólido</option>
-                                        <option value="text-rose-400">Rojo Neón</option>
-                                        <option value="text-sky-400">Azul Eléctrico</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 4. DATOS DE FACTURACIÓN Y ENVÍO -->
-                    <div class="space-y-4 pt-2 border-t border-slate-800/80">
-                        <label class="block text-xs font-bold uppercase tracking-wider text-amber-400">4. Datos de Facturación y Envío</label>
-                        
-                        <div class="space-y-3">
-                            <div>
-                                <label class="block text-[10px] uppercase font-bold text-slate-500 mb-1">Nombre y Apellidos / Empresa</label>
-                                <input type="text" id="fact-nombre" name="nombre_cliente" placeholder="Ej. Juan Pérez" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-slate-100 focus:outline-none focus:border-amber-400 transition">
-                            </div>
-                            
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                <div>
-                                    <label class="block text-[10px] uppercase font-bold text-slate-500 mb-1">DNI / NIF</label>
-                                    <input type="text" id="fact-dni" name="dni_cliente" placeholder="Ej. 12345678X" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-slate-100 focus:outline-none focus:border-amber-400 transition">
-                                </div>
-                                <div>
-                                    <label class="block text-[10px] uppercase font-bold text-slate-500 mb-1">Teléfono de contacto</label>
-                                    <input type="tel" id="fact-telefono" name="telefono_cliente" placeholder="Ej. 600123456" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-slate-100 focus:outline-none focus:border-amber-400 transition">
-                                </div>
-                            </div>
-
-                            <div>
-                                <label class="block text-[10px] uppercase font-bold text-slate-500 mb-1">Dirección de Envío y Código Postal</label>
-                                <input type="text" id="fact-direccion" name="direccion_cliente" placeholder="Calle, Número, Piso, Ciudad, CP" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-slate-100 focus:outline-none focus:border-amber-400 transition">
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- BOTÓN DE ENVÍO AUTOMATIZADO -->
-                    <div class="pt-4">
-                        <button type="button" onclick="enviarPedidoConArchivos()" class="w-full bg-gradient-to-r from-emerald-500 via-green-500 to-emerald-600 text-slate-950 font-black py-4 px-6 rounded-2xl shadow-xl shadow-green-600/20 hover:scale-[1.02] active:scale-[0.98] transition flex items-center justify-center gap-2.5 cursor-pointer text-sm sm:text-base">
-                            <span class="text-xl">📲</span> Enviar Pedido y Archivos por Email y WhatsApp
-                        </button>
-                    </div>
-
+                    <button type="button" onclick="enviarPedidoConArchivos()" class="w-full bg-gradient-to-r from-amber-500 to-rose-500 hover:from-amber-400 hover:to-rose-400 text-slate-950 font-bold py-3 px-4 rounded-xl transition shadow-xl mt-2 flex items-center justify-center gap-2 cursor-pointer">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                        Enviar Pedido por Email y WhatsApp
+                    </button>
                 </form>
             </div>
-
         </div>
     </main>
 
-    <!-- FOOTER -->
-    <footer class="border-t border-slate-800/80 bg-slate-950 py-8 px-4 text-center text-xs text-slate-500">
-        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
-            <p>&copy; 2026 Eloi's Custom Gear. Todos los derechos reservados.</p>
+    <!-- MODAL DE VISTA PREVIA GENERADA -->
+    <div id="modal-preview" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 flex items-center justify-center hidden p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 max-w-lg w-full flex flex-col items-center gap-4 shadow-2xl relative">
+            <h3 class="text-base font-bold text-amber-400">¡Vista Previa Generada con Éxito!</h3>
+            <p class="text-xs text-slate-300 text-center">Esta es la captura exacta de tu diseño personalizado lista para producción:</p>
+            <div id="contenedor-imagen-resultado" class="bg-slate-950 p-3 rounded-xl border border-slate-800 flex justify-center w-full">
+                <!-- Se inyecta la imagen canvas -->
+            </div>
+            <div class="flex gap-3 w-full">
+                <button onclick="cerrarPreview()" class="flex-1 bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold py-2.5 rounded-xl text-xs transition">Cerrar</button>
+            </div>
         </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-900 border-t border-slate-800 text-center py-4 text-xs text-slate-500 mt-12">
+        <p>&copy; 2026 Eloi's Custom Gear. Todos los derechos reservados. Impresión digital DTF y Sublimación de alta calidad.</p>
     </footer>
 
-    <!-- SCRIPT -->
+    <!-- SCRIPT DE INTERACTIVIDAD Y ARRASTRE TÁCTIL / MOUSE -->
     <script>
-        let productoActual = "Camiseta";
-        let precioActual = 15.00;
-
-        let logoState = { posX: 0, posY: -20, scale: 100, rotation: 0 };
-        let textState = { posX: 0, posY: 100, scale: 100, rotation: 0 };
-
-        const zonaEstampado = document.getElementById('zona-estampado');
-        const zonaTextoFlotante = document.getElementById('zona-texto-flotante');
-        const mockupContainer = document.getElementById('mockup-container');
-
-        // Sistema inteligente de respaldo por si el archivo está en carpetas o con mayúsculas
-        function intentarOtraRuta(imgElement) {
-            const actual = imgElement.src;
-            if (actual.includes('camiseta.png')) {
-                imgElement.src = 'Camiseta.png';
-            } else if (actual.includes('Camiseta.png')) {
-                imgElement.src = 'img/camiseta.png';
-            } else if (actual.includes('taza.png')) {
-                imgElement.src = 'Taza.png';
-            } else if (actual.includes('gorra.png')) {
-                imgElement.src = 'Gorra.png';
-            }
-        }
-
-        function habilitarInteraccion(elemento, stateObj) {
-            let punterosActivos = new Map();
-            let distanciaInicialPellizco = 0;
-            let escalaInicialPellizco = 100;
-            let arrastrandoUnDedo = false;
-            let inicioX = 0;
-            let inicioY = 0;
-
-            elemento.style.touchAction = 'none';
-
-            elemento.addEventListener('pointerdown', (e) => {
-                e.preventDefault();
-                punterosActivos.set(e.pointerId, e);
-                elemento.setPointerCapture(e.pointerId);
-
-                if (punterosActivos.size === 1) {
-                    arrastrandoUnDedo = true;
-                    inicioX = e.clientX - stateObj.posX;
-                    inicioY = e.clientY - stateObj.posY;
-                } else if (punterosActivos.size === 2) {
-                    arrastrandoUnDedo = false;
-                    const puntos = Array.from(punterosActivos.values());
-                    distanciaInicialPellizco = Math.hypot(puntos[0].clientX - puntos[1].clientX, puntos[0].clientY - puntos[1].clientY);
-                    escalaInicialPellizco = stateObj.scale;
-                }
-            });
-
-            elemento.addEventListener('pointermove', (e) => {
-                if (!punterosActivos.has(e.pointerId)) return;
-                punterosActivos.set(e.pointerId, e);
-
-                if (punterosActivos.size === 1 && arrastrandoUnDedo) {
-                    stateObj.posX = e.clientX - inicioX;
-                    stateObj.posY = e.clientY - inicioY;
-                    actualizarTransformaciones();
-                } else if (punterosActivos.size === 2) {
-                    const puntos = Array.from(punterosActivos.values());
-                    const distanciaActual = Math.hypot(puntos[0].clientX - puntos[1].clientX, puntos[0].clientY - puntos[1].clientY);
-                    if (distanciaInicialPellizco > 0) {
-                        const factor = distanciaActual / distanciaInicialPellizco;
-                        stateObj.scale = Math.max(30, Math.min(400, Math.round(escalaInicialPellizco * factor)));
-                        actualizarTransformaciones();
-                    }
-                }
-            });
-
-            function finalizarPuntero(e) {
-                try {
-                    elemento.releasePointerCapture(e.pointerId);
-                } catch (err) {}
-                punterosActivos.delete(e.pointerId);
-                
-                if (punterosActivos.size < 2) distanciaInicialPellizco = 0;
-                if (punterosActivos.size === 1) {
-                    const puntoRestante = Array.from(punterosActivos.values())[0];
-                    arrastrandoUnDedo = true;
-                    inicioX = puntoRestante.clientX - stateObj.posX;
-                    inicioY = puntoRestante.clientY - stateObj.posY;
-                } else if (punterosActivos.size === 0) {
-                    arrastrandoUnDedo = false;
-                }
-            }
-
-            elemento.addEventListener('pointerup', finalizarPuntero);
-            elemento.addEventListener('pointercancel', finalizarPuntero);
-        }
-
-        habilitarInteraccion(zonaEstampado, logoState);
-        habilitarInteraccion(zonaTextoFlotante, textState);
-
-        function actualizarTransformaciones() {
-            zonaEstampado.style.transform = `translate(${logoState.posX}px, ${logoState.posY}px) scale(${logoState.scale / 100}) rotate(${logoState.rotation}deg)`;
-            zonaTextoFlotante.style.transform = `translate(${textState.posX}px, ${textState.posY}px) scale(${textState.scale / 100}) rotate(${textState.rotation}deg)`;
-        }
-
+        let productoActual = 'Camiseta';
+        let precioActual = 18.50;
         let modoLimpioActivo = false;
-        function alternarModoLimpio() {
-            modoLimpioActivo = !modoLimpioActivo;
-            if (modoLimpioActivo) {
-                mockupContainer.classList.add('modo-limpio');
-                document.getElementById('icono-ojo').innerText = "🙈";
-                document.getElementById('texto-modo-limpio').innerText = "Mostrar Guías";
-            } else {
-                mockupContainer.classList.remove('modo-limpio');
-                document.getElementById('icono-ojo').innerText = "👁️";
-                document.getElementById('texto-modo-limpio').innerText = "Ocultar Guías";
+
+        // Sistema de Arrastre Universal (Mouse y Touch para móviles/tablets)
+        function hacerArrastrable(elementoId, contenedorId) {
+            const elm = document.getElementById(elementoId);
+            const container = document.getElementById(contenedorId);
+            let isDragging = false;
+            let startX, startY, initialX, initialY;
+
+            elm.addEventListener('pointerdown', dragStart);
+
+            function dragStart(e) {
+                isDragging = true;
+                elm.setPointerCapture(e.pointerId);
+                
+                const rect = elm.getBoundingClientRect();
+                const parentRect = container.getBoundingClientRect();
+                
+                // Calcular posición inicial relativa al centro
+                initialX = rect.left - parentRect.left + (rect.width / 2);
+                initialY = rect.top - parentRect.top + (rect.height / 2);
+                
+                startX = e.clientX;
+                startY = e.clientY;
+
+                elm.addEventListener('pointermove', drag);
+                elm.addEventListener('pointerup', dragEnd);
+                elm.addEventListener('pointercancel', dragEnd);
+            }
+
+            function drag(e) {
+                if (!isDragging) return;
+                e.preventDefault();
+                
+                const dx = e.clientX - startX;
+                const dy = e.clientY - startY;
+                
+                const newX = initialX + dx;
+                const newY = initialY + dy;
+                
+                // Convertir a porcentajes relativos al contenedor para mantener responsividad
+                const pctX = (newX / container.clientWidth) * 100;
+                const pctY = (newY / container.clientHeight) * 100;
+                
+                elm.style.left = `${pctX}%`;
+                elm.style.top = `${pctY}%`;
+                elm.style.transform = 'translate(-50%, -50%)';
+            }
+
+            function dragEnd(e) {
+                if (!isDragging) return;
+                isDragging = false;
+                elm.releasePointerCapture(e.pointerId);
+                elm.removeEventListener('pointermove', drag);
+                elm.removeEventListener('pointerup', dragEnd);
+                elm.removeEventListener('pointercancel', dragEnd);
             }
         }
 
-        function setProducto(nombre, precio, urlImagen) {
+        // Inicializar elementos arrastrables
+        hacerArrastrable('zona-logo-flotante', 'mockup-container');
+        hacerArrastrable('zona-texto-flotante', 'mockup-container');
+
+        function cambiarSoporte(nombre, urlImagen, precio) {
             productoActual = nombre;
             precioActual = precio;
-            document.getElementById('precio-total').innerText = precio.toFixed(2) + " €";
-            document.getElementById('imagen-producto').src = urlImagen;
+            document.getElementById('imagen-soporte').src = urlImagen;
+            document.getElementById('precio-total-display').innerText = precio.toFixed(2) + ' €';
 
-            logoState = { posX: 0, posY: -20, scale: 100, rotation: 0 };
-            textState = { posX: 0, posY: 100, scale: 100, rotation: 0 };
-            actualizarTransformaciones();
-            cerrarPreview();
-
-            const botones = document.querySelectorAll('.producto-btn');
-            botones.forEach(btn => {
-                btn.classList.remove('border-amber-500', 'bg-amber-500/15');
-                btn.classList.add('border-slate-800', 'bg-slate-950/60');
+            // Actualizar estilos visuales de botones de soporte
+            document.querySelectorAll('.soporte-btn').forEach(btn => {
+                btn.classList.remove('border-amber-500', 'bg-slate-800/50');
+                btn.classList.add('border-slate-800', 'bg-slate-900/50');
             });
-            event.currentTarget.classList.remove('border-slate-800', 'bg-slate-950/60');
-            event.currentTarget.classList.add('border-amber-500', 'bg-amber-500/15');
+            event.currentTarget.classList.remove('border-slate-800', 'bg-slate-900/50');
+            event.currentTarget.classList.add('border-amber-500', 'bg-slate-800/50');
+        }
+
+        function alternarModoLimpio() {
+            modoLimpioActivo = !modoLimpioActivo;
+            const btn = document.getElementById('btn-modo-limpio');
+            if (modoLimpioActivo) {
+                btn.classList.add('bg-amber-500', 'text-slate-950');
+                btn.classList.remove('bg-slate-800/80', 'text-slate-300');
+            } else {
+                btn.classList.remove('bg-amber-500', 'text-slate-950');
+                btn.classList.add('bg-slate-800/80', 'text-slate-300');
+            }
         }
 
         function manejarSubidaArchivo(event) {
@@ -444,8 +374,8 @@
             if (archivo) {
                 const lector = new FileReader();
                 lector.onload = function(e) {
-                    const imgPreview = document.getElementById('preview-imagen-subida');
-                    const placeholder = document.getElementById('placeholder-arte');
+                    const imgPreview = document.getElementById('img-preview');
+                    const placeholder = document.getElementById('upload-placeholder');
                     
                     imgPreview.src = e.target.result;
                     imgPreview.classList.remove('hidden');
@@ -460,131 +390,124 @@
             const wrapper = document.getElementById('marco-imagen-wrapper');
             
             wrapper.className = "p-0 transition-all duration-300";
-
-            if (estilo === 'marco-blanco') {
-                wrapper.className = "p-3 bg-white rounded-xl shadow-2xl transition-all duration-300";
-            } else if (estilo === 'marco-oro') {
-                wrapper.className = "p-3 bg-gradient-to-tr from-amber-500 to-yellow-300 rounded-xl shadow-2xl shadow-amber-500/20 transition-all duration-300";
-            } else if (estilo === 'marco-neon') {
-                wrapper.className = "p-3 bg-slate-950 border-2 border-sky-400 rounded-xl shadow-[0_0_20px_rgba(56,189,248,0.5)] transition-all duration-300";
-            } else if (estilo === 'marco-redondo') {
-                wrapper.className = "p-2 bg-slate-900 rounded-full overflow-hidden border-2 border-amber-400 shadow-xl aspect-square flex items-center justify-center transition-all duration-300";
-            } else if (estilo === 'marco-desgastado') {
-                wrapper.className = "p-4 bg-stone-900 border-4 border-dashed border-stone-600 rounded-lg shadow-2xl transition-all duration-300";
-            } else if (estilo === 'marco-difuminado') {
-                wrapper.className = "p-4 bg-slate-950/80 backdrop-blur-md rounded-2xl shadow-[inset_0_0_15px_rgba(0,0,0,0.8)] transition-all duration-300";
-            } else if (estilo === 'marco-sombra') {
-                wrapper.className = "p-2 bg-slate-900 rounded-xl shadow-[0_25px_50px_-12px_rgba(0,0,0,0.9)] transition-all duration-300";
-            } else if (estilo === 'marco-polaroid') {
-                wrapper.className = "p-3 pb-8 bg-white rounded shadow-2xl transition-all duration-300";
-            } else if (estilo === 'marco-doble') {
-                wrapper.className = "p-2 bg-slate-900 border border-slate-700 ring-4 ring-amber-500/30 rounded-xl shadow-2xl transition-all duration-300";
+            
+            switch(estilo) {
+                case 'marco-blanco':
+                    wrapper.className = "p-3 bg-white rounded-xl shadow-2xl transition-all duration-300";
+                    break;
+                case 'marco-oro':
+                    wrapper.className = "p-3 bg-gradient-to-tr from-amber-500 to-yellow-300 rounded-xl shadow-2xl shadow-amber-500/20 transition-all duration-300";
+                    break;
+                case 'marco-neon':
+                    wrapper.className = "p-3 bg-slate-900 border-2 border-sky-400 rounded-xl shadow-[0_0_20px_rgba(56,189,248,0.5)] transition-all duration-300";
+                    break;
+                case 'marco-redondo':
+                    wrapper.className = "p-2 bg-slate-900/80 rounded-full overflow-hidden border-2 border-amber-400 shadow-xl aspect-square flex items-center justify-center transition-all duration-300";
+                    break;
+                case 'marco-desgastado':
+                    wrapper.className = "p-4 bg-stone-900 border-4 border-dashed border-stone-600 rounded-lg shadow-xl transition-all duration-300";
+                    break;
+                case 'marco-difuminado':
+                    wrapper.className = "p-3 bg-gradient-to-b from-slate-900/90 to-slate-950/90 rounded-2xl shadow-2xl backdrop-blur-md transition-all duration-300";
+                    break;
+                case 'marco-sombra':
+                    wrapper.className = "p-2 bg-slate-900 rounded-2xl shadow-[0_25px_50px_-12px_rgba(0,0,0,0.9)] border border-slate-700/50 transition-all duration-300";
+                    break;
+                case 'marco-polaroid':
+                    wrapper.className = "p-3 pb-8 bg-white rounded shadow-2xl transition-all duration-300";
+                    break;
+                case 'marco-doble':
+                    wrapper.className = "p-4 bg-slate-950 border-4 border-slate-800 outline outline-2 outline-amber-400 rounded-2xl shadow-2xl transition-all duration-300";
+                    break;
             }
         }
 
         function actualizarTexto() {
             const texto = document.getElementById('input-texto').value;
-            const elementoTexto = document.getElementById('preview-texto');
-            const contenedorTexto = document.getElementById('zona-texto-flotante');
-
+            const zonaTextoFlotante = document.getElementById('zona-texto-flotante');
+            const previewTexto = document.getElementById('preview-texto');
+            
+            previewTexto.innerText = texto;
             if (texto.trim() !== "") {
-                elementoTexto.innerText = texto;
-                contenedorTexto.classList.remove('hidden');
+                zonaTextoFlotante.classList.remove('hidden');
             } else {
-                contenedorTexto.classList.add('hidden');
+                zonaTextoFlotante.classList.add('hidden');
             }
         }
 
         function actualizarFuente() {
             const fuenteSeleccionada = document.getElementById('select-fuente').value;
-            const elementoTexto = document.getElementById('preview-texto');
+            const previewTexto = document.getElementById('preview-texto');
             
-            elementoTexto.className = elementoTexto.className.replace(/font-\S+/g, '');
-            elementoTexto.classList.add(fuenteSeleccionada, 'font-bold', 'drop-shadow-md', 'text-white', 'pointer-events-none', 'px-3', 'py-1');
+            previewTexto.className = previewTexto.className.replace(/font-\S+/g, '');
+            previewTexto.classList.add(fuenteSeleccionada, 'font-bold', 'drop-shadow-md', 'px-3', 'py-1');
         }
 
         function actualizarColorTexto() {
             const colorSeleccionado = document.getElementById('select-color-texto').value;
-            const elementoTexto = document.getElementById('preview-texto');
+            const previewTexto = document.getElementById('preview-texto');
             
-            elementoTexto.className = elementoTexto.className.replace(/text-\S+|bg-\S+|rounded-\S+|font-black/g, '');
-            elementoTexto.classList.add(...colorSeleccionado.split(' '));
+            previewTexto.className = previewTexto.className.replace(/text-\S+/g, '');
+            previewTexto.className = previewTexto.className.replace(/bg-\S+/g, '');
+            previewTexto.className = previewTexto.className.replace(/rounded-\S+/g, '');
+            previewTexto.className = previewTexto.className.replace(/font-black/g, '');
+            
+            previewTexto.className += " " + colorSeleccionado;
         }
 
-        async function generarVistaPrevia() {
-            const mockupContainer = document.getElementById('mockup-container');
-            const modalPreview = document.getElementById('modal-preview');
-            const contenedorResultado = document.getElementById('contenedor-imagen-resultado');
-
-            mockupContainer.classList.add('modo-limpio');
-
-            try {
-                const canvas = await html2canvas(mockupContainer, {
-                    scale: 2,
-                    useCORS: true,
-                    backgroundColor: null
-                });
+        function generarVistaPrevia() {
+            html2canvas(document.getElementById('mockup-container'), {
+                backgroundColor: null,
+                scale: 2,
+                useCORS: true
+            }).then(canvas => {
+                const imgData = canvas.toDataURL('image/png');
+                const contenedorResultado = document.getElementById('contenedor-imagen-resultado');
+                contenedorResultado.innerHTML = `<img src="${imgData}" class="max-h-64 object-contain rounded-lg shadow-lg">`;
                 
-                const imagenURL = canvas.toDataURL('image/png');
-                contenedorResultado.innerHTML = `<img src="${imagenURL}" class="max-h-52 w-auto object-contain rounded-lg shadow-lg">`;
-                modalPreview.classList.remove('hidden');
-                modalPreview.scrollIntoView({ behavior: 'smooth' });
-            } catch (error) {
-                console.error("Error al generar la vista previa:", error);
-                alert("Hubo un error al generar la imagen.");
-            } finally {
-                mockupContainer.classList.remove('modo-limpio');
-            }
+                document.getElementById('modal-preview').classList.remove('hidden');
+                document.getElementById('input-imagen-oculta').value = imgData;
+            });
         }
 
         function cerrarPreview() {
             document.getElementById('modal-preview').classList.add('hidden');
         }
 
-        async function enviarPedidoConArchivos() {
+        function enviarPedidoConArchivos() {
             const nombre = document.getElementById('fact-nombre').value;
             const telefono = document.getElementById('fact-telefono').value;
             const direccion = document.getElementById('fact-direccion').value;
 
-            if (!nombre || !telefono || !direccion) {
-                alert("Por favor, completa al menos tu nombre, teléfono y dirección de envío.");
+            if (!nombre || !telefono) {
+                alert("Por favor, completa al menos tu nombre y teléfono para procesar el pedido.");
                 return;
             }
 
-            const mockupContainer = document.getElementById('mockup-container');
-            mockupContainer.classList.add('modo-limpio');
+            html2canvas(document.getElementById('mockup-container'), { backgroundColor: null, scale: 2, useCORS: true }).then(canvas => {
+                const imgData = canvas.toDataURL('image/png');
+                document.getElementById('input-imagen-oculta').value = imgData;
 
-            try {
-                const canvas = await html2canvas(mockupContainer, { scale: 2, useCORS: true, backgroundColor: null });
-                const imagenURL = canvas.toDataURL('image/png');
-                
-                document.getElementById('input-imagen-oculta').value = imagenURL;
+                const form = document.getElementById('order-form');
+                const formData = new FormData(form);
 
-                const formElement = document.getElementById('order-form');
-                const formData = new FormData(formElement);
-                
-                const response = await fetch('https://api.web3forms.com/submit', {
+                fetch(form.action, {
                     method: 'POST',
                     body: formData
+                }).then(response => {
+                    if (response.ok) {
+                        const textoWp = `Hola! Acabo de realizar un pedido en Eloi's Custom Gear:%0A*Soporte:* ${productoActual} (${precioActual.toFixed(2)} €)%0A*Cliente:* ${encodeURIComponent(nombre)}%0A*Teléfono:* ${encodeURIComponent(telefono)}%0A*Dirección:* ${encodeURIComponent(direccion)}`;
+                        window.open(`https://wa.me/34600000000?text=${textoWp}`, '_blank');
+                        alert("¡Pedido enviado con éxito por email y WhatsApp!");
+                    } else {
+                        alert("Hubo un error al enviar el formulario. Inténtalo de nuevo.");
+                    }
+                }).catch(error => {
+                    console.error("Error:", error);
+                    alert("Error de conexión al enviar el pedido.");
                 });
-
-                if (response.ok) {
-                    alert("¡Pedido enviado con éxito! Te redirigiremos a WhatsApp para confirmar los detalles con Eloi.");
-                    
-                    const ubicacion = document.getElementById('select-ubicacion').value;
-                    const textoPersonalizado = document.getElementById('input-texto').value;
-                    const mensaje = `Hola! 👋 Acabo de enviar mi pedido y diseño desde la web:\n\n• *Producto:* ${productoActual} (${precioActual.toFixed(2)} €)\n• *Ubicación:* ${ubicacion}\n• *Texto:* ${textoPersonalizado || 'Ninguno'}\n• *Cliente:* ${nombre}\n• *Teléfono:* ${telefono}`;
-                    window.open(`https://wa.me/34600000000?text=${encodeURIComponent(mensaje)}`, '_blank');
-                } else {
-                    alert("Hubo un problema al enviar el formulario. Por favor, revisa tu clave de Web3Forms.");
-                }
-
-            } catch (error) {
-                console.error("Error:", error);
-                alert("Error al procesar el envío del diseño.");
-            } finally {
-                mockupContainer.classList.remove('modo-limpio');
-            }
+            });
         }
     </script>
-</body></html>
+</body>
+</html>
