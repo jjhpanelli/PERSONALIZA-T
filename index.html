@@ -6,14 +6,12 @@
     <title>Eloi's Custom Gear | Estudio de Personalización Pro</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <!-- Nuevas fuentes añadidas -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&family=Bebas+Neue&family=Permanent+Marker&family=Cinzel:wght@700&family=Montserrat:wght@800&family=VT323&family=Pacifico&family=Press+Start+2P&family=Anton&family=Rye&family=Creepster&family=Rubik+Glitch&family=Special+Elite&family=Bungee&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; touch-action: pan-x pan-y; }
         .elemento-interactivo { touch-action: none; cursor: grab; }
         .elemento-interactivo:active { cursor: grabbing; }
         
-        /* Catálogo de Tipografías */
         .font-urban { font-family: 'Plus Jakarta Sans', sans-serif; }
         .font-bebas { font-family: 'Bebas Neue', sans-serif; letter-spacing: 1px; }
         .font-marker { font-family: 'Permanent Marker', cursive; }
@@ -68,10 +66,10 @@
                 <span>✨</span> Estudio de Diseño Interactivo Pro
             </div>
             <h1 class="text-3xl sm:text-6xl font-black tracking-tight mb-4 leading-tight">
-                Personaliza sin límites. <br><span class="bg-gradient-to-r from-amber-400 via-orange-400 to-yellow-300 bg-clip-text text-transparent">Diseña, enmarca y encarga</span>
+                Personaliza sin límites. <br><span class="bg-gradient-to-r from-amber-400 via-orange-400 to-yellow-300 bg-clip-text text-transparent">Diseña, factura y encarga</span>
             </h1>
             <p class="text-slate-400 text-sm sm:text-base leading-relaxed">
-                Nuevos marcos artísticos (desgastados, difuminados, polaroid) y fuentes pro para tus prendas.
+                Genera tu mockup, añade tus datos de facturación y envía el pedido completo al instante.
             </p>
         </div>
 
@@ -101,7 +99,6 @@
                             🎨 Logo (Arrastra / Zoom)
                         </div>
                         
-                        <!-- Contenedor con marcos aplicables -->
                         <div id="marco-imagen-wrapper" class="p-0 transition-all duration-300">
                             <img id="preview-imagen-subida" class="max-h-36 sm:max-h-44 w-auto object-contain drop-shadow-2xl hidden pointer-events-none" alt="Diseño cliente">
                         </div>
@@ -141,7 +138,7 @@
                 </div>
             </div>
 
-            <!-- COLUMNA DERECHA: CONFIGURACIÓN -->
+            <!-- COLUMNA DERECHA: CONFIGURACIÓN Y FACTURACIÓN -->
             <div class="lg:col-span-5 bg-slate-900/40 border border-slate-800/80 rounded-3xl p-6 sm:p-8 backdrop-blur-md shadow-xl">
                 <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-800">
                     <h2 class="text-lg font-bold flex items-center gap-2.5 text-amber-400">
@@ -173,12 +170,12 @@
                         </div>
                     </div>
 
-                    <!-- 2. Archivo, Ubicación y Marcos Avanzados -->
+                    <!-- 2. Archivo, Ubicación y Marcos -->
                     <div class="space-y-4 pt-2">
-                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-400">2. Tu diseño, posición y marcos artísticos</label>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-400">2. Tu diseño, posición y marcos</label>
                         <div class="space-y-3">
                             <div>
-                                <label class="block text-[11px] font-medium text-slate-400 mb-1.5">Archivo de imagen (PNG o JPG)</label>
+                                <label class="block text-[11px] font-medium text-slate-400 mb-1.5">Archivo de imagen original (Obligatorio)</label>
                                 <input type="file" id="input-archivo" accept="image/*" class="w-full text-xs text-slate-300 bg-slate-950/80 rounded-xl border border-slate-800 p-2.5 file:mr-3 file:py-1.5 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-amber-500/10 file:text-amber-400 cursor-pointer transition" onchange="manejarSubidaArchivo(event)">
                             </div>
                             
@@ -191,10 +188,10 @@
                                         <option value="marco-oro">Borde Oro / Ámbar</option>
                                         <option value="marco-neon">Neón Eléctrico</option>
                                         <option value="marco-redondo">Corte Circular Suave</option>
-                                        <option value="marco-desgastado">Vintage / Desgastado (Borde rústico)</option>
-                                        <option value="marco-difuminado">Difuminado / Vignette (Efecto difuso)</option>
+                                        <option value="marco-desgastado">Vintage / Desgastado</option>
+                                        <option value="marco-difuminado">Difuminado / Vignette</option>
                                         <option value="marco-sombra">Sombra Elevada 3D</option>
-                                        <option value="marco-polaroid">Estilo Polaroid Clásico</option>
+                                        <option value="marco-polaroid">Estilo Polaroid</option>
                                         <option value="marco-doble">Doble Marco Fino</option>
                                     </select>
                                 </div>
@@ -210,9 +207,9 @@
                         </div>
                     </div>
 
-                    <!-- 3. Texto y Nuevas Fuentes Chulas -->
+                    <!-- 3. Texto y Tipografías -->
                     <div class="space-y-4 pt-2 border-t border-slate-800/80">
-                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-400">3. Texto y Tipografías Pro (Estilo Streetwear)</label>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-400">3. Texto y Tipografías Pro</label>
                         
                         <div class="space-y-3">
                             <input type="text" id="input-texto" placeholder="Escribe tu frase o nombre..." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-xs sm:text-sm text-slate-100 focus:outline-none focus:border-amber-400 transition shadow-inner" oninput="actualizarTexto()">
@@ -245,9 +242,36 @@
                                         <option value="text-slate-950 bg-white px-2 py-0.5 rounded font-black">Negro sólido</option>
                                         <option value="text-rose-400">Rojo Neón</option>
                                         <option value="text-sky-400">Azul Eléctrico</option>
-                                        <option value="text-emerald-400">Verde Esmeralda</option>
                                     </select>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4. DATOS DE FACTURACIÓN Y ENVÍO -->
+                    <div class="space-y-4 pt-2 border-t border-slate-800/80">
+                        <label class="block text-xs font-bold uppercase tracking-wider text-amber-400">4. Datos de Facturación y Envío</label>
+                        
+                        <div class="space-y-3">
+                            <div>
+                                <label class="block text-[10px] uppercase font-bold text-slate-500 mb-1">Nombre y Apellidos / Empresa</label>
+                                <input type="text" id="fact-nombre" placeholder="Ej. Juan Pérez" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-slate-100 focus:outline-none focus:border-amber-400 transition">
+                            </div>
+                            
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-[10px] uppercase font-bold text-slate-500 mb-1">DNI / NIF</label>
+                                    <input type="text" id="fact-dni" placeholder="Ej. 12345678X" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-slate-100 focus:outline-none focus:border-amber-400 transition">
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] uppercase font-bold text-slate-500 mb-1">Teléfono de contacto</label>
+                                    <input type="tel" id="fact-telefono" placeholder="Ej. 600123456" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-slate-100 focus:outline-none focus:border-amber-400 transition">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-[10px] uppercase font-bold text-slate-500 mb-1">Dirección de Envío y Código Postal</label>
+                                <input type="text" id="fact-direccion" placeholder="Calle, Número, Piso, Ciudad, CP" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-slate-100 focus:outline-none focus:border-amber-400 transition">
                             </div>
                         </div>
                     </div>
@@ -255,7 +279,7 @@
                     <!-- BOTÓN WHATSAPP -->
                     <div class="pt-4">
                         <button type="button" onclick="enviarPedidoWhatsApp()" class="w-full bg-gradient-to-r from-emerald-500 via-green-500 to-emerald-600 text-slate-950 font-black py-4 px-6 rounded-2xl shadow-xl shadow-green-600/20 hover:scale-[1.02] active:scale-[0.98] transition flex items-center justify-center gap-2.5 cursor-pointer text-sm sm:text-base">
-                            <span class="text-xl">📲</span> Enviar diseño por WhatsApp (650013500)
+                            <span class="text-xl">📲</span> Enviar Datos y Diseño por WhatsApp
                         </button>
                     </div>
 
@@ -403,7 +427,6 @@
             }
         }
 
-        // Aplicación del repertorio extendido de marcos y bordes
         function actualizarMarco() {
             const estilo = document.getElementById('select-marco').value;
             const wrapper = document.getElementById('marco-imagen-wrapper');
@@ -484,6 +507,25 @@
         }
 
         function enviarPedidoWhatsApp() {
+            const archivoInput = document.getElementById('input-archivo');
+            const nombreNombre = document.getElementById('fact-nombre').value.trim();
+            const dni = document.getElementById('fact-dni').value.trim();
+            const tel = document.getElementById('fact-telefono').value.trim();
+            const dir = document.getElementById('fact-direccion').value.trim();
+
+            // VALIDACIONES OBLIGATORIAS
+            if (archivoInput.files.length === 0) {
+                alert("⚠️ Por favor, sube tu archivo de imagen original antes de enviar.");
+                archivoInput.focus();
+                return;
+            }
+
+            if (!nombreNombre || !dni || !tel || !dir) {
+                alert("⚠️ Por favor, completa todos los datos de facturación y envío.");
+                document.getElementById('fact-nombre').focus();
+                return;
+            }
+
             const texto = document.getElementById('input-texto').value || "Ninguno";
             const selectFuente = document.getElementById('select-fuente');
             const fuente = selectFuente.options[selectFuente.selectedIndex].text;
@@ -492,28 +534,29 @@
             const ubicacion = document.getElementById('select-ubicacion').value;
             const selectMarco = document.getElementById('select-marco');
             const estiloMarco = selectMarco.options[selectMarco.selectedIndex].text;
-            const archivoInput = document.getElementById('input-archivo');
-            const nombreArchivo = archivoInput.files.length > 0 ? archivoInput.files[0].name : "Ninguno subido";
+            const nombreArchivo = archivoInput.files[0].name;
 
-            const telefono = "34650013500";
+            const telefonoWhatsApp = "34650013500";
 
-            let mensaje = `¡Hola! Quiero hacer un pedido personalizado en Eloi's Custom Gear:
+            let mensaje = `📋 *NUEVO PEDIDO - ELOI'S CUSTOM GEAR*
 
+👤 *DATOS DE FACTURACIÓN Y ENVÍO:*
+• Nombre: ${nombreNombre}
+• DNI/NIF: ${dni}
+• Teléfono: ${tel}
+• Dirección: ${dir}
+
+🎨 *DETALLES DEL DISEÑO:*
 • Soporte: ${productoActual} (${precioActual.toFixed(2)} €)
 • Ubicación: ${ubicacion}
-• Archivo subido: ${nombreArchivo}
+• Archivo Original: ${nombreArchivo}
 • Marco / Borde: ${estiloMarco}
 • Texto añadido: "${texto}"
 • Tipografía: ${fuente} (${colorTexto})
-• Coordenadas -> Logo (Escala: ${logoState.scale}%), Texto (Escala: ${textState.scale}%)`;
 
-            if (imagenBase64Preview) {
-                mensaje += `\n\n[El cliente ha generado su vista previa HD limpia].`;
-            }
+*(Nota: Adjunto también la imagen original y la captura del mockup generado en este chat de WhatsApp para proceder con el pago y producción)*`;
 
-            mensaje += `\n\nPor favor, confirmadme los detalles del pago y envío. ¡Gracias!`;
-
-            const urlWap = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
+            const urlWap = `https://wa.me/${telefonoWhatsApp}?text=${encodeURIComponent(mensaje)}`;
             window.open(urlWap, '_blank');
         }
     </script>
