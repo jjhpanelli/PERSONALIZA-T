@@ -10,6 +10,13 @@
         .elemento-interactivo { touch-action: none; cursor: grab; }
         .elemento-interactivo:active { cursor: grabbing; }
         
+        /* Forzar que los elementos hijos no intercepten el toque del contenedor padre */
+        .elemento-interactivo img, 
+        .elemento-interactivo span, 
+        .elemento-interactivo div {
+            pointer-events: none !important;
+        }
+        
         .font-urban { font-family: 'Plus Jakarta Sans', sans-serif; }
         .font-bebas { font-family: 'Bebas Neue', sans-serif; letter-spacing: 1px; }
         .font-marker { font-family: 'Permanent Marker', cursive; }
@@ -312,8 +319,10 @@
             let inicioX = 0;
             let inicioY = 0;
 
+            elemento.style.touchAction = 'none';
+
             elemento.addEventListener('pointerdown', (e) => {
-                e.stopPropagation();
+                e.preventDefault();
                 punterosActivos.set(e.pointerId, e);
                 elemento.setPointerCapture(e.pointerId);
 
@@ -349,7 +358,11 @@
             });
 
             function finalizarPuntero(e) {
+                try {
+                    elemento.releasePointerCapture(e.pointerId);
+                } catch (err) {}
                 punterosActivos.delete(e.pointerId);
+                
                 if (punterosActivos.size < 2) distanciaInicialPellizco = 0;
                 if (punterosActivos.size === 1) {
                     const puntoRestante = Array.from(punterosActivos.values())[0];
