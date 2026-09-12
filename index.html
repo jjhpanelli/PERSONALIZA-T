@@ -114,9 +114,12 @@
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl space-y-4">
                     <h3 class="text-xs font-bold uppercase tracking-wider text-amber-400">2. Personalización y Ajustes</h3>
                     
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-400 mb-1">Subir tu propia Imagen / Logo</label>
-                        <input type="file" id="subir-imagen" accept="image/*" class="w-full text-xs text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-amber-500/10 file:text-amber-400 hover:file:bg-amber-500/20 cursor-pointer">
+                    <div class="space-y-2">
+                        <label class="block text-xs font-semibold text-slate-400">Subir tu propia Imagen / Logo</label>
+                        <div class="flex gap-2">
+                            <input type="file" id="subir-imagen" accept="image/*" class="w-full text-xs text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-amber-500/10 file:text-amber-400 hover:file:bg-amber-500/20 cursor-pointer">
+                            <button type="button" onclick="quitarImagen()" class="bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/20 px-3 py-2 rounded-xl text-xs font-bold transition" title="Quitar diseño actual">🗑️ Quitar</button>
+                        </div>
                     </div>
 
                     <div class="grid grid-cols-2 gap-3">
@@ -221,7 +224,7 @@
 
     <!-- Script de Lógica General, Galería GitHub y Soporte Táctil -->
     <script>
-        // ⚠️ TUS DATOS DE GITHUB (Usuario, Repositorio y Carpeta de la galería)
+        // ⚠️ TUS DATOS DE GITHUB
         const GITHUB_USER = "jjhpanelli";
         const GITHUB_REPO = "PERSONALIZA-T";
         const GITHUB_FOLDER = "GALERIA"; 
@@ -355,6 +358,18 @@
                 reader.readAsDataURL(file);
             }
         });
+
+        // Función para quitar/eliminar el diseño actual
+        function quitarImagen() {
+            const imgContainer = document.getElementById('user-image-container');
+            const imgElement = document.getElementById('user-uploaded-image');
+            const inputArchivo = document.getElementById('subir-imagen');
+            
+            imgElement.src = "";
+            imgContainer.classList.add('hidden');
+            inputArchivo.value = ""; // Limpia el selector de archivos
+            mostrarToast('Diseño eliminado', '🗑️');
+        }
 
         document.getElementById('range-escala').addEventListener('input', function(e) {
             document.getElementById('user-image-container').style.width = e.target.value + 'px';
@@ -514,7 +529,7 @@
             }).catch(err => {
                 console.error("Error al capturar imagen:", err);
                 mostrarToast("El pedido se procesará por WhatsApp directamente.", "⚠️");
-                window.open(`https://wa.me/34000000000?text=Pedido%20de%20${encodeURIComponent(nombre)}`, '_blank');
+                window.open(`https://wa.me/34650013500?text=Pedido%20de%20${encodeURIComponent(nombre)}`, '_blank');
             });
         }
     </script>
