@@ -23,11 +23,17 @@
     </button>
 
     <!-- Modal del Carrito de Compras -->
-    <div id="modal-carrito" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
-        <div class="bg-slate-900 border border-slate-800 rounded-3xl w-full max-w-lg p-6 space-y-6 shadow-2xl max-h-[90vh] flex flex-col">
+    <div id="modal-carrito" class="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl w-full max-w-lg p-6 space-y-5 shadow-2xl max-h-[90vh] flex flex-col">
             <div class="flex justify-between items-center border-b border-slate-800 pb-4">
                 <h3 class="text-sm font-bold uppercase tracking-wider text-amber-400">Tu Carrito de Personalizaciones</h3>
                 <button onclick="toggleModalCarrito()" class="text-slate-400 hover:text-slate-100 text-lg font-bold">✕</button>
+            </div>
+
+            <!-- Aviso importante sobre las imágenes -->
+            <div class="bg-amber-500/10 border border-amber-500/20 rounded-xl p-3 text-[11px] text-amber-300 space-y-1">
+                <p class="font-bold">⚠️ Importante para tus diseños:</p>
+                <p>Haz clic en <b>"📥 Descargar"</b> en cada artículo antes de enviar el pedido para asegurarte de tener todas tus imágenes guardadas y poder adjuntarlas por WhatsApp.</p>
             </div>
 
             <!-- Lista de Artículos en el Carrito -->
@@ -237,13 +243,13 @@
                 </div>
 
                 <button type="submit" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-3 rounded-xl transition shadow-lg text-xs uppercase tracking-wider">
-                    🚀 Enviar Pedido Completo por WhatsApp
+                    🚀 Enviar Pedido por WhatsApp
                 </button>
             </form>
         </div>
     </div>
 
-    <!-- Script de Carrito y Lógica General -->
+    <!-- Script de Carrito Completo y Optimizado -->
     <script>
         const GITHUB_USER = "jjhpanelli";
         const GITHUB_REPO = "PERSONALIZA-T";
@@ -458,7 +464,11 @@
             carrito.forEach((item, index) => {
                 totalGeneral += item.precio;
                 const div = document.createElement('div');
-                div.className = "flex items-center justify-between bg-slate-950 border border-slate-800 p-3 rounded-xl gap-3";
+                div.className = "flex items-center justify-between bg-slate-950 border border-slate-800 p-3 rounded-xl gap-2";
+                
+                // Nombre único por archivo para evitar bloqueos del navegador
+                const nombreArchivo = `diseno-${index + 1}-${item.soporte.toLowerCase()}.png`;
+
                 div.innerHTML = `
                     <img src="${item.imagen}" class="w-12 h-12 object-contain bg-slate-900 rounded-lg border border-slate-800">
                     <div class="flex-1">
@@ -466,7 +476,10 @@
                         <p class="text-[10px] text-slate-400">Texto: ${item.texto}</p>
                         <span class="text-xs font-semibold text-amber-400">${item.precio.toFixed(2)} €</span>
                     </div>
-                    <button onclick="eliminarDelCarrito(${index})" class="text-red-400 hover:text-red-300 text-xs font-bold px-2 py-1 bg-red-500/10 rounded-lg">🗑️</button>
+                    <div class="flex flex-col gap-1">
+                        <a href="${item.imagen}" download="${nombreArchivo}" class="bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 border border-amber-500/20 text-[10px] font-bold px-2 py-1 rounded-lg text-center transition" title="Descargar esta foto">📥 Descargar</a>
+                        <button onclick="eliminarDelCarrito(${index})" class="bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/20 text-[10px] font-bold px-2 py-1 rounded-lg transition">🗑️ Borrar</button>
+                    </div>
                 `;
                 contenedor.appendChild(div);
             });
@@ -518,19 +531,14 @@
 
             carrito.forEach((item, i) => {
                 textoWhatsApp += `%0A*${i + 1}. ${item.soporte}* - ${item.opcion} — *${item.precio.toFixed(2)}€*`;
-                // Descargar automáticamente cada captura de diseño asociada al pedido
-                const enlace = document.createElement('a');
-                enlace.download = `articulo-${i+1}-${nombre.replace(/\s+/g, '_')}.png`;
-                enlace.href = item.imagen;
-                enlace.click();
             });
 
             textoWhatsApp += `%0A%0A💰 *TOTAL GLOBAL:* *${totalGlobal.toFixed(2)}€*%0A%0A` +
-                `_*(Las imágenes con los diseños se han descargado en tu dispositivo para que puedas adjuntarlas aquí)*_`;
+                `_*(Recuerda que he descargado las imágenes de mis diseños desde el carrito para adjuntarlas en este chat)*_`;
 
             // ⚠️ REEMPLAZA 34000000000 por tu número de WhatsApp real
-            window.open(`https://wa.me/34650013500?text=${textoWhatsApp}`, '_blank');
-            mostrarToast("¡Pedido generado y WhatsApp abierto con éxito!", "🚀");
+            window.open(`https://wa.me/34000000000?text=${textoWhatsApp}`, '_blank');
+            mostrarToast("¡WhatsApp abierto con éxito!", "🚀");
         }
 
         // Funciones de Arrastre (Móvil y PC)
@@ -562,39 +570,17 @@
                 document.onmousemove = null;
             }
             function touchStartHandler(e) {
-                if (e.touches.length === 1) {
-                    startX = e.touches[0].clientX;
-                    startY = e.touches[0].clientY;
-                    document.ontouchend = closeTouchElement;
-                    document.ontouchmove = touchMoveHandler;
-                } else if (e.touches.length === 2) {
-                    initialDistance = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
-                    initialWidth = elmnt.offsetWidth;
-                    document.ontouchend = closeTouchElement;
-                    document.ontouchmove = pinchMoveHandler;
-                }
+                e.touches.length === 1 ? (startX = e.touches[0].clientX, startY = e.touches[0].clientY, document.ontouchend = closeTouchElement, document.ontouchmove = touchMoveHandler) : (initialDistance = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY), initialWidth = elmnt.offsetWidth, document.ontouchend = closeTouchElement, document.ontouchmove = pinchMoveHandler);
             }
             function touchMoveHandler(e) {
-                if (e.touches.length === 1) {
-                    e.preventDefault();
-                    posX = startX - e.touches[0].clientX;
-                    posY = startY - e.touches[0].clientY;
-                    startX = e.touches[0].clientX;
-                    startY = e.touches[0].clientY;
-                    elmnt.style.top = (elmnt.offsetTop - posY) + "px";
-                    elmnt.style.left = (elmnt.offsetLeft - posX) + "px";
-                }
+                e.touches.length === 1 && (e.preventDefault(), posX = startX - e.touches[0].clientX, posY = startY - e.touches[0].clientY, startX = e.touches[0].clientX, startY = e.touches[0].clientY, elmnt.style.top = (elmnt.offsetTop - posY) + "px", elmnt.style.left = (elmnt.offsetLeft - posX) + "px");
             }
             function pinchMoveHandler(e) {
                 if (e.touches.length === 2) {
                     e.preventDefault();
-                    const currentDistance = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
-                    const scaleFactor = currentDistance / initialDistance;
+                    const scaleFactor = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY) / initialDistance;
                     let newWidth = initialWidth * scaleFactor;
-                    if (newWidth >= 50 && newWidth <= 400) {
-                        elmnt.style.width = newWidth + 'px';
-                        document.getElementById('range-escala').value = newWidth;
-                    }
+                    newWidth >= 50 && newWidth <= 400 && (elmnt.style.width = newWidth + 'px', document.getElementById('range-escala').value = newWidth);
                 }
             }
             function closeTouchElement() {
