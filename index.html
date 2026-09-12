@@ -21,10 +21,7 @@
         .font-pacifico { font-family: 'Pacifico', cursive; }
         .font-arcade { font-family: 'Press Start 2P', monospace; font-size: 10px !important; }
 
-        /* Clase para ocultar guías y letreros visuales */
-        .modo-limpio .guia-ui {
-            display: none !important;
-        }
+        .modo-limpio .guia-ui { display: none !important; }
         .modo-limpio .elemento-interactivo {
             border: none !important;
             background: transparent !important;
@@ -34,7 +31,7 @@
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-amber-500 selection:text-slate-950">
 
-    <!-- HEADER / NAVEGACIÓN -->
+    <!-- HEADER -->
     <header class="border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-xl sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
             <div class="flex items-center space-x-3">
@@ -49,70 +46,65 @@
                 </div>
             </div>
             
-            <nav class="hidden md:flex space-x-8 text-sm font-medium text-slate-300">
-                <a href="#estudio" class="hover:text-amber-400 transition">Estudio 3D</a>
-                <a href="#catalogo" class="hover:text-amber-400 transition">Catálogo</a>
-                <a href="#garantia" class="hover:text-amber-400 transition">Calidad DTF</a>
-            </nav>
-
             <a href="#estudio" class="bg-gradient-to-r from-amber-400 to-orange-500 text-slate-950 font-extrabold px-5 py-2.5 rounded-full shadow-lg shadow-orange-500/20 hover:scale-105 active:scale-95 transition text-xs sm:text-sm">
                 Diseñar Ahora ⚡
             </a>
         </div>
     </header>
 
-    <!-- ESTUDIO DE PERSONALIZACIÓN -->
+    <!-- ESTUDIO PRINCIPAL -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12 flex-grow w-full" id="estudio">
         
         <div class="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
             <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-bold mb-4 tracking-wide uppercase">
-                <span>✨</span> Estudio de Diseño Interactivo
+                <span>✨</span> Estudio de Diseño Interactivo Pro
             </div>
             <h1 class="text-3xl sm:text-6xl font-black tracking-tight mb-4 leading-tight">
-                Personaliza sin límites. <br><span class="bg-gradient-to-r from-amber-400 via-orange-400 to-yellow-300 bg-clip-text text-transparent">Diseña, visualiza y encarga</span>
+                Personaliza sin límites. <br><span class="bg-gradient-to-r from-amber-400 via-orange-400 to-yellow-300 bg-clip-text text-transparent">Diseña, enmarca y encarga</span>
             </h1>
             <p class="text-slate-400 text-sm sm:text-base leading-relaxed">
-                Mueve y ajusta tu diseño directamente sobre la prenda. Oculta los letreros cuando quieras ver el resultado limpio.
+                Añade marcos a tu imagen, ajusta tipografías con vista previa real y manda tu proyecto por WhatsApp.
             </p>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             
-            <!-- COLUMNA IZQUIERDA: MOCKUP INTERACTIVO -->
+            <!-- COLUMNA IZQUIERDA: MOCKUP -->
             <div class="lg:col-span-7 bg-slate-900/60 border border-slate-800/80 rounded-3xl p-5 sm:p-6 shadow-2xl relative flex flex-col items-center backdrop-blur-md sticky top-24">
                 
                 <div class="absolute top-4 left-4 right-4 flex justify-between items-center z-30 pointer-events-none">
-                    <!-- Botón Modo Limpio / Ocultar Guías -->
                     <button type="button" id="btn-modo-limpio" onclick="alternarModoLimpio()" class="bg-slate-900/90 hover:bg-slate-800 border border-slate-700 text-slate-200 text-xs font-bold px-3 py-2 rounded-xl shadow-lg transition flex items-center gap-1.5 cursor-pointer pointer-events-auto active:scale-95">
                         <span id="icono-ojo">👁️</span> <span id="texto-modo-limpio">Ocultar Guías</span>
                     </button>
                     
-                    <!-- Botón de Generar Vista Previa -->
                     <button type="button" onclick="generarVistaPrevia()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-black px-3.5 py-2 rounded-xl shadow-lg transition flex items-center gap-1.5 cursor-pointer pointer-events-auto active:scale-95">
                         <span>📸</span> Previa HD
                     </button>
                 </div>
 
-                <!-- Contenedor visual del Mockup -->
                 <div id="mockup-container" class="w-full h-[420px] sm:h-[500px] flex items-center justify-center relative my-4 bg-slate-950 rounded-2xl border border-slate-800/80 overflow-hidden shadow-2xl select-none group">
-                    
                     <img id="imagen-producto" src="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover opacity-85 transition-all duration-500 pointer-events-none" alt="Mockup base">
                     
                     <div class="absolute inset-0 bg-radial from-transparent via-slate-950/40 to-slate-950/80 pointer-events-none"></div>
 
-                    <!-- ZONA DE ESTAMPADO TÁCTIL (LOGO) -->
+                    <!-- ZONA LOGO CON CONTENEDOR DE MARCOS -->
                     <div id="zona-estampado" class="elemento-interactivo absolute flex flex-col items-center justify-center z-20 text-center p-4 rounded-2xl border-2 border-dashed border-amber-400/40 hover:border-amber-400 bg-amber-500/5 transition-colors shadow-2xl backdrop-blur-[2px]" style="transform: translate(0px, -40px) scale(1) rotate(0deg);">
                         <div class="guia-ui absolute -top-3.5 bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 text-[10px] font-black px-2.5 py-0.5 rounded-full shadow-md pointer-events-none uppercase tracking-wider">
                             🎨 Logo (Arrastra / Zoom)
                         </div>
-                        <img id="preview-imagen-subida" class="max-h-36 sm:max-h-44 w-auto object-contain drop-shadow-2xl hidden pointer-events-none mb-1" alt="Diseño cliente">
+                        
+                        <!-- Contenedor con marcos aplicables a la imagen -->
+                        <div id="marco-imagen-wrapper" class="p-0 transition-all duration-300">
+                            <img id="preview-imagen-subida" class="max-h-36 sm:max-h-44 w-auto object-contain drop-shadow-2xl hidden pointer-events-none" alt="Diseño cliente">
+                        </div>
+
                         <div id="placeholder-arte" class="guia-ui flex flex-col items-center justify-center p-4 pointer-events-none">
                             <span class="text-2xl mb-1">🖼️</span>
                             <span class="text-[11px] text-amber-300 font-bold bg-slate-950/90 px-3 py-1 rounded-full border border-slate-800 shadow">Sube tu diseño aquí</span>
                         </div>
                     </div>
 
-                    <!-- ZONA DE TEXTO TÁCTIL -->
+                    <!-- ZONA TEXTO -->
                     <div id="zona-texto-flotante" class="elemento-interactivo absolute flex flex-col items-center justify-center z-30 text-center p-3 rounded-xl border border-dashed border-sky-400/40 hover:border-sky-400 bg-sky-500/5 transition-colors hidden shadow-2xl backdrop-blur-[2px]" style="transform: translate(0px, 90px) scale(1) rotate(0deg);">
                         <div class="guia-ui absolute -top-3 bg-gradient-to-r from-sky-400 to-blue-500 text-slate-950 text-[9px] font-black px-2 py-0.5 rounded-full shadow-md pointer-events-none uppercase tracking-wider">
                             ✍️ Texto (Arrastra / Zoom)
@@ -122,39 +114,31 @@
 
                 </div>
 
-                <!-- Modal de Vista Previa Capturada -->
+                <!-- Modal de Vista Previa -->
                 <div id="modal-preview" class="w-full bg-slate-950 border border-slate-800 rounded-2xl p-4 hidden mt-2 animate-fade-in">
                     <div class="flex justify-between items-center mb-2">
-                        <h4 class="text-xs font-bold text-amber-400 uppercase tracking-wider flex items-center gap-1.5">
-                            <span>✨</span> Vista Previa Capturada
-                        </h4>
+                        <h4 class="text-xs font-bold text-amber-400 uppercase tracking-wider">✨ Vista Previa Capturada</h4>
                         <button type="button" onclick="cerrarPreview()" class="text-slate-400 hover:text-white text-xs font-bold px-2 py-0.5 rounded bg-slate-900 border border-slate-800">✕ Cerrar</button>
                     </div>
                     <div id="contenedor-imagen-resultado" class="w-full flex justify-center rounded-xl overflow-hidden border border-slate-800 bg-slate-950 max-h-56"></div>
-                    <p class="text-[10px] text-slate-400 text-center mt-2">💡 Consejo: Mantén pulsada la imagen para guardarla en tu dispositivo.</p>
+                    <p class="text-[10px] text-slate-400 text-center mt-2">💡 Mantén pulsada la imagen para guardarla en tu dispositivo.</p>
                 </div>
 
-                <!-- Precio y Garantía -->
                 <div class="w-full bg-slate-950/80 border border-slate-800 rounded-2xl p-4 flex justify-between items-center backdrop-blur-md mt-2">
                     <div>
                         <span class="text-[11px] font-medium text-slate-400 uppercase tracking-wider block">Total Estimado</span>
-                        <div class="flex items-baseline gap-2">
-                            <span class="text-2xl sm:text-3xl font-black text-amber-400" id="precio-total">15.00 €</span>
-                        </div>
+                        <span class="text-2xl sm:text-3xl font-black text-amber-400" id="precio-total">15.00 €</span>
                     </div>
-                    <span class="text-xs bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-3 py-1.5 rounded-xl font-bold flex items-center gap-1">
-                        <span>🛡️</span> DTF Premium
-                    </span>
+                    <span class="text-xs bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-3 py-1.5 rounded-xl font-bold">🛡️ DTF Premium</span>
                 </div>
             </div>
 
-            <!-- COLUMNA DERECHA: CONFIGURACIÓN Y FUENTES VISUALES -->
+            <!-- COLUMNA DERECHA: CONFIGURACIÓN -->
             <div class="lg:col-span-5 bg-slate-900/40 border border-slate-800/80 rounded-3xl p-6 sm:p-8 backdrop-blur-md shadow-xl">
                 <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-800">
                     <h2 class="text-lg font-bold flex items-center gap-2.5 text-amber-400">
                         <span class="p-2 rounded-xl bg-amber-500/10 border border-amber-500/20">🎛️</span> Panel de Configuración
                     </h2>
-                    <span class="text-xs text-slate-400 font-medium">Paso a paso</span>
                 </div>
 
                 <form id="order-form" class="space-y-6">
@@ -181,35 +165,48 @@
                         </div>
                     </div>
 
-                    <!-- 2. Archivo y Ubicación -->
+                    <!-- 2. Archivo, Ubicación y Marcos de Imagen -->
                     <div class="space-y-4 pt-2">
-                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-400">2. Tu diseño y posición</label>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-400">2. Tu diseño, posición y marcos</label>
                         <div class="space-y-3">
                             <div>
                                 <label class="block text-[11px] font-medium text-slate-400 mb-1.5">Archivo de imagen (PNG o JPG)</label>
                                 <input type="file" id="input-archivo" accept="image/*" class="w-full text-xs text-slate-300 bg-slate-950/80 rounded-xl border border-slate-800 p-2.5 file:mr-3 file:py-1.5 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-amber-500/10 file:text-amber-400 cursor-pointer transition" onchange="manejarSubidaArchivo(event)">
                             </div>
-                            <div>
-                                <label class="block text-[11px] font-medium text-slate-400 mb-1.5">Ubicación principal</label>
-                                <select id="select-ubicacion" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-xs sm:text-sm text-slate-200 focus:outline-none focus:border-amber-400 transition">
-                                    <option value="Frente / Centrado">Frente / Centrado principal</option>
-                                    <option value="Espalda / Reverso">Espalda / Reverso completo</option>
-                                    <option value="Pecho Izquierdo (Logo)">Pecho Izquierdo (Logo)</option>
-                                </select>
+                            
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-[10px] uppercase font-bold text-slate-500 mb-1">Marco / Borde para la imagen</label>
+                                    <select id="select-marco" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-amber-400 transition" onchange="actualizarMarco()">
+                                        <option value="sin-marco">Sin borde</option>
+                                        <option value="marco-blanco">Borde Blanco Sólido</option>
+                                        <option value="marco-oro">Borde Oro / Ámbar</option>
+                                        <option value="marco-neon">Borde Neón Azul</option>
+                                        <option value="marco-redondo">Corte Circular Suave</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] uppercase font-bold text-slate-500 mb-1">Ubicación principal</label>
+                                    <select id="select-ubicacion" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-amber-400 transition">
+                                        <option value="Frente / Centrado">Frente / Centrado principal</option>
+                                        <option value="Espalda / Reverso">Espalda / Reverso completo</option>
+                                        <option value="Pecho Izquierdo (Logo)">Pecho Izquierdo (Logo)</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- 3. Texto y Fuentes con Ejemplo Visual -->
+                    <!-- 3. Texto y Fuentes con Muestra Visual Real -->
                     <div class="space-y-4 pt-2 border-t border-slate-800/80">
-                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-400">3. Texto personalizado y Tipografías</label>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-400">3. Texto y Tipografías (Vista Previa Visual)</label>
                         
                         <div class="space-y-3">
                             <input type="text" id="input-texto" placeholder="Escribe tu frase o nombre..." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-xs sm:text-sm text-slate-100 focus:outline-none focus:border-amber-400 transition shadow-inner" oninput="actualizarTexto()">
                             
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                 <div>
-                                    <label class="block text-[10px] uppercase font-bold text-slate-500 mb-1">Estilo de Fuente (Ejemplo Visual)</label>
+                                    <label class="block text-[10px] uppercase font-bold text-slate-500 mb-1">Selecciona la Fuente</label>
                                     <select id="select-fuente" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-amber-300 font-bold focus:outline-none focus:border-amber-400 transition" onchange="actualizarFuente()">
                                         <option value="font-urban" class="font-urban text-sm">Abc Urban Modern</option>
                                         <option value="font-bebas" class="font-bebas text-base">ABC BEBAS STREET</option>
@@ -240,9 +237,6 @@
                         <button type="button" onclick="enviarPedidoWhatsApp()" class="w-full bg-gradient-to-r from-emerald-500 via-green-500 to-emerald-600 text-slate-950 font-black py-4 px-6 rounded-2xl shadow-xl shadow-green-600/20 hover:scale-[1.02] active:scale-[0.98] transition flex items-center justify-center gap-2.5 cursor-pointer text-sm sm:text-base">
                             <span class="text-xl">📲</span> Enviar diseño por WhatsApp (650013500)
                         </button>
-                        <p class="text-[11px] text-center text-slate-500 mt-2.5">
-                            Se abrirá WhatsApp directamente con tu vista previa y medidas adjuntas.
-                        </p>
                     </div>
 
                 </form>
@@ -255,10 +249,6 @@
     <footer class="border-t border-slate-800/80 bg-slate-950 py-8 px-4 text-center text-xs text-slate-500">
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
             <p>&copy; 2026 Eloi's Custom Gear. Todos los derechos reservados.</p>
-            <div class="flex space-x-6 text-slate-400">
-                <a href="#estudio" class="hover:text-amber-400 transition">Política de Privacidad</a>
-                <a href="#estudio" class="hover:text-amber-400 transition">Términos de Servicio</a>
-            </div>
         </div>
     </footer>
 
@@ -343,7 +333,6 @@
             zonaTextoFlotante.style.transform = `translate(${textState.posX}px, ${textState.posY}px) scale(${textState.scale / 100}) rotate(${textState.rotation}deg)`;
         }
 
-        // Función para alternar el Modo Limpio (Ocultar/Mostrar Guías)
         let modoLimpioActivo = false;
         function alternarModoLimpio() {
             modoLimpioActivo = !modoLimpioActivo;
@@ -394,6 +383,25 @@
             }
         }
 
+        // Función para aplicar marcos y bordes a la imagen subida
+        function actualizarMarco() {
+            const estilo = document.getElementById('select-marco').value;
+            const wrapper = document.getElementById('marco-imagen-wrapper');
+            
+            // Limpiar clases de marcos previos
+            wrapper.className = "p-0 transition-all duration-300";
+
+            if (estilo === 'marco-blanco') {
+                wrapper.className = "p-3 bg-white rounded-xl shadow-2xl transition-all duration-300";
+            } else if (estilo === 'marco-oro') {
+                wrapper.className = "p-3 bg-gradient-to-tr from-amber-500 to-yellow-300 rounded-xl shadow-2xl transition-all duration-300";
+            } else if (estilo === 'marco-neon') {
+                wrapper.className = "p-3 bg-sky-500/20 border-2 border-sky-400 rounded-xl shadow-[0_0_20px_rgba(56,189,248,0.5)] transition-all duration-300";
+            } else if (estilo === 'marco-redondo') {
+                wrapper.className = "p-1 bg-slate-900 border-2 border-amber-400 rounded-full overflow-hidden shadow-2xl transition-all duration-300";
+            }
+        }
+
         function actualizarTexto() {
             const texto = document.getElementById('input-texto').value;
             const preview = document.getElementById('preview-texto');
@@ -426,27 +434,19 @@
         let imagenBase64Preview = "";
 
         function generarVistaPrevia() {
-            // Asegurarnos de que se capture en modo limpio si el usuario quiere
             const estabaLimpio = modoLimpioActivo;
-            if (!estabaLimpio) {
-                mockupContainer.classList.add('modo-limpio');
-            }
+            if (!estabaLimpio) mockupContainer.classList.add('modo-limpio');
 
             html2canvas(mockupContainer, { backgroundColor: null, scale: 2, useCORS: true }).then(canvas => {
                 imagenBase64Preview = canvas.toDataURL('image/png');
-                
-                if (!estabaLimpio) {
-                    mockupContainer.classList.remove('modo-limpio');
-                }
+                if (!estabaLimpio) mockupContainer.classList.remove('modo-limpio');
 
                 const contenedorResultado = document.getElementById('contenedor-imagen-resultado');
                 contenedorResultado.innerHTML = `<img src="${imagenBase64Preview}" class="max-h-48 rounded-lg shadow-lg border border-slate-800 object-contain" alt="Vista previa diseño">`;
-                
                 document.getElementById('modal-preview').classList.remove('hidden');
             }).catch(err => {
-                console.error("Error al generar vista previa:", err);
                 if (!estabaLimpio) mockupContainer.classList.remove('modo-limpio');
-                alert("No se pudo generar la imagen previa, pero puedes enviar los datos por WhatsApp directamente.");
+                alert("No se pudo generar la imagen previa automática.");
             });
         }
 
@@ -461,6 +461,8 @@
             const selectColor = document.getElementById('select-color-texto');
             const colorTexto = selectColor.options[selectColor.selectedIndex].text;
             const ubicacion = document.getElementById('select-ubicacion').value;
+            const selectMarco = document.getElementById('select-marco');
+            const estiloMarco = selectMarco.options[selectMarco.selectedIndex].text;
             const archivoInput = document.getElementById('input-archivo');
             const nombreArchivo = archivoInput.files.length > 0 ? archivoInput.files[0].name : "Ninguno subido";
 
@@ -468,16 +470,16 @@
 
             let mensaje = `¡Hola! Quiero hacer un pedido personalizado en Eloi's Custom Gear:
 
-• Soporte: ${productoActual}
-• Precio estimado: ${precioActual.toFixed(2)} €
+• Soporte: ${productoActual} (${precioActual.toFixed(2)} €)
 • Ubicación: ${ubicacion}
 • Archivo subido: ${nombreArchivo}
+• Marco / Borde de imagen: ${estiloMarco}
 • Texto añadido: "${texto}"
 • Tipografía: ${fuente} (${colorTexto})
 • Coordenadas -> Logo (Escala: ${logoState.scale}%), Texto (Escala: ${textState.scale}%)`;
 
             if (imagenBase64Preview) {
-                mensaje += `\n\n[El cliente ha generado su vista previa HD limpia y está lista para coordinar en este chat].`;
+                mensaje += `\n\n[El cliente ha generado su vista previa HD limpia].`;
             }
 
             mensaje += `\n\nPor favor, confirmadme los detalles del pago y envío. ¡Gracias!`;
