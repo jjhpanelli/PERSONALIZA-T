@@ -117,14 +117,11 @@
                     </div>
                 </div>
 
-                <!-- 3. Formulario y Envío con Captura -->
+                <!-- 3. Formulario y Envío -->
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl space-y-4">
                     <h3 class="text-xs font-bold uppercase tracking-wider text-amber-400">3. Datos y Envío</h3>
                     
                     <form id="order-form" class="space-y-3" onsubmit="event.preventDefault(); enviarPedidoConCaptura();">
-                        <input type="hidden" name="access_key" value="YOUR-WEB3FORMS-ACCESS-KEY">
-                        <input type="hidden" id="imagen-base64-input" name="imagen_mockup">
-
                         <div>
                             <label class="block text-[11px] font-semibold text-slate-400 mb-1">Nombre y Apellidos *</label>
                             <input type="text" id="fact-nombre" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-100 focus:outline-none focus:border-amber-500">
@@ -145,7 +142,7 @@
                         </div>
 
                         <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-3 rounded-xl transition shadow-lg shadow-amber-500/10 text-xs uppercase tracking-wider">
-                            Enviar Pedido Completo
+                            Enviar Pedido por WhatsApp
                         </button>
                     </form>
                 </div>
@@ -154,7 +151,7 @@
         </div>
     </div>
 
-    <!-- Script Completo de Controles y Captura -->
+    <!-- Script de Lógica -->
     <script>
         let productoActual = 'Camiseta';
         let precioActual = 15.00;
@@ -247,7 +244,7 @@
         hacerArrastrable(document.getElementById('user-image-container'));
         hacerArrastrable(document.getElementById('user-text-container'));
 
-        // Captura con html2canvas y envío a WhatsApp / Web3Forms sin errores
+        // Función de captura y envío por WhatsApp
         function enviarPedidoConCaptura() {
             const nombre = document.getElementById('fact-nombre').value;
             const telefono = document.getElementById('fact-telefono').value;
@@ -262,22 +259,28 @@
             const areaCaptura = document.getElementById('captura-area');
             
             html2canvas(areaCaptura, { scale: 2, useCORS: true }).then(canvas => {
-                const imagenDataUrl = canvas.toDataURL('image/png');
-                document.getElementById('imagen-base64-input').value = imagenDataUrl;
+                // Descarga automática de la imagen del diseño
+                const enlaceDescarga = document.createElement('a');
+                enlaceDescarga.download = `pedido-${nombre.replace(/\s+/g, '_')}.png`;
+                enlaceDescarga.href = canvas.toDataURL('image/png');
+                enlaceDescarga.click();
 
+                // Mensaje estructurado para WhatsApp
                 const textoWhatsApp = `*¡Nuevo Pedido - Eloi's Custom Gear!*%0A%0A` +
                     `👕 *Soporte:* ${productoActual} (${precioActual.toFixed(2)}€)%0A` +
                     `👤 *Cliente:* ${encodeURIComponent(nombre)}%0A` +
                     `📞 *Teléfono:* ${encodeURIComponent(telefono)}%0A` +
                     `📧 *Email:* ${encodeURIComponent(email || 'No especificado')}%0A` +
-                    `🏠 *Dirección:* ${encodeURIComponent(direccion || 'No especificada')}`;
+                    `🏠 *Dirección:* ${encodeURIComponent(direccion || 'No especificada')}%0A%0A` +
+                    `_*(La imagen de tu diseño se ha descargado en tu dispositivo para que puedas adjuntarla aquí)*_`;
 
-                window.open(`https://wa.me/34600000000?text=${textoWhatsApp}`, '_blank');
-                alert("¡Diseño capturado y pedido listo! Se ha abierto WhatsApp para coordinar los detalles.");
+                // REEMPLAZA 34000000000 por tu número real de WhatsApp con prefijo de país
+                window.open(`https://wa.me/34000000000?text=${textoWhatsApp}`, '_blank');
+                alert("¡Diseño guardado! Se ha descargado la imagen en tu dispositivo y se ha abierto WhatsApp.");
             }).catch(err => {
                 console.error("Error al capturar imagen:", err);
                 alert("El pedido se procesará por WhatsApp directamente.");
-                window.open(`https://wa.me/34600000000?text=Pedido%20de%20${encodeURIComponent(nombre)}`, '_blank');
+                window.open(`https://wa.me/34000000000?text=Pedido%20de%20${encodeURIComponent(nombre)}`, '_blank');
             });
         }
     </script>
