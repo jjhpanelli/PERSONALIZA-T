@@ -242,6 +242,13 @@
                     <textarea id="fact-direccion" rows="2" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-100 focus:outline-none focus:border-amber-500"></textarea>
                 </div>
 
+                <!-- NUEVO APARTADO: Petición de imágenes originales para retocar / optimizar -->
+                <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 space-y-2">
+                    <label class="block text-xs font-bold text-amber-400">🖼️ ¿Necesitas que retoquemos u optimise tus imágenes originales?</label>
+                    <p class="text-[11px] text-slate-400">Sube aquí tus archivos originales (alta resolución, vectores, fotos sin recortar) para que podamos mejorarlos antes de la estampación.</p>
+                    <input type="file" id="fact-imagenes-originales" multiple accept="image/*,.psd,.ai,.pdf" class="w-full text-xs text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-amber-500/10 file:text-amber-400 hover:file:bg-amber-500/20 cursor-pointer pt-2">
+                </div>
+
                 <button type="submit" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-3 rounded-xl transition shadow-lg text-xs uppercase tracking-wider">
                     🚀 Enviar Pedido por WhatsApp
                 </button>
@@ -514,6 +521,7 @@
             const telefono = document.getElementById('fact-telefono').value;
             const direccion = document.getElementById('fact-direccion').value;
             const email = document.getElementById('fact-email').value;
+            const inputOriginales = document.getElementById('fact-imagenes-originales');
 
             if (!nombre || !telefono) {
                 mostrarToast("Completa tu nombre y teléfono.", "⚠️");
@@ -521,6 +529,7 @@
             }
 
             let totalGlobal = carrito.reduce((acc, item) => acc + item.precio, 0);
+            let totalOriginales = inputOriginales.files.length;
 
             let textoWhatsApp = `*¡Nuevo Pedido Múltiple - Eloi's Custom Gear!*%0A%0A` +
                 `👤 *Cliente:* ${encodeURIComponent(nombre)}%0A` +
@@ -532,6 +541,10 @@
             carrito.forEach((item, i) => {
                 textoWhatsApp += `%0A*${i + 1}. ${item.soporte}* - ${item.opcion} — *${item.precio.toFixed(2)}€*`;
             });
+
+            if (totalOriginales > 0) {
+                textoWhatsApp += `%0A%0A📎 *El cliente adjunta ${totalOriginales} archivo(s) original(es) para retocar/optimizar.*`;
+            }
 
             textoWhatsApp += `%0A%0A💰 *TOTAL GLOBAL:* *${totalGlobal.toFixed(2)}€*%0A%0A` +
                 `_*(Recuerda que he descargado las imágenes de mis diseños desde el carrito para adjuntarlas en este chat)*_`;
