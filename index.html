@@ -69,13 +69,13 @@
                 Personaliza sin límites. <br><span class="bg-gradient-to-r from-amber-400 via-orange-400 to-yellow-300 bg-clip-text text-transparent">Diseña, factura y encarga</span>
             </h1>
             <p class="text-slate-400 text-sm sm:text-base leading-relaxed">
-                Genera tu mockup, añade tus datos de facturación y envía el pedido completo al instante.
+                Genera tu mockup vectorial exclusivo, añade tus datos y envía el pedido completo al instante.
             </p>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             
-            <!-- COLUMNA IZQUIERDA: MOCKUP -->
+            <!-- COLUMNA IZQUIERDA: MOCKUP VECTORIAL -->
             <div class="lg:col-span-7 bg-slate-900/60 border border-slate-800/80 rounded-3xl p-5 sm:p-6 shadow-2xl relative flex flex-col items-center backdrop-blur-md sticky top-24">
                 
                 <div class="absolute top-4 left-4 right-4 flex justify-between items-center z-30 pointer-events-none">
@@ -88,19 +88,56 @@
                     </button>
                 </div>
 
+                <!-- CONTENEDOR DEL MOCKUP VECTORIAL -->
                 <div id="mockup-container" class="w-full h-[420px] sm:h-[500px] flex items-center justify-center relative my-4 bg-slate-950 rounded-2xl border border-slate-800/80 overflow-hidden shadow-2xl select-none group">
-                    <img id="imagen-producto" crossorigin="anonymous" src="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover opacity-85 transition-all duration-500 pointer-events-none" alt="Mockup base">
                     
-                    <div class="absolute inset-0 bg-radial from-transparent via-slate-950/40 to-slate-950/80 pointer-events-none"></div>
+                    <!-- FONDO AMBIENTAL SUTIL -->
+                    <div class="absolute inset-0 bg-gradient-to-b from-slate-900/40 via-slate-950 to-slate-950 pointer-events-none"></div>
 
-                    <!-- ZONA LOGO CON CONTENEDOR DE MARCOS -->
-                    <div id="zona-estampado" class="elemento-interactivo absolute flex flex-col items-center justify-center z-20 text-center p-4 rounded-2xl border-2 border-dashed border-amber-400/40 hover:border-amber-400 bg-amber-500/5 transition-colors shadow-2xl backdrop-blur-[2px]" style="transform: translate(0px, -40px) scale(1) rotate(0deg);">
+                    <!-- 1. MOCKUP CAMISETA VECTORIAL -->
+                    <div id="mockup-camiseta" class="mockup-pieza relative w-[260px] sm:w-[320px] h-[360px] sm:h-[420px] flex justify-center items-center pointer-events-none transition-all duration-300">
+                        <!-- Cuerpo de la camiseta -->
+                        <div class="absolute inset-0 bg-gradient-to-b from-slate-800 to-slate-900 rounded-[3rem_3rem_2rem_2rem] shadow-[0_20px_50px_rgba(0,0,0,0.9)] border border-slate-700/50 overflow-hidden">
+                            <!-- Mangas Izq/Der -->
+                            <div class="absolute -left-12 top-6 w-24 h-40 bg-gradient-to-r from-slate-900 to-slate-800 rounded-3xl -rotate-12 border border-slate-700/40"></div>
+                            <div class="absolute -right-12 top-6 w-24 h-40 bg-gradient-to-l from-slate-900 to-slate-800 rounded-3xl rotate-12 border border-slate-700/40"></div>
+                            <!-- Cuello / Escote -->
+                            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-28 h-10 bg-slate-950 rounded-b-full border-b border-slate-700/60 shadow-inner"></div>
+                            <!-- Sombra central sutil para volumen -->
+                            <div class="absolute inset-0 bg-radial from-transparent via-transparent to-slate-950/60"></div>
+                        </div>
+                    </div>
+
+                    <!-- 2. MOCKUP TAZA VECTORIAL (Oculto por defecto) -->
+                    <div id="mockup-taza" class="mockup-pieza relative w-[240px] sm:w-[280px] h-[300px] sm:h-[350px] flex justify-center items-center pointer-events-none transition-all duration-300 hidden">
+                        <!-- Asa de la taza -->
+                        <div class="absolute -left-10 top-1/2 -translate-y-1/2 w-16 h-28 border-8 border-slate-700 rounded-l-full shadow-lg"></div>
+                        <!-- Cuerpo cilíndrico de la taza -->
+                        <div class="absolute inset-0 bg-gradient-to-r from-slate-800 via-slate-700 to-slate-900 rounded-3xl shadow-[0_25px_50px_rgba(0,0,0,0.9)] border border-slate-600/40 overflow-hidden flex flex-col justify-between py-6">
+                            <div class="w-full h-8 bg-gradient-to-b from-slate-600/40 to-transparent rounded-t-3xl border-b border-slate-600/30"></div>
+                            <div class="w-full h-8 bg-gradient-to-t from-slate-950/80 to-transparent rounded-b-3xl border-t border-slate-600/30"></div>
+                        </div>
+                    </div>
+
+                    <!-- 3. MOCKUP GORRA TRUCKER (Oculto por defecto) -->
+                    <div id="mockup-gorra" class="mockup-pieza relative w-[280px] sm:w-[320px] h-[260px] sm:h-[300px] flex flex-col justify-center items-center pointer-events-none transition-all duration-300 hidden">
+                        <!-- Visera curva -->
+                        <div class="absolute bottom-4 w-72 h-16 bg-gradient-to-t from-slate-950 to-slate-800 rounded-b-full border-b-4 border-amber-500/40 shadow-2xl z-10"></div>
+                        <!-- Casquete / Paneles -->
+                        <div class="w-64 h-48 bg-gradient-to-b from-slate-700 to-slate-900 rounded-t-[10rem] shadow-[0_15px_40px_rgba(0,0,0,0.8)] border border-slate-600/40 relative overflow-hidden">
+                            <!-- Botón superior -->
+                            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-4 h-4 bg-amber-500 rounded-full shadow"></div>
+                        </div>
+                    </div>
+
+                    <!-- ZONA LOGO FLOTANTE -->
+                    <div id="zona-estampado" class="elemento-interactivo absolute flex flex-col items-center justify-center z-20 text-center p-4 rounded-2xl border-2 border-dashed border-amber-400/40 hover:border-amber-400 bg-amber-500/5 transition-colors shadow-2xl backdrop-blur-[2px]" style="transform: translate(0px, -20px) scale(1) rotate(0deg);">
                         <div class="guia-ui absolute -top-3.5 bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 text-[10px] font-black px-2.5 py-0.5 rounded-full shadow-md pointer-events-none uppercase tracking-wider">
                             🎨 Logo (Arrastra / Zoom)
                         </div>
                         
                         <div id="marco-imagen-wrapper" class="p-0 transition-all duration-300">
-                            <img id="preview-imagen-subida" crossorigin="anonymous" class="max-h-36 sm:max-h-44 w-auto object-contain drop-shadow-2xl hidden pointer-events-none" alt="Diseño cliente">
+                            <img id="preview-imagen-subida" crossorigin="anonymous" class="max-h-32 sm:max-h-40 w-auto object-contain drop-shadow-2xl hidden pointer-events-none" alt="Diseño cliente">
                         </div>
 
                         <div id="placeholder-arte" class="guia-ui flex flex-col items-center justify-center p-4 pointer-events-none">
@@ -109,8 +146,8 @@
                         </div>
                     </div>
 
-                    <!-- ZONA TEXTO -->
-                    <div id="zona-texto-flotante" class="elemento-interactivo absolute flex flex-col items-center justify-center z-30 text-center p-3 rounded-xl border border-dashed border-sky-400/40 hover:border-sky-400 bg-sky-500/5 transition-colors hidden shadow-2xl backdrop-blur-[2px]" style="transform: translate(0px, 90px) scale(1) rotate(0deg);">
+                    <!-- ZONA TEXTO FLOTANTE -->
+                    <div id="zona-texto-flotante" class="elemento-interactivo absolute flex flex-col items-center justify-center z-30 text-center p-3 rounded-xl border border-dashed border-sky-400/40 hover:border-sky-400 bg-sky-500/5 transition-colors hidden shadow-2xl backdrop-blur-[2px]" style="transform: translate(0px, 80px) scale(1) rotate(0deg);">
                         <div class="guia-ui absolute -top-3 bg-gradient-to-r from-sky-400 to-blue-500 text-slate-950 text-[9px] font-black px-2 py-0.5 rounded-full shadow-md pointer-events-none uppercase tracking-wider">
                             ✍️ Texto (Arrastra / Zoom)
                         </div>
@@ -134,7 +171,7 @@
                         <span class="text-[11px] font-medium text-slate-400 uppercase tracking-wider block">Total Estimado</span>
                         <span class="text-2xl sm:text-3xl font-black text-amber-400" id="precio-total">15.00 €</span>
                     </div>
-                    <span class="text-xs bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-3 py-1.5 rounded-xl font-bold">🛡️ DTF Premium</span>
+                    <span class="text-xs bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-3 py-1.5 rounded-xl font-bold">🛡️ DTF / Sublimación Pro</span>
                 </div>
             </div>
 
@@ -152,17 +189,17 @@
                     <div>
                         <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">1. Selecciona el soporte</label>
                         <div class="grid grid-cols-3 gap-3">
-                            <button type="button" onclick="setProducto('Camiseta', 15, 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=800&auto=format&fit=crop')" class="producto-btn group border-2 border-amber-500 bg-amber-500/10 rounded-2xl p-3 text-center cursor-pointer transition">
+                            <button type="button" onclick="setProducto('Camiseta', 15, 'mockup-camiseta')" class="producto-btn group border-2 border-amber-500 bg-amber-500/10 rounded-2xl p-3 text-center cursor-pointer transition">
                                 <span class="block text-2xl mb-1">👕</span>
                                 <span class="text-xs font-bold block text-slate-200">Camiseta</span>
                                 <span class="text-[11px] text-amber-400 font-extrabold">15.00 €</span>
                             </button>
-                            <button type="button" onclick="setProducto('Taza de Cerámica', 10, 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=800&auto=format&fit=crop')" class="producto-btn group border-2 border-slate-800 bg-slate-950/60 rounded-2xl p-3 text-center cursor-pointer transition">
+                            <button type="button" onclick="setProducto('Taza de Cerámica', 10, 'mockup-taza')" class="producto-btn group border-2 border-slate-800 bg-slate-950/60 rounded-2xl p-3 text-center cursor-pointer transition">
                                 <span class="block text-2xl mb-1">☕</span>
                                 <span class="text-xs font-bold block text-slate-300">Taza</span>
                                 <span class="text-[11px] text-amber-400 font-extrabold">10.00 €</span>
                             </button>
-                            <button type="button" onclick="setProducto('Gorra Trucker', 12, 'https://images.unsplash.com/photo-1588850561407-ed78c282e89b?q=80&w=800&auto=format&fit=crop')" class="producto-btn group border-2 border-slate-800 bg-slate-950/60 rounded-2xl p-3 text-center cursor-pointer transition">
+                            <button type="button" onclick="setProducto('Gorra Trucker', 12, 'mockup-gorra')" class="producto-btn group border-2 border-slate-800 bg-slate-950/60 rounded-2xl p-3 text-center cursor-pointer transition">
                                 <span class="block text-2xl mb-1">🧢</span>
                                 <span class="text-xs font-bold block text-slate-300">Gorra</span>
                                 <span class="text-[11px] text-amber-400 font-extrabold">12.00 €</span>
@@ -301,8 +338,8 @@
         let productoActual = "Camiseta";
         let precioActual = 15.00;
 
-        let logoState = { posX: 0, posY: -40, scale: 100, rotation: 0 };
-        let textState = { posX: 0, posY: 90, scale: 100, rotation: 0 };
+        let logoState = { posX: 0, posY: -20, scale: 100, rotation: 0 };
+        let textState = { posX: 0, posY: 80, scale: 100, rotation: 0 };
 
         const zonaEstampado = document.getElementById('zona-estampado');
         const zonaTextoFlotante = document.getElementById('zona-texto-flotante');
@@ -391,14 +428,17 @@
             }
         }
 
-        function setProducto(nombre, precio, urlMockup) {
+        function setProducto(nombre, precio, idMockup) {
             productoActual = nombre;
             precioActual = precio;
             document.getElementById('precio-total').innerText = precio.toFixed(2) + " €";
-            document.getElementById('imagen-producto').src = urlMockup;
 
-            logoState = { posX: 0, posY: -40, scale: 100, rotation: 0 };
-            textState = { posX: 0, posY: 90, scale: 100, rotation: 0 };
+            // Ocultar todos los mockups vectoriales y mostrar el seleccionado
+            document.querySelectorAll('.mockup-pieza').forEach(m => m.classList.add('hidden'));
+            document.getElementById(idMockup).classList.remove('hidden');
+
+            logoState = { posX: 0, posY: -20, scale: 100, rotation: 0 };
+            textState = { posX: 0, posY: 80, scale: 100, rotation: 0 };
             actualizarTransformaciones();
             cerrarPreview();
 
@@ -489,7 +529,6 @@
             const estabaLimpio = modoLimpioActivo;
             if (!estabaLimpio) mockupContainer.classList.add('modo-limpio');
 
-            // Timeout corto para permitir que el navegador aplique la clase CSS limpia antes del render
             setTimeout(() => {
                 html2canvas(mockupContainer, { backgroundColor: null, scale: 2, useCORS: true, allowTaint: false }).then(canvas => {
                     imagenBase64Preview = canvas.toDataURL('image/png');
@@ -531,12 +570,11 @@
             const estabaLimpio = modoLimpioActivo;
             if (!estabaLimpio) mockupContainer.classList.add('modo-limpio');
 
-            // Se añade un pequeño retraso para asegurar que el DOM procese las imágenes en base64 y el canvas no falle
             setTimeout(() => {
                 html2canvas(mockupContainer, { backgroundColor: null, scale: 2, useCORS: true, allowTaint: false }).then(canvas => {
                     if (!estabaLimpio) mockupContainer.classList.remove('modo-limpio');
 
-                    // 1. DESCARGAR AUTOMÁTICAMENTE EL MOCKUP GENERADO
+                    // 1. DESCARGAR AUTOMÁTICAMENTE EL MOCKUP VECTORIAL GENERADO
                     const enlaceDescarga = document.createElement('a');
                     enlaceDescarga.download = `Mockup-${productoActual.replace(/\s+/g, '-')}-${Date.now()}.png`;
                     enlaceDescarga.href = canvas.toDataURL('image/png');
@@ -571,7 +609,7 @@
 • Texto añadido: "${texto}"
 • Tipografía: ${fuente} (${colorTexto})
 
-⚠️ *¡IMPORTANTE:* El sistema acaba de descargar automáticamente en tu dispositivo la **imagen del Mockup** generada. Por favor, adjúntala aquí junto con tu **archivo original** para proceder con el pago y producción!`;
+⚠️ *¡IMPORTANTE:* El sistema acaba de descargar automáticamente en tu dispositivo la **imagen del Mockup Vectorial** generada. Por favor, adjúntala aquí junto con tu **archivo original** para proceder con el pago y producción!`;
 
                     const urlWap = `https://wa.me/${telefonoWhatsApp}?text=${encodeURIComponent(mensaje)}`;
                     window.open(urlWap, '_blank');
