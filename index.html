@@ -10,7 +10,6 @@
         .elemento-interactivo { touch-action: none; cursor: grab; }
         .elemento-interactivo:active { cursor: grabbing; }
         
-        /* Forzar que los elementos hijos no intercepten el toque del contenedor padre */
         .elemento-interactivo img, 
         .elemento-interactivo span, 
         .elemento-interactivo div {
@@ -92,12 +91,12 @@
                 </div>
 
                 <div id="mockup-container" class="w-full h-[420px] sm:h-[500px] flex items-center justify-center relative my-4 bg-slate-950 rounded-2xl border border-slate-800/80 overflow-hidden shadow-2xl select-none group">
-                    <!-- USANDO TUS MOCKUPS DE PHOTOSHOP -->
-                    <img id="imagen-producto" src="camiseta.png" class="w-full h-full object-cover opacity-95 transition-all duration-500 pointer-events-none" alt="Mockup base Photoshop">
+                    <!-- RUTA DIRECTA SEGURA A TUS MOCKUPS DE GITHUB -->
+                    <img id="imagen-producto" src="https://raw.githubusercontent.com/jjhpanelli/PERSONALIZA-T/main/camiseta.png" class="w-full h-full object-cover opacity-95 transition-all duration-500 pointer-events-none" alt="Mockup base Photoshop">
                     
                     <div class="absolute inset-0 bg-radial from-transparent via-slate-950/20 to-slate-950/60 pointer-events-none"></div>
 
-                    <!-- ZONA LOGO CON CONTENEDOR DE MARCOS -->
+                    <!-- ZONA LOGO -->
                     <div id="zona-estampado" class="elemento-interactivo absolute flex flex-col items-center justify-center z-20 text-center p-4 rounded-2xl border-2 border-dashed border-amber-400/40 hover:border-amber-400 bg-amber-500/5 transition-colors shadow-2xl backdrop-blur-[2px]" style="transform: translate(0px, -40px) scale(1) rotate(0deg);">
                         <div class="guia-ui absolute -top-3.5 bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 text-[10px] font-black px-2.5 py-0.5 rounded-full shadow-md pointer-events-none uppercase tracking-wider">
                             🎨 Logo (Arrastra / Zoom)
@@ -150,10 +149,9 @@
                     </h2>
                 </div>
 
-                <!-- FORMULARIO INTEGRADO CON WEB3FORMS (ENVÍO DE ARCHIVOS Y DATOS) -->
+                <!-- FORMULARIO INTEGRADO CON WEB3FORMS -->
                 <form id="order-form" action="https://api.web3forms.com/submit" method="POST" class="space-y-6">
                     
-                    <!-- Configuración de Web3Forms (Introduce tu clave gratuita aquí) -->
                     <input type="hidden" name="access_key" value="TU_CLAVE_DE_ACCES_AQUÍ">
                     <input type="hidden" name="subject" value="Nuevo Pedido desde la Web de Eloi's Custom Gear">
                     <input type="hidden" name="imagen_mockup" id="input-imagen-oculta">
@@ -411,7 +409,8 @@
             productoActual = nombre;
             precioActual = precio;
             document.getElementById('precio-total').innerText = precio.toFixed(2) + " €";
-            document.getElementById('imagen-producto').src = archivoMockup;
+            // Ruta directa segura a GitHub
+            document.getElementById('imagen-producto').src = `https://raw.githubusercontent.com/jjhpanelli/PERSONALIZA-T/main/${archivoMockup}`;
 
             logoState = { posX: 0, posY: -40, scale: 100, rotation: 0 };
             textState = { posX: 0, posY: 90, scale: 100, rotation: 0 };
@@ -543,14 +542,11 @@
             mockupContainer.classList.add('modo-limpio');
 
             try {
-                // 1. Renderizar la imagen del mockup limpio
                 const canvas = await html2canvas(mockupContainer, { scale: 2, useCORS: true, backgroundColor: null });
                 const imagenURL = canvas.toDataURL('image/png');
                 
-                // 2. Inyectarla en el input oculto
                 document.getElementById('input-imagen-oculta').value = imagenURL;
 
-                // 3. Enviar a Web3Forms (llega al correo con el archivo adjunto y el mockup)
                 const formElement = document.getElementById('order-form');
                 const formData = new FormData(formElement);
                 
@@ -562,7 +558,6 @@
                 if (response.ok) {
                     alert("¡Pedido enviado con éxito! Te redirigiremos a WhatsApp para confirmar los detalles con Eloi.");
                     
-                    // 4. Abrir WhatsApp con el resumen
                     const ubicacion = document.getElementById('select-ubicacion').value;
                     const textoPersonalizado = document.getElementById('input-texto').value;
                     const mensaje = `Hola! 👋 Acabo de enviar mi pedido y diseño desde la web:\n\n• *Producto:* ${productoActual} (${precioActual.toFixed(2)} €)\n• *Ubicación:* ${ubicacion}\n• *Texto:* ${textoPersonalizado || 'Ninguno'}\n• *Cliente:* ${nombre}\n• *Teléfono:* ${telefono}`;
