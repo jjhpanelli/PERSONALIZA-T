@@ -5,16 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Eloi's Custom Gear | Estudio de Personalización Pro</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Carga de fuentes tipográficas amplias y profesionales -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&family=Bebas+Neue&family=Permanent+Marker&family=Cinzel:wght@700&family=Montserrat:wght@800&family=VT323&family=Pacifico&family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; touch-action: pan-x pan-y; }
         .elemento-interactivo { touch-action: none; cursor: grab; }
         .elemento-interactivo:active { cursor: grabbing; }
-        @keyframes pulse-subtle {
-            0%, 100% { opacity: 0.4; }
-            50% { opacity: 0.8; }
-        }
-        .animate-pulse-subtle { animation: pulse-subtle 3s infinite; }
+        
+        /* Clases de fuentes tipográficas para selección en vivo */
+        .font-urban { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .font-bebas { font-family: 'Bebas Neue', sans-serif; letter-spacing: 1px; }
+        .font-marker { font-family: 'Permanent Marker', cursive; }
+        .font-cinzel { font-family: 'Cinzel', serif; }
+        .font-montserrat { font-family: 'Montserrat', sans-serif; }
+        .font-retro { font-family: 'VT323', monospace; }
+        .font-pacifico { font-family: 'Pacifico', cursive; }
+        .font-arcade { font-family: 'Press Start 2P', monospace; font-size: 10px !important; }
     </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-amber-500 selection:text-slate-950">
@@ -49,32 +55,27 @@
     <!-- HERO / ESTUDIO DE PERSONALIZACIÓN INTERACTIVO -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12 flex-grow w-full" id="estudio">
         
-        <!-- Título principal llamativo -->
         <div class="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
             <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-bold mb-4 tracking-wide uppercase">
-                <span>✨</span> Interacción Táctil Directa Avanzada
+                <span>✨</span> Control Táctil Total (Logo & Texto)
             </div>
             <h1 class="text-3xl sm:text-6xl font-black tracking-tight mb-4 leading-tight">
                 Personaliza sin límites. <br><span class="bg-gradient-to-r from-amber-400 via-orange-400 to-yellow-300 bg-clip-text text-transparent">Toca, arrastra y pellizca</span>
             </h1>
             <p class="text-slate-400 text-sm sm:text-base leading-relaxed">
-                Interactúa directamente sobre la prenda. Mueve el diseño o el texto a cualquier posición, redmensiona con dos dedos o ajusta los parámetros con total fluidez.
+                Interactúa directamente sobre la prenda. Redimensiona el texto y el logo con dos dedos o muévelos con total fluidez.
             </p>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             
-            <!-- COLUMNA IZQUIERDA: MOCKUP INTERACTIVO TÁCTIL MEJORADO -->
+            <!-- COLUMNA IZQUIERDA: MOCKUP INTERACTIVO TÁCTIL -->
             <div class="lg:col-span-7 bg-slate-900/60 border border-slate-800/80 rounded-3xl p-5 sm:p-6 shadow-2xl relative flex flex-col items-center backdrop-blur-md sticky top-24">
                 
-                <!-- Badge superior informativo -->
                 <div class="absolute top-4 left-4 right-4 flex justify-between items-center z-30 pointer-events-none">
                     <span class="bg-slate-950/80 border border-slate-800 text-[11px] px-3 py-1.5 rounded-full text-amber-400 font-bold shadow-lg backdrop-blur-md flex items-center gap-1.5">
-                        <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"><span></span></span>
-                        <span>Mueve o pellizca los elementos libremente</span>
-                    </span>
-                    <span id="badge-ubicacion-activa" class="bg-amber-500/20 border border-amber-500/40 text-[11px] px-3 py-1 rounded-full text-amber-300 font-bold hidden backdrop-blur-md">
-                        Frente
+                        <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+                        <span>Arrastra o pellizca cualquier elemento</span>
                     </span>
                 </div>
 
@@ -82,58 +83,47 @@
                 <div id="mockup-container" class="w-full h-[420px] sm:h-[500px] flex items-center justify-center relative my-4 bg-slate-950 rounded-2xl border border-slate-800/80 overflow-hidden shadow-2xl select-none group">
                     
                     <!-- Fotografía de Producto de fondo -->
-                    <img id="imagen-producto" src="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover opacity-85 transition-all duration-500 pointer-events-none group-hover:scale-102" alt="Mockup base">
+                    <img id="imagen-producto" src="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover opacity-85 transition-all duration-500 pointer-events-none" alt="Mockup base">
                     
-                    <!-- Viñeta de sombra sutil para realismo -->
                     <div class="absolute inset-0 bg-radial from-transparent via-slate-950/40 to-slate-950/80 pointer-events-none"></div>
 
-                    <!-- ZONA DE ESTAMPADO TÁCTIL PRINCIPAL (LOGO / ARTE) -->
-                    <div id="zona-estampado" class="elemento-interactivo absolute flex flex-col items-center justify-center z-20 text-center p-4 rounded-2xl border-2 border-dashed border-amber-400/50 hover:border-amber-400 bg-amber-500/5 hover:bg-amber-500/10 transition-colors shadow-2xl backdrop-blur-[2px]" style="transform: translate(0px, 0px) scale(1) rotate(0deg);">
-                        
-                        <!-- Tirador visual superior táctil -->
-                        <div class="absolute -top-3.5 bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 text-[10px] font-black px-2.5 py-0.5 rounded-full shadow-md pointer-events-none uppercase tracking-wider flex items-center gap-1">
-                            <span>🎨 Logo / Arte (Arrastra)</span>
+                    <!-- ZONA DE ESTAMPADO TÁCTIL (LOGO / ARTE) -->
+                    <div id="zona-estampado" class="elemento-interactivo absolute flex flex-col items-center justify-center z-20 text-center p-4 rounded-2xl border-2 border-dashed border-amber-400/40 hover:border-amber-400 bg-amber-500/5 transition-colors shadow-2xl backdrop-blur-[2px]" style="transform: translate(0px, -40px) scale(1) rotate(0deg);">
+                        <div class="absolute -top-3.5 bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 text-[10px] font-black px-2.5 py-0.5 rounded-full shadow-md pointer-events-none uppercase tracking-wider">
+                            🎨 Logo (Arrastra / Zoom)
                         </div>
-
-                        <!-- Imagen subida -->
-                        <img id="preview-imagen-subida" class="max-h-40 sm:max-h-48 w-auto object-contain drop-shadow-2xl hidden pointer-events-none mb-1" alt="Diseño cliente">
+                        <img id="preview-imagen-subida" class="max-h-36 sm:max-h-44 w-auto object-contain drop-shadow-2xl hidden pointer-events-none mb-1" alt="Diseño cliente">
                         <div id="placeholder-arte" class="flex flex-col items-center justify-center p-4 pointer-events-none">
                             <span class="text-2xl mb-1">🖼️</span>
                             <span class="text-[11px] text-amber-300 font-bold bg-slate-950/90 px-3 py-1 rounded-full border border-slate-800 shadow">Sube tu diseño aquí</span>
                         </div>
                     </div>
 
-                    <!-- ZONA DE TEXTO TÁCTIL INDEPENDIENTE -->
-                    <div id="zona-texto-flotante" class="elemento-interactivo absolute flex flex-col items-center justify-center z-30 text-center p-3 rounded-xl border border-transparent hover:border-sky-400/60 hover:bg-sky-500/5 transition-colors hidden shadow-lg" style="transform: translate(0px, 90px) scale(1) rotate(0deg);">
-                        
-                        <!-- Tirador visual superior texto -->
+                    <!-- ZONA DE TEXTO TÁCTIL INDEPENDIENTE (CON ZOOM Y ARRASTRE) -->
+                    <div id="zona-texto-flotante" class="elemento-interactivo absolute flex flex-col items-center justify-center z-30 text-center p-3 rounded-xl border border-dashed border-sky-400/40 hover:border-sky-400 bg-sky-500/5 transition-colors hidden shadow-2xl backdrop-blur-[2px]" style="transform: translate(0px, 90px) scale(1) rotate(0deg);">
                         <div class="absolute -top-3 bg-gradient-to-r from-sky-400 to-blue-500 text-slate-950 text-[9px] font-black px-2 py-0.5 rounded-full shadow-md pointer-events-none uppercase tracking-wider">
-                            ✍️ Texto (Arrastra)
+                            ✍️ Texto (Arrastra / Zoom)
                         </div>
-
-                        <span id="preview-texto" class="font-bold drop-shadow-md text-white text-base pointer-events-none px-2"></span>
+                        <span id="preview-texto" class="font-bold drop-shadow-md text-white text-xl pointer-events-none px-3 py-1 font-urban"></span>
                     </div>
 
                 </div>
 
-                <!-- Barra inferior del mockup: Precio y Resumen rápido -->
+                <!-- Barra inferior del mockup: Precio -->
                 <div class="w-full bg-slate-950/80 border border-slate-800 rounded-2xl p-4 flex justify-between items-center backdrop-blur-md">
                     <div>
                         <span class="text-[11px] font-medium text-slate-400 uppercase tracking-wider block">Total Estimado</span>
                         <div class="flex items-baseline gap-2">
                             <span class="text-2xl sm:text-3xl font-black text-amber-400" id="precio-total">15.00 €</span>
-                            <span class="text-xs text-slate-500 line-through">19.00 €</span>
                         </div>
                     </div>
-                    <div class="flex items-center gap-2">
-                        <span class="text-[11px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-3 py-1.5 rounded-xl font-bold flex items-center gap-1">
-                            <span>🛡️</span> DTF Premium / Alta Durabilidad
-                        </span>
-                    </div>
+                    <span class="text-xs bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-3 py-1.5 rounded-xl font-bold flex items-center gap-1">
+                        <span>🛡️</span> DTF Premium / Alta Durabilidad
+                    </span>
                 </div>
             </div>
 
-            <!-- COLUMNA DERECHA: CONTROLES Y OPCIONES DE CONFIGURACIÓN -->
+            <!-- COLUMNA DERECHA: CONFIGURACIÓN Y FUENTES -->
             <div class="lg:col-span-5 bg-slate-900/40 border border-slate-800/80 rounded-3xl p-6 sm:p-8 backdrop-blur-md shadow-xl">
                 <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-800">
                     <h2 class="text-lg font-bold flex items-center gap-2.5 text-amber-400">
@@ -148,71 +138,72 @@
                     <div>
                         <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">1. Selecciona el soporte</label>
                         <div class="grid grid-cols-3 gap-3">
-                            <!-- Camiseta -->
-                            <button type="button" onclick="setProducto('Camiseta', 15, 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=800&auto=format&fit=crop')" class="producto-btn group border-2 border-amber-500 bg-amber-500/10 rounded-2xl p-3 text-center cursor-pointer transition hover:border-amber-400">
-                                <span class="block text-2xl mb-1 group-hover:scale-110 transition-transform">👕</span>
+                            <button type="button" onclick="setProducto('Camiseta', 15, 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=800&auto=format&fit=crop')" class="producto-btn group border-2 border-amber-500 bg-amber-500/10 rounded-2xl p-3 text-center cursor-pointer transition">
+                                <span class="block text-2xl mb-1">👕</span>
                                 <span class="text-xs font-bold block text-slate-200">Camiseta</span>
                                 <span class="text-[11px] text-amber-400 font-extrabold">15.00 €</span>
                             </button>
-                            <!-- Taza -->
-                            <button type="button" onclick="setProducto('Taza de Cerámica', 10, 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=800&auto=format&fit=crop')" class="producto-btn group border-2 border-slate-800 bg-slate-950/60 rounded-2xl p-3 text-center cursor-pointer transition hover:border-slate-700">
-                                <span class="block text-2xl mb-1 group-hover:scale-110 transition-transform">☕</span>
+                            <button type="button" onclick="setProducto('Taza de Cerámica', 10, 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=800&auto=format&fit=crop')" class="producto-btn group border-2 border-slate-800 bg-slate-950/60 rounded-2xl p-3 text-center cursor-pointer transition">
+                                <span class="block text-2xl mb-1">☕</span>
                                 <span class="text-xs font-bold block text-slate-300">Taza</span>
                                 <span class="text-[11px] text-amber-400 font-extrabold">10.00 €</span>
                             </button>
-                            <!-- Gorra -->
-                            <button type="button" onclick="setProducto('Gorra Trucker', 12, 'https://images.unsplash.com/photo-1588850561407-ed78c282e89b?q=80&w=800&auto=format&fit=crop')" class="producto-btn group border-2 border-slate-800 bg-slate-950/60 rounded-2xl p-3 text-center cursor-pointer transition hover:border-slate-700">
-                                <span class="block text-2xl mb-1 group-hover:scale-110 transition-transform">🧢</span>
+                            <button type="button" onclick="setProducto('Gorra Trucker', 12, 'https://images.unsplash.com/photo-1588850561407-ed78c282e89b?q=80&w=800&auto=format&fit=crop')" class="producto-btn group border-2 border-slate-800 bg-slate-950/60 rounded-2xl p-3 text-center cursor-pointer transition">
+                                <span class="block text-2xl mb-1">🧢</span>
                                 <span class="text-xs font-bold block text-slate-300">Gorra</span>
                                 <span class="text-[11px] text-amber-400 font-extrabold">12.00 €</span>
                             </button>
                         </div>
                     </div>
 
-                    <!-- 2. Subida de Archivo y Ubicación -->
+                    <!-- 2. Archivo y Ubicación -->
                     <div class="space-y-4 pt-2">
                         <label class="block text-xs font-bold uppercase tracking-wider text-slate-400">2. Tu diseño y posición</label>
-                        
                         <div class="space-y-3">
                             <div>
-                                <label class="block text-[11px] font-medium text-slate-400 mb-1.5">Archivo de imagen (PNG o JPG con buena resolución)</label>
-                                <input type="file" id="input-archivo" accept="image/*" class="w-full text-xs text-slate-300 bg-slate-950/80 rounded-xl border border-slate-800 p-2.5 file:mr-3 file:py-1.5 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-amber-500/10 file:text-amber-400 hover:file:bg-amber-500/20 cursor-pointer transition shadow-inner" onchange="manejarSubidaArchivo(event)">
+                                <label class="block text-[11px] font-medium text-slate-400 mb-1.5">Archivo de imagen (PNG o JPG)</label>
+                                <input type="file" id="input-archivo" accept="image/*" class="w-full text-xs text-slate-300 bg-slate-950/80 rounded-xl border border-slate-800 p-2.5 file:mr-3 file:py-1.5 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-amber-500/10 file:text-amber-400 cursor-pointer transition" onchange="manejarSubidaArchivo(event)">
                             </div>
-                            
                             <div>
-                                <label class="block text-[11px] font-medium text-slate-400 mb-1.5">Ubicación principal de estampado</label>
-                                <select id="select-ubicacion" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-xs sm:text-sm text-slate-200 focus:outline-none focus:border-amber-400 transition shadow-inner">
+                                <label class="block text-[11px] font-medium text-slate-400 mb-1.5">Ubicación principal</label>
+                                <select id="select-ubicacion" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-xs sm:text-sm text-slate-200 focus:outline-none focus:border-amber-400 transition">
                                     <option value="Frente / Centrado">Frente / Centrado principal</option>
                                     <option value="Espalda / Reverso">Espalda / Reverso completo</option>
-                                    <option value="Pecho Izquierdo (Logo Pequeño)">Pecho Izquierdo (Logo)</option>
+                                    <option value="Pecho Izquierdo (Logo)">Pecho Izquierdo (Logo)</option>
                                 </select>
                             </div>
                         </div>
                     </div>
 
-                    <!-- 3. Texto Personalizado (Integrado sin botones abajo) -->
+                    <!-- 3. Texto y Amplio Selector de Fuentes -->
                     <div class="space-y-4 pt-2 border-t border-slate-800/80">
-                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-400">3. Texto opcional integrado</label>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-400">3. Texto personalizado y Tipografías</label>
                         
                         <div class="space-y-3">
-                            <input type="text" id="input-texto" placeholder="Ej: Tu nombre, frase o lema..." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-xs sm:text-sm text-slate-100 focus:outline-none focus:border-amber-400 transition shadow-inner" oninput="actualizarTexto()">
+                            <input type="text" id="input-texto" placeholder="Escribe tu frase o nombre..." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-xs sm:text-sm text-slate-100 focus:outline-none focus:border-amber-400 transition shadow-inner" oninput="actualizarTexto()">
                             
-                            <div class="grid grid-cols-2 gap-3">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                 <div>
-                                    <label class="block text-[10px] uppercase font-bold text-slate-500 mb-1">Tipografía</label>
-                                    <select id="select-fuente" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-300 focus:outline-none focus:border-amber-400 transition" onchange="actualizarFuente()">
-                                        <option value="font-sans">Urbano / Moderno</option>
-                                        <option value="font-serif">Clásico / Elegante</option>
-                                        <option value="font-mono">Street / Blocky</option>
+                                    <label class="block text-[10px] uppercase font-bold text-slate-500 mb-1">Estilo de Fuente Pro</label>
+                                    <select id="select-fuente" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-amber-300 font-bold focus:outline-none focus:border-amber-400 transition" onchange="actualizarFuente()">
+                                        <option value="font-urban">Urbano / Moderno (Clean)</option>
+                                        <option value="font-bebas">Bebas / Streetwear Bold</option>
+                                        <option value="font-marker">Permanent Marker / Graff</option>
+                                        <option value="font-cinzel">Cinzel / Elegante & Luxury</option>
+                                        <option value="font-montserrat">Montserrat / Heavy Sport</option>
+                                        <option value="font-retro">VT323 / Retro Digital</option>
+                                        <option value="font-pacifico">Pacifico / Script Casual</option>
+                                        <option value="font-arcade">Press Start / 8-Bit Retro</option>
                                     </select>
                                 </div>
                                 <div>
                                     <label class="block text-[10px] uppercase font-bold text-slate-500 mb-1">Color del texto</label>
                                     <select id="select-color-texto" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-300 focus:outline-none focus:border-amber-400 transition" onchange="actualizarColorTexto()">
                                         <option value="text-white">Blanco puro</option>
-                                        <option value="text-amber-400">Ámbar / Oro</option>
-                                        <option value="text-slate-900 bg-white/90 px-1 rounded">Negro sólido</option>
+                                        <option value="text-amber-400">Ámbar / Oro brillante</option>
+                                        <option value="text-slate-950 bg-white px-2 py-0.5 rounded font-black">Negro sólido</option>
                                         <option value="text-rose-400">Rojo Neón</option>
+                                        <option value="text-sky-400">Azul Eléctrico</option>
                                     </select>
                                 </div>
                             </div>
@@ -225,7 +216,7 @@
                             <span class="text-xl">📲</span> Enviar diseño por WhatsApp (650013500)
                         </button>
                         <p class="text-[11px] text-center text-slate-500 mt-2.5">
-                            Se abrirá WhatsApp directamente con tu configuración y medidas guardadas.
+                            Se abrirá WhatsApp directamente con tus medidas, texto y fuentes seleccionadas.
                         </p>
                     </div>
 
@@ -234,27 +225,6 @@
 
         </div>
     </main>
-
-    <!-- SECCIÓN INFORMATIVA / BENEFICIOS -->
-    <section class="border-t border-slate-800/80 bg-slate-900/30 py-12 px-4" id="garantia">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="bg-slate-900/60 border border-slate-800/80 p-6 rounded-2xl">
-                <span class="text-3xl mb-3 block">🚀</span>
-                <h3 class="text-base font-bold text-white mb-1">Impresión DTF & Sublimación Pro</h3>
-                <p class="text-xs text-slate-400 leading-relaxed">Colores ultra nítidos y durabilidad extrema frente a los lavados más exigentes.</p>
-            </div>
-            <div class="bg-slate-900/60 border border-slate-800/80 p-6 rounded-2xl">
-                <span class="text-3xl mb-3 block">👆</span>
-                <h3 class="text-base font-bold text-white mb-1">Control Táctil Preciso</h3>
-                <p class="text-xs text-slate-400 leading-relaxed">Ajusta milimétricamente el tamaño y posición de tu arte directamente sobre el producto.</p>
-            </div>
-            <div class="bg-slate-900/60 border border-slate-800/80 p-6 rounded-2xl">
-                <span class="text-3xl mb-3 block">⚡</span>
-                <h3 class="text-base font-bold text-white mb-1">Atención Inmediata</h3>
-                <p class="text-xs text-slate-400 leading-relaxed">Envía tu diseño con un solo toque por WhatsApp y revisamos los detalles al instante.</p>
-            </div>
-        </div>
-    </section>
 
     <!-- FOOTER -->
     <footer class="border-t border-slate-800/80 bg-slate-950 py-8 px-4 text-center text-xs text-slate-500">
@@ -267,20 +237,17 @@
         </div>
     </footer>
 
-    <!-- SCRIPT DE GESTOS TÁCTILES INDEPENDIENTES (LOGO Y TEXTO) -->
+    <!-- SCRIPT DE GESTOS TÁCTILES Y CONTROL DE FUENTES -->
     <script>
         let productoActual = "Camiseta";
         let precioActual = 15.00;
 
-        // Estado del elemento Logo
-        let logoState = { posX: 0, posY: 0, scale: 100, rotation: 0 };
-        // Estado del elemento Texto
+        let logoState = { posX: 0, posY: -40, scale: 100, rotation: 0 };
         let textState = { posX: 0, posY: 90, scale: 100, rotation: 0 };
 
         const zonaEstampado = document.getElementById('zona-estampado');
         const zonaTextoFlotante = document.getElementById('zona-texto-flotante');
 
-        // Función genérica para manejar gestos táctiles (Mover y Pellizcar/Zoom con 1 o 2 dedos)
         function habilitarInteraccion(elemento, stateObj) {
             let punterosActivos = new Map();
             let distanciaInicialPellizco = 0;
@@ -319,7 +286,7 @@
                     const distanciaActual = Math.hypot(puntos[0].clientX - puntos[1].clientX, puntos[0].clientY - puntos[1].clientY);
                     if (distanciaInicialPellizco > 0) {
                         const factor = distanciaActual / distanciaInicialPellizco;
-                        stateObj.scale = Math.max(30, Math.min(350, Math.round(escalaInicialPellizco * factor)));
+                        stateObj.scale = Math.max(30, Math.min(400, Math.round(escalaInicialPellizco * factor)));
                         actualizarTransformaciones();
                     }
                 }
@@ -344,7 +311,6 @@
             elemento.addEventListener('pointercancel', finalizarPuntero);
         }
 
-        // Aplicar gestos a ambos contenedores
         habilitarInteraccion(zonaEstampado, logoState);
         habilitarInteraccion(zonaTextoFlotante, textState);
 
@@ -359,8 +325,7 @@
             document.getElementById('precio-total').innerText = precio.toFixed(2) + " €";
             document.getElementById('imagen-producto').src = urlMockup;
 
-            // Resetear posiciones al cambiar de producto
-            logoState = { posX: 0, posY: 0, scale: 100, rotation: 0 };
+            logoState = { posX: 0, posY: -40, scale: 100, rotation: 0 };
             textState = { posX: 0, posY: 90, scale: 100, rotation: 0 };
             actualizarTransformaciones();
 
@@ -404,15 +369,20 @@
         function actualizarFuente() {
             const fuente = document.getElementById('select-fuente').value;
             const preview = document.getElementById('preview-texto');
-            const colorClase = preview.className.split(' ').filter(c => c.startsWith('text-') || c.startsWith('bg-')).join(' ');
-            preview.className = `font-bold drop-shadow-md text-base px-2 ${colorClase} ${fuente}`;
+            
+            // Extraer clases de color actuales
+            const clasesExistentes = Array.from(preview.classList).filter(c => c.startsWith('text-') || c.startsWith('bg-') || c.startsWith('font-') || c === 'font-bold' || c === 'drop-shadow-md' || c === 'px-3' || c === 'py-1');
+            const clasesColor = clasesExistentes.filter(c => c.startsWith('text-') || c.startsWith('bg-')).join(' ');
+            
+            preview.className = `drop-shadow-md px-3 py-1 font-bold ${clasesColor} ${fuente}`;
         }
 
         function actualizarColorTexto() {
             const color = document.getElementById('select-color-texto').value;
             const preview = document.getElementById('preview-texto');
             const fuenteActual = document.getElementById('select-fuente').value;
-            preview.className = `font-bold drop-shadow-md text-base px-2 ${color} ${fuenteActual}`;
+            
+            preview.className = `drop-shadow-md px-3 py-1 font-bold ${color} ${fuenteActual}`;
         }
 
         function enviarPedidoWhatsApp() {
@@ -425,7 +395,6 @@
             const archivoInput = document.getElementById('input-archivo');
             const nombreArchivo = archivoInput.files.length > 0 ? archivoInput.files[0].name : "Ninguno subido";
 
-            // Teléfono integrado 650013500
             const telefono = "34650013500";
 
             const mensaje = `¡Hola! Quiero hacer un pedido personalizado en Eloi's Custom Gear:
@@ -434,8 +403,9 @@
 • Precio estimado: ${precioActual.toFixed(2)} €
 • Ubicación: ${ubicacion}
 • Archivo de diseño: ${nombreArchivo}
-• Texto añadido: "${texto}" (${fuente}, ${colorTexto})
-• Ajustes táctiles -> Logo (Escala: ${logoState.scale}%), Texto (Escala: ${textState.scale}%)
+• Texto añadido: "${texto}"
+• Tipografía: ${fuente} (${colorTexto})
+• Medidas táctiles -> Logo (Escala: ${logoState.scale}%), Texto (Escala: ${textState.scale}%)
 
 Por favor, confirmadme los detalles del pago y envío. ¡Gracias!`;
 
