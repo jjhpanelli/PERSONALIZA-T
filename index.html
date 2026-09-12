@@ -38,29 +38,29 @@
                 Crea tu propio estilo <span class="text-amber-400">Urbano & Merchandising</span>
             </h1>
             <p class="text-slate-400 max-w-2xl mx-auto text-sm md:text-base">
-                Personaliza camisetas, tazas y gorras con DTF, sublimación y vinilo. Visualiza tu diseño sobre mockups de producto reales en tiempo real.
+                Personaliza camisetas, tazas y gorras con DTF y sublimación. Ajusta la posición y escala de tu diseño sobre el mockup en tiempo real.
             </p>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             
-            <!-- COLUMNA IZQUIERDA: MOCKUP DE PRODUCTO REAL -->
+            <!-- COLUMNA IZQUIERDA: MOCKUP DE PRODUCTO REAL CON ZONA MOVIBLE -->
             <div class="lg:col-span-6 bg-slate-800/60 border border-slate-700/60 rounded-3xl p-6 shadow-2xl relative flex flex-col items-center sticky top-24">
                 <div class="absolute top-4 left-4 bg-slate-900/80 border border-slate-700 text-xs px-3 py-1 rounded-full text-amber-400 font-semibold z-30">
                     Mockup de Producto Real
                 </div>
 
-                <!-- Contenedor de la Imagen del Producto -->
+                <!-- Contenedor del Mockup -->
                 <div id="mockup-container" class="w-full h-96 md:h-[420px] flex items-center justify-center relative my-6 bg-slate-950 rounded-2xl border border-slate-800 overflow-hidden shadow-inner">
                     
-                    <!-- Fotografía de Producto de fondo (Cambia según Camiseta, Taza o Gorra) -->
-                    <img id="imagen-producto" src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover opacity-90 transition-opacity duration-300" alt="Mockup de producto">
+                    <!-- Fotografía de Producto Real de fondo -->
+                    <img id="imagen-producto" src="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover opacity-90 transition-opacity duration-300" alt="Mockup de producto">
                     
-                    <!-- Capa oscura sutil para contraste -->
+                    <!-- Capa oscura sutil -->
                     <div class="absolute inset-0 bg-slate-950/20 pointer-events-none"></div>
 
-                    <!-- Zona de Estampado Flotante sobre el producto -->
-                    <div id="zona-estampado" class="absolute flex flex-col items-center justify-center transition-all duration-150 z-20 max-w-[45%] text-center" style="transform: scale(1);">
+                    <!-- Zona de Estampado Ajustable (Se mueve con los Sliders X e Y) -->
+                    <div id="zona-estampado" class="absolute flex flex-col items-center justify-center transition-transform duration-75 z-20 max-w-[45%] text-center" style="transform: translate(0px, 0px) scale(1);">
                         <!-- Imagen subida por el cliente -->
                         <img id="preview-imagen-subida" class="max-h-28 w-auto object-contain drop-shadow-2xl hidden mb-1" alt="Diseño subido">
                         <span id="placeholder-texto-imagen" class="text-[11px] text-amber-300 font-medium bg-slate-950/80 px-2.5 py-1 rounded-full backdrop-blur-xs border border-slate-700/60 mb-1">Sube tu diseño 🎨</span>
@@ -95,19 +95,19 @@
                         <label class="block text-sm font-semibold mb-3 text-slate-300">1. Elige el producto</label>
                         <div class="grid grid-cols-3 gap-4">
                             <!-- Camiseta -->
-                            <button type="button" onclick="setProducto('Camiseta', 15, 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop', 'top-[38%]')" class="producto-btn group border-2 border-amber-500 bg-amber-500/10 rounded-2xl p-3 text-center cursor-pointer transition">
+                            <button type="button" onclick="setProducto('Camiseta', 15, 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=800&auto=format&fit=crop')" class="producto-btn group border-2 border-amber-500 bg-amber-500/10 rounded-2xl p-3 text-center cursor-pointer transition">
                                 <span class="block text-2xl mb-1">👕</span>
                                 <span class="text-xs font-bold block">Camiseta</span>
                                 <span class="text-[11px] text-amber-400 font-semibold">15.00 €</span>
                             </button>
                             <!-- Taza -->
-                            <button type="button" onclick="setProducto('Taza de Cerámica', 10, 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=800&auto=format&fit=crop', 'top-[42%]')" class="producto-btn group border-2 border-slate-700 bg-slate-900/60 rounded-2xl p-3 text-center cursor-pointer transition hover:border-slate-500">
+                            <button type="button" onclick="setProducto('Taza de Cerámica', 10, 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=800&auto=format&fit=crop')" class="producto-btn group border-2 border-slate-700 bg-slate-900/60 rounded-2xl p-3 text-center cursor-pointer transition hover:border-slate-500">
                                 <span class="block text-2xl mb-1">☕</span>
                                 <span class="text-xs font-bold block">Taza</span>
                                 <span class="text-[11px] text-amber-400 font-semibold">10.00 €</span>
                             </button>
                             <!-- Gorra -->
-                            <button type="button" onclick="setProducto('Gorra Trucker', 12, 'https://images.unsplash.com/photo-1588850561407-ed78c282e89b?q=80&w=800&auto=format&fit=crop', 'top-[45%]')" class="producto-btn group border-2 border-slate-700 bg-slate-900/60 rounded-2xl p-3 text-center cursor-pointer transition hover:border-slate-500">
+                            <button type="button" onclick="setProducto('Gorra Trucker', 12, 'https://images.unsplash.com/photo-1588850561407-ed78c282e89b?q=80&w=800&auto=format&fit=crop')" class="producto-btn group border-2 border-slate-700 bg-slate-900/60 rounded-2xl p-3 text-center cursor-pointer transition hover:border-slate-500">
                                 <span class="block text-2xl mb-1">🧢</span>
                                 <span class="text-xs font-bold block">Gorra</span>
                                 <span class="text-[11px] text-amber-400 font-semibold">12.00 €</span>
@@ -160,13 +160,36 @@
                                 </div>
                             </div>
 
-                            <!-- Escala / Tamaño manual -->
-                            <div>
-                                <div class="flex justify-between items-center mb-1">
-                                    <label class="block text-xs font-medium text-slate-400">Tamaño del diseño (Ajuste manual)</label>
-                                    <span id="label-escala" class="text-xs font-bold text-amber-400">100%</span>
+                            <!-- CONTROLES MANUALES: TAMAÑO Y POSICIÓN -->
+                            <div class="bg-slate-950/40 p-4 rounded-2xl border border-slate-800 space-y-4 pt-3">
+                                <h4 class="text-xs font-bold text-amber-400 uppercase tracking-wider">Controles de Ajuste Manual</h4>
+                                
+                                <!-- Escala / Tamaño -->
+                                <div>
+                                    <div class="flex justify-between items-center mb-1">
+                                        <label class="block text-xs font-medium text-slate-400">Tamaño del diseño</label>
+                                        <span id="label-escala" class="text-xs font-bold text-amber-400">100%</span>
+                                    </div>
+                                    <input type="range" id="slider-escala" min="40" max="160" value="100" class="w-full accent-amber-500 cursor-pointer" oninput="actualizarTransformacion()">
                                 </div>
-                                <input type="range" id="slider-escala" min="50" max="150" value="100" class="w-full accent-amber-500 cursor-pointer" oninput="actualizarEscala()">
+
+                                <!-- Posición Vertical (Eje Y) -->
+                                <div>
+                                    <div class="flex justify-between items-center mb-1">
+                                        <label class="block text-xs font-medium text-slate-400">Mover Arriba / Abajo</label>
+                                        <span id="label-pos-y" class="text-xs font-bold text-amber-400">0 px</span>
+                                    </div>
+                                    <input type="range" id="slider-pos-y" min="-100" max="100" value="0" class="w-full accent-amber-500 cursor-pointer" oninput="actualizarTransformacion()">
+                                </div>
+
+                                <!-- Posición Horizontal (Eje X) -->
+                                <div>
+                                    <div class="flex justify-between items-center mb-1">
+                                        <label class="block text-xs font-medium text-slate-400">Mover Izquierda / Derecha</label>
+                                        <span id="label-pos-x" class="text-xs font-bold text-amber-400">0 px</span>
+                                    </div>
+                                    <input type="range" id="slider-pos-x" min="-100" max="100" value="0" class="w-full accent-amber-500 cursor-pointer" oninput="actualizarTransformacion()">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -190,15 +213,17 @@
         let productoActual = "Camiseta";
         let precioActual = 15.00;
 
-        function setProducto(nombre, precio, urlMockup, posicionCss) {
+        function setProducto(nombre, precio, urlMockup) {
             productoActual = nombre;
             precioActual = precio;
             document.getElementById('precio-total').innerText = precio.toFixed(2) + " €";
             document.getElementById('imagen-producto').src = urlMockup;
-            
-            // Ajustar posición del sello de estampado según el producto
-            const zona = document.getElementById('zona-estampado');
-            zona.className = `absolute ${posicionCss} flex flex-col items-center justify-center transition-all duration-150 z-20 max-w-[45%] text-center`;
+
+            // Resetear posición al cambiar de producto
+            document.getElementById('slider-pos-x').value = 0;
+            document.getElementById('slider-pos-y').value = 0;
+            document.getElementById('slider-escala').value = 100;
+            actualizarTransformacion();
 
             const botones = document.querySelectorAll('.producto-btn');
             botones.forEach(btn => {
@@ -242,11 +267,17 @@
             contenedor.className = `font-bold drop-shadow-lg text-xs ${color} ${fuenteActual}`;
         }
 
-        function actualizarEscala() {
+        function actualizarTransformacion() {
             const escala = document.getElementById('slider-escala').value;
+            const posX = document.getElementById('slider-pos-x').value;
+            const posY = document.getElementById('slider-pos-y').value;
+
             document.getElementById('label-escala').innerText = escala + "%";
+            document.getElementById('label-pos-x').innerText = posX + " px";
+            document.getElementById('label-pos-y').innerText = posY + " px";
+
             const zonaEstampado = document.getElementById('zona-estampado');
-            zonaEstampado.style.transform = `scale(${escala / 100})`;
+            zonaEstampado.style.transform = `translate(${posX}px, ${posY}px) scale(${escala / 100})`;
         }
 
         function enviarPedidoWhatsApp() {
@@ -256,6 +287,8 @@
             const selectColor = document.getElementById('select-color-texto');
             const colorTexto = selectColor.options[selectColor.selectedIndex].text;
             const escala = document.getElementById('slider-escala').value + "%";
+            const posX = document.getElementById('slider-pos-x').value + "px";
+            const posY = document.getElementById('slider-pos-y').value + "px";
             const ubicacion = document.getElementById('select-ubicacion').value;
             const archivoInput = document.getElementById('input-archivo');
             const nombreArchivo = archivoInput.files.length > 0 ? archivoInput.files[0].name : "Ninguno subido";
@@ -268,7 +301,7 @@
 • Precio estimado: ${precioActual.toFixed(2)} €
 • Ubicación: ${ubicacion}
 • Archivo de diseño: ${nombreArchivo}
-• Tamaño / Escala: ${escala}
+• Ajustes manuales -> Escala: ${escala} | Posición X: ${posX}, Y: ${posY}
 • Texto añadido: ${texto} (${fuente}, ${colorTexto})
 
 Por favor, confirmadme los detalles y el pago. ¡Gracias!`;
