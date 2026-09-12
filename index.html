@@ -37,7 +37,7 @@
                         <div class="relative w-full h-full flex items-center justify-center">
                             <img id="imagen-soporte" crossorigin="anonymous" src="camiseta.png" alt="Soporte" class="w-full h-full object-contain pointer-events-none select-none drop-shadow-2xl">
 
-                            <!-- Imagen del usuario (Arrastrable con fusión realista) -->
+                            <!-- Imagen del usuario (Arrastrable y con pellizco táctil) -->
                             <div id="user-image-container" class="absolute cursor-move hidden" style="width: 150px; top: 35%; left: 35%; mix-blend-mode: multiply;">
                                 <img id="user-uploaded-image" src="" class="w-full h-full object-contain pointer-events-none">
                             </div>
@@ -48,7 +48,7 @@
                             </div>
                         </div>
                     </div>
-                    <p class="text-xs text-slate-500 mt-3">💡 Arrastra la imagen o el texto con el ratón para colocarlos en su sitio.</p>
+                    <p class="text-xs text-slate-500 mt-3">💡 Arrastra con el dedo o ratón. En móviles, pellizca la imagen con dos dedos para cambiar su tamaño.</p>
                 </div>
 
                 <!-- Galería Automática desde GitHub -->
@@ -219,12 +219,12 @@
         </section>
     </div>
 
-    <!-- Script de Lógica General y Galería Automática de GitHub -->
+    <!-- Script de Lógica General, Galería GitHub y Soporte Táctil -->
     <script>
-        // ⚠️ CONFIGURACIÓN DE TU GITHUB (Sustituye por tus datos reales cuando los tengas)
-        const GITHUB_USER = "TU_USUARIO_DE_GITHUB";
-        const GITHUB_REPO = "NOMBRE_DE_TU_REPOSITORIO";
-        const GITHUB_FOLDER = "galeria"; // Nombre de la carpeta en tu repositorio
+        // ⚠️ TUS DATOS DE GITHUB (Usuario, Repositorio y Carpeta de la galería)
+        const GITHUB_USER = "jjhpanelli";
+        const GITHUB_REPO = "PERSONALIZA-T";
+        const GITHUB_FOLDER = "GALERIA"; 
 
         let productoActual = 'Camiseta';
         let precioBase = 15.00;
@@ -253,7 +253,6 @@
                 const archivos = await respuesta.json();
                 contenedor.innerHTML = "";
 
-                // Filtrar solo imágenes válidas
                 const imagenes = archivos.filter(archivo => 
                     /\.(png|jpg|jpeg|webp)$/i.test(archivo.name)
                 );
@@ -280,8 +279,8 @@
                 });
 
             } catch (error) {
-                console.warn("Galería GitHub pendiente de configurar credenciales.");
-                contenedor.innerHTML = `<p class="text-xs text-slate-500 col-span-full text-center py-3">Sube tu carpeta a GitHub y configura tus datos en el script.</p>`;
+                console.warn("Galería GitHub pendiente.");
+                contenedor.innerHTML = `<p class="text-xs text-slate-500 col-span-full text-center py-3">Sube tus diseños a la carpeta GALERIA en GitHub.</p>`;
             }
         }
 
@@ -389,31 +388,90 @@
             renderedText.style.fontSize = e.target.value + 'px';
         });
 
+        // Función de Arrastre y Pellizco Táctil (Móvil y PC)
         function hacerArrastrable(elmnt) {
-            let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+            let posX = 0, posY = 0, startX = 0, startY = 0;
+            let initialDistance = 0;
+            let initialWidth = 150;
+
             elmnt.onmousedown = dragMouseDown;
+            elmnt.addEventListener('touchstart', touchStartHandler, { passive: false });
 
             function dragMouseDown(e) {
                 e.preventDefault();
-                pos3 = e.clientX;
-                pos4 = e.clientY;
+                startX = e.clientX;
+                startY = e.clientY;
                 document.onmouseup = closeDragElement;
                 document.onmousemove = elementDrag;
             }
 
             function elementDrag(e) {
                 e.preventDefault();
-                pos1 = pos3 - e.clientX;
-                pos2 = pos4 - e.clientY;
-                pos3 = e.clientX;
-                pos4 = e.clientY;
-                elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
-                elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+                posX = startX - e.clientX;
+                posY = startY - e.clientY;
+                startX = e.clientX;
+                startY = e.clientY;
+                elmnt.style.top = (elmnt.offsetTop - posY) + "px";
+                elmnt.style.left = (elmnt.offsetLeft - posX) + "px";
             }
 
             function closeDragElement() {
                 document.onmouseup = null;
                 document.onmousemove = null;
+            }
+
+            function touchStartHandler(e) {
+                if (e.touches.length === 1) {
+                    startX = e.touches[0].clientX;
+                    startY = e.touches[0].clientY;
+                    document.ontouchend = closeTouchElement;
+                    document.ontouchmove = touchMoveHandler;
+                } else if (e.touches.length === 2) {
+                    initialDistance = Math.hypot(
+                        e.touches[0].clientX - e.touches[1].clientX,
+                        e.touches[0].clientY - e.touches[1].clientY
+                    );
+                    initialWidth = elmnt.offsetWidth;
+                    document.ontouchend = closeTouchElement;
+                    document.ontouchmove = pinchMoveHandler;
+                }
+            }
+
+            function touchMoveHandler(e) {
+                if (e.touches.length === 1) {
+                    e.preventDefault();
+                    posX = startX - e.touches[0].clientX;
+                    posY = startY - e.touches[0].clientY;
+                    startX = e.touches[0].clientX;
+                    startY = e.touches[0].clientY;
+                    elmnt.style.top = (elmnt.offsetTop - posY) + "px";
+                    elmnt.style.left = (elmnt.offsetLeft - posX) + "px";
+                }
+            }
+
+            function pinchMoveHandler(e) {
+                if (e.touches.length === 2) {
+                    e.preventDefault();
+                    const currentDistance = Math.hypot(
+                        e.touches[0].clientX - e.touches[1].clientX,
+                        e.touches[0].clientY - e.touches[1].clientY
+                    );
+                    const scaleFactor = currentDistance / initialDistance;
+                    let newWidth = initialWidth * scaleFactor;
+                    
+                    if (newWidth >= 50 && newWidth <= 400) {
+                        elmnt.style.width = newWidth + 'px';
+                        const rangeEscala = document.getElementById('range-escala');
+                        if (rangeEscala && elmnt.id === 'user-image-container') {
+                            rangeEscala.value = newWidth;
+                        }
+                    }
+                }
+            }
+
+            function closeTouchElement() {
+                document.ontouchmove = null;
+                document.ontouchend = null;
             }
         }
 
@@ -451,7 +509,7 @@
                     `_*(La imagen de tu diseño se ha descargado en tu dispositivo para que puedas adjuntarla aquí)*_`;
 
                 // ⚠️ REEMPLAZA 34000000000 por tu número real de WhatsApp con prefijo de país
-                window.open(`https://wa.me/34650013500?text=${textoWhatsApp}`, '_blank');
+                window.open(`https://wa.me/34000000000?text=${textoWhatsApp}`, '_blank');
                 mostrarToast("¡Diseño guardado y WhatsApp abierto con éxito!", "🚀");
             }).catch(err => {
                 console.error("Error al capturar imagen:", err);
