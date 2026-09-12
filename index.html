@@ -8,8 +8,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&family=Bebas+Neue&family=Permanent+Marker&family=Cinzel:wght@700&family=Montserrat:wght@800&family=VT323&family=Pacifico&family=Press+Start+2P&family=Anton&family=Rye&family=Creepster&family=Rubik+Glitch&family=Special+Elite&family=Bungee&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
-        .elemento-interactivo { cursor: grab; user-select: none; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; touch-action: manipulation; }
+        .elemento-interactivo { cursor: grab; user-select: none; touch-action: none; }
         .elemento-interactivo:active { cursor: grabbing; }
         
         .font-urban { font-family: 'Plus Jakarta Sans', sans-serif; }
@@ -117,6 +117,24 @@
                         <span id="preview-texto" class="font-bold drop-shadow-md text-white text-xl pointer-events-none px-3 py-1 font-urban"></span>
                     </div>
 
+                </div>
+
+                <!-- Botones de Control Manual de Zoom para Móviles / Escritorio -->
+                <div class="w-full grid grid-cols-2 gap-3 mb-2">
+                    <div class="bg-slate-950/90 border border-slate-800 rounded-xl p-2.5 flex items-center justify-between">
+                        <span class="text-[11px] font-bold text-amber-400">🔍 Zoom Logo</span>
+                        <div class="flex gap-1">
+                            <button type="button" onclick="cambiarZoom('logo', -15)" class="w-7 h-7 bg-slate-900 border border-slate-700 rounded-lg text-xs font-bold hover:bg-slate-800 active:scale-95">-</button>
+                            <button type="button" onclick="cambiarZoom('logo', 15)" class="w-7 h-7 bg-slate-900 border border-slate-700 rounded-lg text-xs font-bold hover:bg-slate-800 active:scale-95">+</button>
+                        </div>
+                    </div>
+                    <div class="bg-slate-950/90 border border-slate-800 rounded-xl p-2.5 flex items-center justify-between">
+                        <span class="text-[11px] font-bold text-sky-400">🔍 Zoom Texto</span>
+                        <div class="flex gap-1">
+                            <button type="button" onclick="cambiarZoom('texto', -15)" class="w-7 h-7 bg-slate-900 border border-slate-700 rounded-lg text-xs font-bold hover:bg-slate-800 active:scale-95">-</button>
+                            <button type="button" onclick="cambiarZoom('texto', 15)" class="w-7 h-7 bg-slate-900 border border-slate-700 rounded-lg text-xs font-bold hover:bg-slate-800 active:scale-95">+</button>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Modal de Vista Previa -->
@@ -296,84 +314,77 @@
         </div>
     </footer>
 
-    <!-- SCRIPT DE INTERACCIÓN ROBUSTO (RATÓN Y TÁCTIL) -->
+    <!-- SCRIPT DE INTERACCIÓN CON PUNTEROS UNIFICADOS -->
     <script>
         let productoActual = "Camiseta";
         let precioActual = 15.00;
 
-        let logoState = { posX: 0, posY: -40, scale: 100, rotation: 0 };
-        let textState = { posX: 0, posY: 90, scale: 100, rotation: 0 };
+        let logoState = { posX: 0, posY: -40, scale: 100 };
+        let textState = { posX: 0, posY: 90, scale: 100 };
 
         const zonaEstampado = document.getElementById('zona-estampado');
         const zonaTextoFlotante = document.getElementById('zona-texto-flotante');
         const mockupContainer = document.getElementById('mockup-container');
 
-        function configurarArrastreRobusto(elemento, stateObj) {
+        function configurarArrastreConPunteros(elemento, stateObj) {
             let estaArrastrando = false;
             let inicioX = 0;
             let inicioY = 0;
+            let idPointer = null;
 
-            // Eventos de Ratón
-            elemento.addEventListener('mousedown', (e) => {
-                if (e.button !== 0) return; // Solo clic izquierdo
+            elemento.addEventListener('pointerdown', (e) => {
                 estaArrastrando = true;
+                idPointer = e.pointerId;
                 inicioX = e.clientX - stateObj.posX;
                 inicioY = e.clientY - stateObj.posY;
-                elemento.style.zIndex = 50;
-                e.stopPropagation();
+                elemento.setPointerCapture(e.pointerId);
+                elemento.style.zIndex = 60;
+                e.preventDefault();
             });
 
-            window.addEventListener('mousemove', (e) => {
-                if (!estaArrastrando) return;
+            elemento.addEventListener('pointermove', (e) => {
+                if (!estaArrastrando || e.pointerId !== idPointer) return;
                 stateObj.posX = e.clientX - inicioX;
                 stateObj.posY = e.clientY - inicioY;
                 actualizarTransformaciones();
             });
 
-            window.addEventListener('mouseup', () => {
+            const finalizarArrastre = (e) => {
+                if (!estaArrastrando || (e.pointerId && e.pointerId !== idPointer)) return;
                 estaArrastrando = false;
-            });
+                idPointer = null;
+            };
 
-            // Eventos Táctiles (Móviles / Tablets)
-            elemento.addEventListener('touchstart', (e) => {
-                if (e.touches.length === 1) {
-                    estaArrastrando = true;
-                    inicioX = e.touches[0].clientX - stateObj.posX;
-                    inicioY = e.touches[0].clientY - stateObj.posY;
-                    elemento.style.zIndex = 50;
-                    e.stopPropagation();
-                }
-            }, { passive: true });
+            elemento.addEventListener('pointerup', finalizarArrastre);
+            elemento.addEventListener('pointercancel', finalizarArrastre);
 
-            window.addEventListener('touchmove', (e) => {
-                if (!estaArrastrando || e.touches.length !== 1) return;
-                stateObj.posX = e.touches[0].clientX - inicioX;
-                stateObj.posY = e.touches[0].clientY - inicioY;
-                actualizarTransformaciones();
-            }, { passive: true });
-
-            window.addEventListener('touchend', () => {
-                estaArrastrando = false;
-            });
-
-            // Soporte de Zoom con la rueda del ratón sobre el elemento
+            // Zoom con rueda de ratón
             elemento.addEventListener('wheel', (e) => {
                 e.preventDefault();
                 if (e.deltaY < 0) {
-                    stateObj.scale = Math.min(400, stateObj.scale + 10);
+                    stateObj.scale = Math.min(400, stateObj.scale + 15);
                 } else {
-                    stateObj.scale = Math.max(30, stateObj.scale - 10);
+                    stateObj.scale = Math.max(30, stateObj.scale - 15);
                 }
                 actualizarTransformaciones();
             }, { passive: false });
         }
 
-        configurarArrastreRobusto(zonaEstampado, logoState);
-        configurarArrastreRobusto(zonaTextoFlotante, textState);
+        configurarArrastreConPunteros(zonaEstampado, logoState);
+        configurarArrastreConPunteros(zonaTextoFlotante, textState);
 
         function actualizarTransformaciones() {
             zonaEstampado.style.transform = `translate(${logoState.posX}px, ${logoState.posY}px) scale(${logoState.scale / 100})`;
             zonaTextoFlotante.style.transform = `translate(${textState.posX}px, ${textState.posY}px) scale(${textState.scale / 100})`;
+        }
+
+        function cambiarZoom(tipo, valor) {
+            if (tipo === 'logo') {
+                logoState.scale = Math.min(400, Math.max(30, logoState.scale + valor));
+            } else {
+                textState.scale = Math.min(400, Math.max(30, textState.scale + valor));
+            }
+            actualizarTransformaciones();
         }
 
         let modoLimpioActivo = false;
@@ -396,8 +407,8 @@
             document.getElementById('precio-total').innerText = precio.toFixed(2) + " €";
             document.getElementById('imagen-producto').src = urlMockup;
 
-            logoState = { posX: 0, posY: -40, scale: 100, rotation: 0 };
-            textState = { posX: 0, posY: 90, scale: 100, rotation: 0 };
+            logoState = { posX: 0, posY: -40, scale: 100 };
+            textState = { posX: 0, posY: 90, scale: 100 };
             actualizarTransformaciones();
             cerrarPreview();
 
