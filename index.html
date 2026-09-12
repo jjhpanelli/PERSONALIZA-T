@@ -3,35 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eloi's Custom Gear - Personalizador Pro con Carrito</title>
+    <title>Personaliza-T - Estudio de Diseño y Merchandising Pro</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Font moderna: Plus Jakarta Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- html2canvas para capturar el diseño -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen p-4 md:p-8">
+<body class="bg-slate-950 text-slate-100 min-h-screen p-4 md:p-8 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-900 via-slate-950 to-black">
 
     <!-- Notificación Flotante Estilo Toast -->
-    <div id="toast-notification" class="fixed bottom-6 right-6 z-50 bg-slate-900 border border-amber-500/40 text-slate-200 px-5 py-3 rounded-2xl shadow-2xl transition-all duration-300 transform translate-y-20 opacity-0 flex items-center gap-3">
+    <div id="toast-notification" class="fixed bottom-6 right-6 z-50 bg-slate-900/90 backdrop-blur-md border border-amber-500/40 text-slate-200 px-5 py-3 rounded-2xl shadow-2xl transition-all duration-300 transform translate-y-20 opacity-0 flex items-center gap-3">
         <span id="toast-icon" class="text-amber-400 text-lg">✨</span>
         <span id="toast-message" class="text-xs font-semibold">Mensaje de notificación</span>
     </div>
 
     <!-- Botón Flotante del Carrito -->
-    <button onclick="toggleModalCarrito()" class="fixed top-6 right-6 z-40 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-4 py-3 rounded-2xl shadow-xl flex items-center gap-2 transition text-xs uppercase tracking-wider">
+    <button onclick="toggleModalCarrito()" class="fixed top-6 right-6 z-40 bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold px-4 py-3 rounded-2xl shadow-xl shadow-amber-500/10 flex items-center gap-2 transition text-xs uppercase tracking-wider transform hover:scale-105">
         🛒 Carrito <span id="carrito-contador" class="bg-slate-950 text-amber-400 px-2 py-0.5 rounded-full text-xs">0</span>
     </button>
 
     <!-- Modal del Carrito de Compras -->
     <div id="modal-carrito" class="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-sm hidden flex items-center justify-center p-4">
-        <div class="bg-slate-900 border border-slate-800 rounded-3xl w-full max-w-lg p-6 space-y-5 shadow-2xl max-h-[90vh] flex flex-col">
+        <div class="bg-slate-900 border border-slate-800/80 rounded-3xl w-full max-w-lg p-6 space-y-5 shadow-2xl max-h-[90vh] flex flex-col">
             <div class="flex justify-between items-center border-b border-slate-800 pb-4">
-                <h3 class="text-sm font-bold uppercase tracking-wider text-amber-400">Tu Carrito de Personalizaciones</h3>
+                <h3 class="text-xs font-extrabold uppercase tracking-widest text-amber-400 flex items-center gap-2">🛒 Tu Carrito de Personalizaciones</h3>
                 <button onclick="toggleModalCarrito()" class="text-slate-400 hover:text-slate-100 text-lg font-bold">✕</button>
             </div>
 
             <!-- Aviso importante sobre las imágenes -->
-            <div class="bg-amber-500/10 border border-amber-500/20 rounded-xl p-3 text-[11px] text-amber-300 space-y-1">
+            <div class="bg-amber-500/10 border border-amber-500/20 rounded-2xl p-3.5 text-[11px] text-amber-300 space-y-1">
                 <p class="font-bold">⚠️ Importante para tus diseños:</p>
                 <p>Haz clic en <b>"📥 Descargar"</b> en cada artículo antes de enviar el pedido para asegurarte de tener todas tus imágenes guardadas y poder adjuntarlas por WhatsApp.</p>
             </div>
@@ -44,10 +49,10 @@
             <div class="border-t border-slate-800 pt-4 space-y-4">
                 <div class="flex justify-between items-center">
                     <span class="text-xs font-semibold text-slate-400">Total Global del Carrito:</span>
-                    <span id="carrito-total-precio" class="text-lg font-black text-amber-400">0.00 €</span>
+                    <span id="carrito-total-precio" class="text-xl font-black text-amber-400">0.00 €</span>
                 </div>
 
-                <button onclick="irAlCheckout()" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-3 rounded-xl transition text-xs uppercase tracking-wider">
+                <button onclick="irAlCheckout()" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold py-3.5 rounded-xl transition text-xs uppercase tracking-wider shadow-lg shadow-amber-500/20">
                     Proceder al Formulario de Envío
                 </button>
             </div>
@@ -55,10 +60,13 @@
     </div>
 
     <div class="max-w-6xl mx-auto space-y-8">
-        <!-- Cabecera -->
-        <header class="text-center space-y-2">
-            <h1 class="text-3xl font-extrabold tracking-tight text-amber-400">Eloi's Custom Gear</h1>
-            <p class="text-sm text-slate-400">Personaliza tu estilo, añade al carrito cuantos quieras y haz tu pedido</p>
+        <!-- Cabecera con Logotipo Personaliza-T -->
+        <header class="text-center space-y-3 pt-4">
+            <div class="inline-flex items-center justify-center bg-slate-900/80 border border-slate-800 px-5 py-2 rounded-2xl shadow-inner mb-1">
+                <span class="text-2xl font-extrabold tracking-tight text-slate-100">Personaliza</span><span class="text-2xl font-extrabold tracking-tight text-amber-400">-T</span>
+            </div>
+            <h1 class="text-xs uppercase tracking-[0.3em] font-bold text-amber-500/80">Estudio de Diseño y Merchandising Pro</h1>
+            <p class="text-xs text-slate-400 max-w-md mx-auto">Personaliza tu estilo, añade al carrito cuantos productos desees y haz tu pedido de forma rápida.</p>
         </header>
 
         <div class="grid lg:grid-cols-12 gap-8">
@@ -66,9 +74,12 @@
             <!-- Columna Izquierda: Mockup, Área Visual y Galería Automática (7 columnas) -->
             <div class="lg:col-span-7 space-y-6">
                 <div class="flex flex-col items-center justify-center">
-                    <div id="captura-area" class="bg-slate-900 border border-slate-800 rounded-3xl p-8 relative shadow-2xl w-full aspect-square max-w-[500px] flex items-center justify-center overflow-hidden">
+                    <div id="captura-area" class="bg-gradient-to-b from-slate-900 to-slate-950 border border-slate-800/80 rounded-3xl p-8 relative shadow-2xl w-full aspect-square max-w-[500px] flex items-center justify-center overflow-hidden">
                         
-                        <span id="nombre-soporte-badge" class="absolute top-6 left-6 z-20 bg-amber-500/10 text-amber-400 border border-amber-500/20 text-xs font-bold px-3.5 py-1.5 rounded-full uppercase tracking-wider">Camiseta</span>
+                        <!-- Logotipo marca de agua discreto en la esquina del visor -->
+                        <span class="absolute bottom-4 right-5 z-20 text-[10px] font-bold tracking-widest text-slate-700 uppercase pointer-events-none">Personaliza-T</span>
+
+                        <span id="nombre-soporte-badge" class="absolute top-6 left-6 z-20 bg-amber-500/10 text-amber-400 border border-amber-500/20 text-xs font-bold px-3.5 py-1.5 rounded-full uppercase tracking-wider shadow-md">Camiseta</span>
 
                         <!-- Contenedor del Mockup y Elementos -->
                         <div class="relative w-full h-full flex items-center justify-center">
@@ -85,14 +96,13 @@
                             </div>
                         </div>
                     </div>
-                    <p class="text-xs text-slate-500 mt-3">💡 Arrastra con el dedo o ratón. En móviles, pellizca la imagen con dos dedos para cambiar su tamaño.</p>
+                    <p class="text-[11px] text-slate-400 mt-3 flex items-center gap-1.5">💡 <span class="font-medium">Arrastra</span> con el ratón o dedo. En móviles, <span class="font-medium">pellizca</span> la imagen con dos dedos para cambiar su tamaño.</p>
                 </div>
 
                 <!-- Galería Automática desde GitHub -->
-                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl space-y-3">
+                <div class="bg-slate-900/80 backdrop-blur-md border border-slate-800/80 rounded-2xl p-5 shadow-xl space-y-3">
                     <div class="flex justify-between items-center">
-                        <h3 class="text-xs font-bold uppercase tracking-wider text-amber-400">🎨 Galería de Diseños Propios (Haz clic para aplicar)</h3>
-                        <span class="text-[10px] text-slate-500">Carga automática GitHub</span>
+                        <h3 class="text-xs font-bold uppercase tracking-wider text-amber-400 flex items-center gap-1.5">🎨 Galería de Diseños Propios <span class="text-[9px] text-slate-500 font-normal">(Haz clic para aplicar)</span></h3>
                     </div>
                     <div id="galeria-automatica" class="grid grid-cols-4 gap-3 max-h-56 overflow-y-auto p-1">
                         <p class="text-xs text-slate-400 col-span-full text-center py-4">Cargando diseños desde GitHub...</p>
@@ -100,25 +110,25 @@
                 </div>
             </div>
 
-            <!-- Columna Derecha: Controles Avanzados, Opciones, Precio y Botón de Carrito (5 columns) -->
+            <!-- Columna Derecha: Controles Avanzados, Opciones, Precio y Carrito (5 columns) -->
             <div class="lg:col-span-5 space-y-6">
                 
                 <!-- 1. Selector de Soportes, Tallas y Colores Base -->
-                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl space-y-4">
+                <div class="bg-slate-900/80 backdrop-blur-md border border-slate-800/80 rounded-2xl p-5 shadow-xl space-y-4">
                     <h3 class="text-xs font-bold uppercase tracking-wider text-amber-400">1. Elige tu Soporte y Opciones</h3>
                     
                     <div class="grid grid-cols-3 gap-3">
-                        <button onclick="cambiarSoporte('Camiseta', 'camiseta.png', 15.00, 'tallas-container')" class="soporte-btn border-2 border-amber-500 bg-slate-800/50 rounded-xl p-3 flex flex-col items-center gap-1.5 transition hover:border-amber-400">
+                        <button onclick="cambiarSoporte('Camiseta', 'camiseta.png', 15.00, 'tallas-container')" class="soporte-btn border-2 border-amber-500 bg-amber-500/10 rounded-xl p-3 flex flex-col items-center gap-1.5 transition hover:scale-105">
                             <span class="text-xl">👕</span>
                             <span class="text-xs font-bold">Camiseta</span>
                             <span class="text-[10px] text-amber-400 font-semibold">15.00 €</span>
                         </button>
-                        <button onclick="cambiarSoporte('Taza', 'taza.png', 10.00, 'color-taza-container')" class="soporte-btn border-2 border-slate-800 bg-slate-900/50 rounded-xl p-3 flex flex-col items-center gap-1.5 transition hover:border-slate-600">
+                        <button onclick="cambiarSoporte('Taza', 'taza.png', 10.00, 'color-taza-container')" class="soporte-btn border-2 border-slate-800 bg-slate-950/50 rounded-xl p-3 flex flex-col items-center gap-1.5 transition hover:border-slate-600 hover:scale-105">
                             <span class="text-xl">☕</span>
                             <span class="text-xs font-bold">Taza</span>
                             <span class="text-[10px] text-amber-400 font-semibold">10.00 €</span>
                         </button>
-                        <button onclick="cambiarSoporte('Gorra', 'gorra.png', 12.00, 'tallas-container')" class="soporte-btn border-2 border-slate-800 bg-slate-900/50 rounded-xl p-3 flex flex-col items-center gap-1.5 transition hover:border-slate-600">
+                        <button onclick="cambiarSoporte('Gorra', 'gorra.png', 12.00, 'tallas-container')" class="soporte-btn border-2 border-slate-800 bg-slate-950/50 rounded-xl p-3 flex flex-col items-center gap-1.5 transition hover:border-slate-600 hover:scale-105">
                             <span class="text-xl">🧢</span>
                             <span class="text-xs font-bold">Gorra</span>
                             <span class="text-[10px] text-amber-400 font-semibold">12.00 €</span>
@@ -148,7 +158,7 @@
                 </div>
 
                 <!-- 2. Controles de Diseño y Ajustes -->
-                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl space-y-4">
+                <div class="bg-slate-900/80 backdrop-blur-md border border-slate-800/80 rounded-2xl p-5 shadow-xl space-y-4">
                     <h3 class="text-xs font-bold uppercase tracking-wider text-amber-400">2. Personalización y Ajustes</h3>
                     
                     <div class="space-y-2">
@@ -202,7 +212,7 @@
                 </div>
 
                 <!-- 3. Precio y Botón de Añadir al Carrito -->
-                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl space-y-4">
+                <div class="bg-slate-900/80 backdrop-blur-md border border-slate-800/80 rounded-2xl p-5 shadow-xl space-y-4">
                     <div class="flex justify-between items-center bg-slate-950 border border-slate-800 p-3.5 rounded-xl">
                         <div>
                             <span class="text-[10px] uppercase tracking-wider text-slate-400 block font-semibold">Precio Artículo</span>
@@ -211,7 +221,7 @@
                         <span class="text-xs text-slate-400 bg-slate-900 px-3 py-1.5 rounded-lg border border-slate-800" id="resumen-opcion-badge">Talla: S</span>
                     </div>
 
-                    <button type="button" onclick="agregarAlCarrito()" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-3.5 rounded-xl transition shadow-lg shadow-amber-500/10 text-xs uppercase tracking-wider flex items-center justify-center gap-2">
+                    <button type="button" onclick="agregarAlCarrito()" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold py-3.5 rounded-xl transition shadow-xl shadow-amber-500/10 text-xs uppercase tracking-wider flex items-center justify-center gap-2 transform hover:scale-[1.02]">
                         ✨ Añadir este producto al Carrito
                     </button>
                 </div>
@@ -220,36 +230,36 @@
         </div>
 
         <!-- Sección de Datos de Envío y Pedido Final (Oculta hasta abrir el checkout) -->
-        <div id="seccion-checkout" class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4 max-w-2xl mx-auto hidden">
-            <h3 class="text-sm font-bold uppercase tracking-wider text-amber-400 text-center">3. Datos de Envío y Confirmación del Pedido</h3>
-            <form id="order-form" class="space-y-3" onsubmit="event.preventDefault(); enviarPedidoCompletoWhatsApp();">
+        <div id="seccion-checkout" class="bg-slate-900/90 backdrop-blur-md border border-slate-800 rounded-3xl p-6 md:p-8 shadow-2xl space-y-5 max-w-2xl mx-auto hidden">
+            <h3 class="text-sm font-extrabold uppercase tracking-widest text-amber-400 text-center">3. Datos de Envío y Confirmación del Pedido</h3>
+            <form id="order-form" class="space-y-3.5" onsubmit="event.preventDefault(); enviarPedidoCompletoWhatsApp();">
                 <div>
                     <label class="block text-[11px] font-semibold text-slate-400 mb-1">Nombre y Apellidos *</label>
-                    <input type="text" id="fact-nombre" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-100 focus:outline-none focus:border-amber-500">
+                    <input type="text" id="fact-nombre" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-slate-100 focus:outline-none focus:border-amber-500">
                 </div>
-                <div class="grid grid-cols-2 gap-2">
+                <div class="grid grid-cols-2 gap-3">
                     <div>
                         <label class="block text-[11px] font-semibold text-slate-400 mb-1">Teléfono / WhatsApp *</label>
-                        <input type="tel" id="fact-telefono" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-100 focus:outline-none focus:border-amber-500">
+                        <input type="tel" id="fact-telefono" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-slate-100 focus:outline-none focus:border-amber-500">
                     </div>
                     <div>
                         <label class="block text-[11px] font-semibold text-slate-400 mb-1">Email</label>
-                        <input type="email" id="fact-email" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-100 focus:outline-none focus:border-amber-500">
+                        <input type="email" id="fact-email" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-slate-100 focus:outline-none focus:border-amber-500">
                     </div>
                 </div>
                 <div>
                     <label class="block text-[11px] font-semibold text-slate-400 mb-1">Dirección de Entrega</label>
-                    <textarea id="fact-direccion" rows="2" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-100 focus:outline-none focus:border-amber-500"></textarea>
+                    <textarea id="fact-direccion" rows="2" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-slate-100 focus:outline-none focus:border-amber-500"></textarea>
                 </div>
 
-                <!-- NUEVO APARTADO: Petición de imágenes originales para retocar / optimizar -->
-                <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 space-y-2">
-                    <label class="block text-xs font-bold text-amber-400">🖼️ ¿Necesitas que retoquemos u optimise tus imágenes originales?</label>
+                <!-- Apartado de imágenes originales para retocar / optimizar -->
+                <div class="bg-slate-950 border border-slate-800/80 rounded-2xl p-4 space-y-2">
+                    <label class="block text-xs font-bold text-amber-400">🖼️ ¿Necesitas que retocamos u optimicemos tus imágenes originales?</label>
                     <p class="text-[11px] text-slate-400">Sube aquí tus archivos originales (alta resolución, vectores, fotos sin recortar) para que podamos mejorarlos antes de la estampación.</p>
                     <input type="file" id="fact-imagenes-originales" multiple accept="image/*,.psd,.ai,.pdf" class="w-full text-xs text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-amber-500/10 file:text-amber-400 hover:file:bg-amber-500/20 cursor-pointer pt-2">
                 </div>
 
-                <button type="submit" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-3 rounded-xl transition shadow-lg text-xs uppercase tracking-wider">
+                <button type="submit" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold py-3.5 rounded-xl transition shadow-lg text-xs uppercase tracking-wider transform hover:scale-[1.02]">
                     🚀 Enviar Pedido por WhatsApp
                 </button>
             </form>
@@ -531,7 +541,7 @@
             let totalGlobal = carrito.reduce((acc, item) => acc + item.precio, 0);
             let totalOriginales = inputOriginales.files.length;
 
-            let textoWhatsApp = `*¡Nuevo Pedido Múltiple - Eloi's Custom Gear!*%0A%0A` +
+            let textoWhatsApp = `*¡Nuevo Pedido - Personaliza-T!*%0A%0A` +
                 `👤 *Cliente:* ${encodeURIComponent(nombre)}%0A` +
                 `📞 *Teléfono:* ${encodeURIComponent(telefono)}%0A` +
                 `📧 *Email:* ${encodeURIComponent(email || 'No especificado')}%0A` +
@@ -550,7 +560,7 @@
                 `_*(Recuerda que he descargado las imágenes de mis diseños desde el carrito para adjuntarlas en este chat)*_`;
 
             // ⚠️ REEMPLAZA 34000000000 por tu número de WhatsApp real
-            window.open(`https://wa.me/34650013500?text=${textoWhatsApp}`, '_blank');
+            window.open(`https://wa.me/34000000000?text=${textoWhatsApp}`, '_blank');
             mostrarToast("¡WhatsApp abierto con éxito!", "🚀");
         }
 
