@@ -114,6 +114,7 @@
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl space-y-4">
                     <h3 class="text-xs font-bold uppercase tracking-wider text-amber-400">2. Personalización y Ajustes</h3>
                     
+                    <!-- Subir Imagen + Botón Quitar -->
                     <div class="space-y-2">
                         <label class="block text-xs font-semibold text-slate-400">Subir tu propia Imagen / Logo</label>
                         <div class="flex gap-2">
@@ -135,9 +136,13 @@
 
                     <hr class="border-slate-800">
 
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-400 mb-1">Texto Personalizado Adicional</label>
-                        <input type="text" id="input-texto" placeholder="Escribe tu texto..." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-100 focus:outline-none focus:border-amber-500">
+                    <!-- Texto Personalizado + Botón Quitar Texto -->
+                    <div class="space-y-2">
+                        <label class="block text-xs font-semibold text-slate-400">Texto Personalizado Adicional</label>
+                        <div class="flex gap-2">
+                            <input type="text" id="input-texto" placeholder="Escribe tu texto..." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-100 focus:outline-none focus:border-amber-500">
+                            <button type="button" onclick="quitarTexto()" class="bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/20 px-3 py-2 rounded-xl text-xs font-bold transition" title="Quitar texto actual">🗑️ Quitar</button>
+                        </div>
                     </div>
 
                     <div class="grid grid-cols-3 gap-2">
@@ -359,7 +364,7 @@
             }
         });
 
-        // Función para quitar/eliminar el diseño actual
+        // Función para quitar/eliminar la imagen actual
         function quitarImagen() {
             const imgContainer = document.getElementById('user-image-container');
             const imgElement = document.getElementById('user-uploaded-image');
@@ -367,8 +372,20 @@
             
             imgElement.src = "";
             imgContainer.classList.add('hidden');
-            inputArchivo.value = ""; // Limpia el selector de archivos
-            mostrarToast('Diseño eliminado', '🗑️');
+            inputArchivo.value = "";
+            mostrarToast('Diseño de imagen eliminado', '🗑️');
+        }
+
+        // Función para quitar/eliminar el texto actual
+        function quitarTexto() {
+            const textContainer = document.getElementById('user-text-container');
+            const inputTexto = document.getElementById('input-texto');
+            const renderedText = document.getElementById('user-rendered-text');
+            
+            renderedText.innerText = "";
+            inputTexto.value = "";
+            textContainer.classList.add('hidden');
+            mostrarToast('Texto eliminado', '🗑️');
         }
 
         document.getElementById('range-escala').addEventListener('input', function(e) {
@@ -524,12 +541,12 @@
                     `_*(La imagen de tu diseño se ha descargado en tu dispositivo para que puedas adjuntarla aquí)*_`;
 
                 // ⚠️ REEMPLAZA 34000000000 por tu número real de WhatsApp con prefijo de país
-                window.open(`https://wa.me/34650013500?text=${textoWhatsApp}`, '_blank');
+                window.open(`https://wa.me/34000000000?text=${textoWhatsApp}`, '_blank');
                 mostrarToast("¡Diseño guardado y WhatsApp abierto con éxito!", "🚀");
             }).catch(err => {
                 console.error("Error al capturar imagen:", err);
                 mostrarToast("El pedido se procesará por WhatsApp directamente.", "⚠️");
-                window.open(`https://wa.me/34650013500?text=Pedido%20de%20${encodeURIComponent(nombre)}`, '_blank');
+                window.open(`https://wa.me/34000000000?text=Pedido%20de%20${encodeURIComponent(nombre)}`, '_blank');
             });
         }
     </script>
