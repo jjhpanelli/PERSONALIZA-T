@@ -38,7 +38,7 @@
                 Crea tu propio estilo <span class="text-amber-400">Urbano & Merchandising</span>
             </h1>
             <p class="text-slate-400 max-w-2xl mx-auto text-sm md:text-base">
-                Personaliza camisetas, tazas y gorras con DTF y sublimación. Ajusta la posición y escala de tu diseño sobre el mockup en tiempo real.
+                Personaliza camisetas, tazas y gorras con DTF y sublimación. Ajusta el tamaño, posición y rotación con total libertad.
             </p>
         </div>
 
@@ -59,10 +59,10 @@
                     <!-- Capa oscura sutil -->
                     <div class="absolute inset-0 bg-slate-950/20 pointer-events-none"></div>
 
-                    <!-- Zona de Estampado Ajustable (Se mueve con los Sliders X e Y) -->
-                    <div id="zona-estampado" class="absolute flex flex-col items-center justify-center transition-transform duration-75 z-20 max-w-[45%] text-center" style="transform: translate(0px, 0px) scale(1);">
+                    <!-- Zona de Estampado Ampliada y Ajustable -->
+                    <div id="zona-estampado" class="absolute flex flex-col items-center justify-center transition-transform duration-75 z-20 max-w-[80%] text-center" style="transform: translate(0px, 0px) scale(1) rotate(0deg);">
                         <!-- Imagen subida por el cliente -->
-                        <img id="preview-imagen-subida" class="max-h-28 w-auto object-contain drop-shadow-2xl hidden mb-1" alt="Diseño subido">
+                        <img id="preview-imagen-subida" class="max-h-48 w-auto object-contain drop-shadow-2xl hidden mb-1" alt="Diseño subido">
                         <span id="placeholder-texto-imagen" class="text-[11px] text-amber-300 font-medium bg-slate-950/80 px-2.5 py-1 rounded-full backdrop-blur-xs border border-slate-700/60 mb-1">Sube tu diseño 🎨</span>
 
                         <!-- Texto superpuesto -->
@@ -160,36 +160,50 @@
                                 </div>
                             </div>
 
-                            <!-- CONTROLES MANUALES: TAMAÑO Y POSICIÓN -->
-                            <div class="bg-slate-950/40 p-4 rounded-2xl border border-slate-800 space-y-4 pt-3">
-                                <h4 class="text-xs font-bold text-amber-400 uppercase tracking-wider">Controles de Ajuste Manual</h4>
+                            <!-- CONTROLES MANUALES AMPLIADOS Y CON MANDO MÓVIL TÁCTIL -->
+                            <div class="bg-slate-950/60 p-4 rounded-2xl border border-slate-800 space-y-4 pt-3">
+                                <div class="flex justify-between items-center">
+                                    <h4 class="text-xs font-bold text-amber-400 uppercase tracking-wider">Controles de Ajuste y Movimiento</h4>
+                                    <span class="text-[10px] bg-amber-500/10 text-amber-300 px-2 py-0.5 rounded border border-amber-500/20">Modo Táctil / Manual Activo</span>
+                                </div>
                                 
-                                <!-- Escala / Tamaño -->
+                                <!-- Escala / Tamaño Ampliado (hasta 300%) -->
                                 <div>
                                     <div class="flex justify-between items-center mb-1">
                                         <label class="block text-xs font-medium text-slate-400">Tamaño del diseño</label>
                                         <span id="label-escala" class="text-xs font-bold text-amber-400">100%</span>
                                     </div>
-                                    <input type="range" id="slider-escala" min="40" max="160" value="100" class="w-full accent-amber-500 cursor-pointer" oninput="actualizarTransformacion()">
+                                    <input type="range" id="slider-escala" min="20" max="300" value="100" class="w-full accent-amber-500 cursor-pointer" oninput="actualizarTransformacion()">
                                 </div>
 
-                                <!-- Posición Vertical (Eje Y) -->
+                                <!-- Rotación (Girar) -->
                                 <div>
                                     <div class="flex justify-between items-center mb-1">
-                                        <label class="block text-xs font-medium text-slate-400">Mover Arriba / Abajo</label>
-                                        <span id="label-pos-y" class="text-xs font-bold text-amber-400">0 px</span>
+                                        <label class="block text-xs font-medium text-slate-400">Girar Diseño</label>
+                                        <span id="label-rotacion" class="text-xs font-bold text-amber-400">0°</span>
                                     </div>
-                                    <input type="range" id="slider-pos-y" min="-100" max="100" value="0" class="w-full accent-amber-500 cursor-pointer" oninput="actualizarTransformacion()">
+                                    <input type="range" id="slider-rotacion" min="-180" max="180" value="0" class="w-full accent-amber-500 cursor-pointer" oninput="actualizarTransformacion()">
                                 </div>
 
-                                <!-- Posición Horizontal (Eje X) -->
-                                <div>
-                                    <div class="flex justify-between items-center mb-1">
-                                        <label class="block text-xs font-medium text-slate-400">Mover Izquierda / Derecha</label>
-                                        <span id="label-pos-x" class="text-xs font-bold text-amber-400">0 px</span>
+                                <!-- Mando Manual de Botones para Móvil / Precisión -->
+                                <div class="pt-2 border-t border-slate-800">
+                                    <label class="block text-xs font-medium text-slate-400 mb-2 text-center">Controles Manuales Táctiles (Móvil / Escritorio)</label>
+                                    <div class="grid grid-cols-3 gap-2 max-w-[220px] mx-auto">
+                                        <div></div>
+                                        <button type="button" onclick="moverManual(0, -15)" class="bg-slate-800 hover:bg-amber-500 hover:text-slate-950 text-slate-200 font-bold py-2.5 rounded-xl border border-slate-700 transition active:scale-95 flex items-center justify-center text-sm shadow">⬆️</button>
+                                        <div></div>
+                                        <button type="button" onclick="moverManual(-15, 0)" class="bg-slate-800 hover:bg-amber-500 hover:text-slate-950 text-slate-200 font-bold py-2.5 rounded-xl border border-slate-700 transition active:scale-95 flex items-center justify-center text-sm shadow">⬅️</button>
+                                        <button type="button" onclick="resetearPosicion()" class="bg-slate-900 hover:bg-slate-700 text-amber-400 font-bold py-2.5 rounded-xl border border-slate-700 transition text-[10px] shadow" title="Centrar">🎯</button>
+                                        <button type="button" onclick="moverManual(15, 0)" class="bg-slate-800 hover:bg-amber-500 hover:text-slate-950 text-slate-200 font-bold py-2.5 rounded-xl border border-slate-700 transition active:scale-95 flex items-center justify-center text-sm shadow">➡️</button>
+                                        <div></div>
+                                        <button type="button" onclick="moverManual(0, 15)" class="bg-slate-800 hover:bg-amber-500 hover:text-slate-950 text-slate-200 font-bold py-2.5 rounded-xl border border-slate-700 transition active:scale-95 flex items-center justify-center text-sm shadow">⬇️</button>
+                                        <div></div>
                                     </div>
-                                    <input type="range" id="slider-pos-x" min="-100" max="100" value="0" class="w-full accent-amber-500 cursor-pointer" oninput="actualizarTransformacion()">
                                 </div>
+
+                                <!-- Inputs ocultos de posición para mantener compatibilidad -->
+                                <input type="hidden" id="slider-pos-x" value="0">
+                                <input type="hidden" id="slider-pos-y" value="0">
                             </div>
                         </div>
                     </div>
@@ -212,6 +226,8 @@
     <script>
         let productoActual = "Camiseta";
         let precioActual = 15.00;
+        let posXActual = 0;
+        let posYActual = 0;
 
         function setProducto(nombre, precio, urlMockup) {
             productoActual = nombre;
@@ -219,11 +235,7 @@
             document.getElementById('precio-total').innerText = precio.toFixed(2) + " €";
             document.getElementById('imagen-producto').src = urlMockup;
 
-            // Resetear posición al cambiar de producto
-            document.getElementById('slider-pos-x').value = 0;
-            document.getElementById('slider-pos-y').value = 0;
-            document.getElementById('slider-escala').value = 100;
-            actualizarTransformacion();
+            resetearPosicion();
 
             const botones = document.querySelectorAll('.producto-btn');
             botones.forEach(btn => {
@@ -267,17 +279,33 @@
             contenedor.className = `font-bold drop-shadow-lg text-xs ${color} ${fuenteActual}`;
         }
 
+        function moverManual(deltaX, deltaY) {
+            posXActual += deltaX;
+            posYActual += deltaY;
+            document.getElementById('slider-pos-x').value = posXActual;
+            document.getElementById('slider-pos-y').value = posYActual;
+            actualizarTransformacion();
+        }
+
+        function resetearPosicion() {
+            posXActual = 0;
+            posYActual = 0;
+            document.getElementById('slider-pos-x').value = 0;
+            document.getElementById('slider-pos-y').value = 0;
+            document.getElementById('slider-escala').value = 100;
+            document.getElementById('slider-rotacion').value = 0;
+            actualizarTransformacion();
+        }
+
         function actualizarTransformacion() {
             const escala = document.getElementById('slider-escala').value;
-            const posX = document.getElementById('slider-pos-x').value;
-            const posY = document.getElementById('slider-pos-y').value;
+            const rotacion = document.getElementById('slider-rotacion').value;
 
             document.getElementById('label-escala').innerText = escala + "%";
-            document.getElementById('label-pos-x').innerText = posX + " px";
-            document.getElementById('label-pos-y').innerText = posY + " px";
+            document.getElementById('label-rotacion').innerText = rotacion + "°";
 
             const zonaEstampado = document.getElementById('zona-estampado');
-            zonaEstampado.style.transform = `translate(${posX}px, ${posY}px) scale(${escala / 100})`;
+            zonaEstampado.style.transform = `translate(${posXActual}px, ${posYActual}px) scale(${escala / 100}) rotate(${rotacion}deg)`;
         }
 
         function enviarPedidoWhatsApp() {
@@ -287,8 +315,7 @@
             const selectColor = document.getElementById('select-color-texto');
             const colorTexto = selectColor.options[selectColor.selectedIndex].text;
             const escala = document.getElementById('slider-escala').value + "%";
-            const posX = document.getElementById('slider-pos-x').value + "px";
-            const posY = document.getElementById('slider-pos-y').value + "px";
+            const rotacion = document.getElementById('slider-rotacion').value + "°";
             const ubicacion = document.getElementById('select-ubicacion').value;
             const archivoInput = document.getElementById('input-archivo');
             const nombreArchivo = archivoInput.files.length > 0 ? archivoInput.files[0].name : "Ninguno subido";
@@ -301,7 +328,7 @@
 • Precio estimado: ${precioActual.toFixed(2)} €
 • Ubicación: ${ubicacion}
 • Archivo de diseño: ${nombreArchivo}
-• Ajustes manuales -> Escala: ${escala} | Posición X: ${posX}, Y: ${posY}
+• Ajustes manuales -> Escala: ${escala} | Rotación: ${rotacion} | Posición X: ${posXActual}px, Y: ${posYActual}px
 • Texto añadido: ${texto} (${fuente}, ${colorTexto})
 
 Por favor, confirmadme los detalles y el pago. ¡Gracias!`;
