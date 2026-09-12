@@ -89,7 +89,7 @@
                 </div>
 
                 <div id="mockup-container" class="w-full h-[420px] sm:h-[500px] flex items-center justify-center relative my-4 bg-slate-950 rounded-2xl border border-slate-800/80 overflow-hidden shadow-2xl select-none group">
-                    <img id="imagen-producto" src="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover opacity-85 transition-all duration-500 pointer-events-none" alt="Mockup base">
+                    <img id="imagen-producto" crossorigin="anonymous" src="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover opacity-85 transition-all duration-500 pointer-events-none" alt="Mockup base">
                     
                     <div class="absolute inset-0 bg-radial from-transparent via-slate-950/40 to-slate-950/80 pointer-events-none"></div>
 
@@ -100,7 +100,7 @@
                         </div>
                         
                         <div id="marco-imagen-wrapper" class="p-0 transition-all duration-300">
-                            <img id="preview-imagen-subida" class="max-h-36 sm:max-h-44 w-auto object-contain drop-shadow-2xl hidden pointer-events-none" alt="Diseño cliente">
+                            <img id="preview-imagen-subida" crossorigin="anonymous" class="max-h-36 sm:max-h-44 w-auto object-contain drop-shadow-2xl hidden pointer-events-none" alt="Diseño cliente">
                         </div>
 
                         <div id="placeholder-arte" class="guia-ui flex flex-col items-center justify-center p-4 pointer-events-none">
@@ -489,17 +489,20 @@
             const estabaLimpio = modoLimpioActivo;
             if (!estabaLimpio) mockupContainer.classList.add('modo-limpio');
 
-            html2canvas(mockupContainer, { backgroundColor: null, scale: 2, useCORS: true }).then(canvas => {
-                imagenBase64Preview = canvas.toDataURL('image/png');
-                if (!estabaLimpio) mockupContainer.classList.remove('modo-limpio');
+            // Timeout corto para permitir que el navegador aplique la clase CSS limpia antes del render
+            setTimeout(() => {
+                html2canvas(mockupContainer, { backgroundColor: null, scale: 2, useCORS: true, allowTaint: false }).then(canvas => {
+                    imagenBase64Preview = canvas.toDataURL('image/png');
+                    if (!estabaLimpio) mockupContainer.classList.remove('modo-limpio');
 
-                const contenedorResultado = document.getElementById('contenedor-imagen-resultado');
-                contenedorResultado.innerHTML = `<img src="${imagenBase64Preview}" class="max-h-48 rounded-lg shadow-lg border border-slate-800 object-contain" alt="Vista previa diseño">`;
-                document.getElementById('modal-preview').classList.remove('hidden');
-            }).catch(err => {
-                if (!estabaLimpio) mockupContainer.classList.remove('modo-limpio');
-                alert("No se pudo generar la imagen previa automática.");
-            });
+                    const contenedorResultado = document.getElementById('contenedor-imagen-resultado');
+                    contenedorResultado.innerHTML = `<img src="${imagenBase64Preview}" class="max-h-48 rounded-lg shadow-lg border border-slate-800 object-contain" alt="Vista previa diseño">`;
+                    document.getElementById('modal-preview').classList.remove('hidden');
+                }).catch(err => {
+                    if (!estabaLimpio) mockupContainer.classList.remove('modo-limpio');
+                    alert("No se pudo generar la imagen previa automática.");
+                });
+            }, 100);
         }
 
         function cerrarPreview() {
@@ -513,7 +516,6 @@
             const tel = document.getElementById('fact-telefono').value.trim();
             const dir = document.getElementById('fact-direccion').value.trim();
 
-            // VALIDACIONES OBLIGATORIAS
             if (archivoInput.files.length === 0) {
                 alert("⚠️ Por favor, sube tu archivo de imagen original antes de enviar.");
                 archivoInput.focus();
@@ -526,33 +528,34 @@
                 return;
             }
 
-            // OCULTAR GUÍAS Y GENERAR LA IMAGEN HD DEL MOCKUP PARA AUTODESCARTARLA
             const estabaLimpio = modoLimpioActivo;
             if (!estabaLimpio) mockupContainer.classList.add('modo-limpio');
 
-            html2canvas(mockupContainer, { backgroundColor: null, scale: 2, useCORS: true }).then(canvas => {
-                if (!estabaLimpio) mockupContainer.classList.remove('modo-limpio');
+            // Se añade un pequeño retraso para asegurar que el DOM procese las imágenes en base64 y el canvas no falle
+            setTimeout(() => {
+                html2canvas(mockupContainer, { backgroundColor: null, scale: 2, useCORS: true, allowTaint: false }).then(canvas => {
+                    if (!estabaLimpio) mockupContainer.classList.remove('modo-limpio');
 
-                // 1. DESCARGAR AUTOMÁTICAMENTE EL MOCKUP GENERADO AL ORDENADOR/MÓVIL DEL CLIENTE
-                const enlaceDescarga = document.createElement('a');
-                enlaceDescarga.download = `Mockup-${productoActual.replace(/\s+/g, '-')}-${Date.now()}.png`;
-                enlaceDescarga.href = canvas.toDataURL('image/png');
-                enlaceDescarga.click();
+                    // 1. DESCARGAR AUTOMÁTICAMENTE EL MOCKUP GENERADO
+                    const enlaceDescarga = document.createElement('a');
+                    enlaceDescarga.download = `Mockup-${productoActual.replace(/\s+/g, '-')}-${Date.now()}.png`;
+                    enlaceDescarga.href = canvas.toDataURL('image/png');
+                    enlaceDescarga.click();
 
-                // 2. PREPARAR DATOS PARA WHATSAPP
-                const texto = document.getElementById('input-texto').value || "Ninguno";
-                const selectFuente = document.getElementById('select-fuente');
-                const fuente = selectFuente.options[selectFuente.selectedIndex].text;
-                const selectColor = document.getElementById('select-color-texto');
-                const colorTexto = selectColor.options[selectColor.selectedIndex].text;
-                const ubicacion = document.getElementById('select-ubicacion').value;
-                const selectMarco = document.getElementById('select-marco');
-                const estiloMarco = selectMarco.options[selectMarco.selectedIndex].text;
-                const nombreArchivo = archivoInput.files[0].name;
+                    // 2. PREPARAR DATOS PARA WHATSAPP
+                    const texto = document.getElementById('input-texto').value || "Ninguno";
+                    const selectFuente = document.getElementById('select-fuente');
+                    const fuente = selectFuente.options[selectFuente.selectedIndex].text;
+                    const selectColor = document.getElementById('select-color-texto');
+                    const colorTexto = selectColor.options[selectColor.selectedIndex].text;
+                    const ubicacion = document.getElementById('select-ubicacion').value;
+                    const selectMarco = document.getElementById('select-marco');
+                    const estiloMarco = selectMarco.options[selectMarco.selectedIndex].text;
+                    const nombreArchivo = archivoInput.files[0].name;
 
-                const telefonoWhatsApp = "34650013500";
+                    const telefonoWhatsApp = "34650013500";
 
-                let mensaje = `📋 *NUEVO PEDIDO - ELOI'S CUSTOM GEAR*
+                    let mensaje = `📋 *NUEVO PEDIDO - ELOI'S CUSTOM GEAR*
 
 👤 *DATOS DE FACTURACIÓN Y ENVÍO:*
 • Nombre: ${nombreNombre}
@@ -570,13 +573,14 @@
 
 ⚠️ *¡IMPORTANTE:* El sistema acaba de descargar automáticamente en tu dispositivo la **imagen del Mockup** generada. Por favor, adjúntala aquí junto con tu **archivo original** para proceder con el pago y producción!`;
 
-                const urlWap = `https://wa.me/${telefonoWhatsApp}?text=${encodeURIComponent(mensaje)}`;
-                window.open(urlWap, '_blank');
+                    const urlWap = `https://wa.me/${telefonoWhatsApp}?text=${encodeURIComponent(mensaje)}`;
+                    window.open(urlWap, '_blank');
 
-            }).catch(err => {
-                if (!estabaLimpio) mockupContainer.classList.remove('modo-limpio');
-                alert("Hubo un error al preparar los archivos de diseño.");
-            });
+                }).catch(err => {
+                    if (!estabaLimpio) mockupContainer.classList.remove('modo-limpio');
+                    alert("Hubo un error al preparar los archivos de diseño.");
+                });
+            }, 150);
         }
     </script>
 </body>
