@@ -1,237 +1,357 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eloi's Custom Gear | Estudio de Personalización</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Eloi's Custom Gear | Estudio de Personalización Pro</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; touch-action: pan-x pan-y; }
+        .elemento-interactivo { touch-action: none; cursor: grab; }
+        .elemento-interactivo:active { cursor: grabbing; }
+        @keyframes pulse-subtle {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 0.8; }
+        }
+        .animate-pulse-subtle { animation: pulse-subtle 3s infinite; }
     </style>
 </head>
-<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col justify-between">
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-amber-500 selection:text-slate-950">
 
-    <!-- HEADER -->
-    <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur-md sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+    <!-- HEADER / NAVEGACIÓN -->
+    <header class="border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-xl sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
             <div class="flex items-center space-x-3">
-                <span class="text-2xl font-extrabold tracking-tight bg-gradient-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent">
-                    Eloi's Custom Gear
-                </span>
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-500 to-orange-500 flex items-center justify-center shadow-lg shadow-amber-500/20">
+                    <span class="text-slate-950 font-black text-xl">E</span>
+                </div>
+                <div>
+                    <span class="text-lg sm:text-xl font-extrabold tracking-tight bg-gradient-to-r from-white via-slate-200 to-amber-400 bg-clip-text text-transparent block leading-tight">
+                        Eloi's Custom Gear
+                    </span>
+                    <span class="text-[10px] text-amber-400/80 font-bold tracking-widest uppercase block">Merch & Streetwear Lab</span>
+                </div>
             </div>
-            <nav class="hidden md:flex space-x-6 text-sm font-medium text-slate-300">
-                <a href="#estudio" class="hover:text-amber-400 transition">Diseña</a>
+            
+            <nav class="hidden md:flex space-x-8 text-sm font-medium text-slate-300">
+                <a href="#estudio" class="hover:text-amber-400 transition">Estudio 3D</a>
                 <a href="#catalogo" class="hover:text-amber-400 transition">Catálogo</a>
-                <a href="#ejemplos" class="hover:text-amber-400 transition">Galería</a>
+                <a href="#garantia" class="hover:text-amber-400 transition">Calidad DTF</a>
             </nav>
-            <a href="#estudio" class="bg-gradient-to-r from-amber-500 to-orange-600 text-slate-950 font-bold px-5 py-2.5 rounded-full shadow-lg shadow-orange-500/20 hover:opacity-95 transition text-sm">
-                Empezar a Diseñar
+
+            <a href="#estudio" class="bg-gradient-to-r from-amber-400 to-orange-500 text-slate-950 font-extrabold px-5 py-2.5 rounded-full shadow-lg shadow-orange-500/20 hover:scale-105 active:scale-95 transition text-xs sm:text-sm">
+                Diseñar Ahora ⚡
             </a>
         </div>
     </header>
 
-    <!-- HERO / ESTUDIO DE PERSONALIZACIÓN -->
-    <main class="max-w-7xl mx-auto px-4 py-8 flex-grow w-full" id="estudio">
-        <div class="text-center mb-10">
-            <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight mb-3">
-                Crea tu propio estilo <span class="text-amber-400">Urbano & Merchandising</span>
+    <!-- HERO / ESTUDIO DE PERSONALIZACIÓN INTERACTIVO -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12 flex-grow w-full" id="estudio">
+        
+        <!-- Título principal llamativo -->
+        <div class="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-bold mb-4 tracking-wide uppercase">
+                <span>✨</span> Interacción Táctil Directa Avanzada
+            </div>
+            <h1 class="text-3xl sm:text-6xl font-black tracking-tight mb-4 leading-tight">
+                Personaliza sin límites. <br><span class="bg-gradient-to-r from-amber-400 via-orange-400 to-yellow-300 bg-clip-text text-transparent">Toca, arrastra y pellizca</span>
             </h1>
-            <p class="text-slate-400 max-w-2xl mx-auto text-sm md:text-base">
-                Personaliza camisetas, tazas y gorras con DTF y sublimación. Utiliza los controles táctiles para ajustar tu diseño con total precisión.
+            <p class="text-slate-400 text-sm sm:text-base leading-relaxed">
+                Interactúa directamente sobre la prenda. Mueve el diseño o el texto a cualquier posición, redmensiona con dos dedos o ajusta los parámetros con total fluidez.
             </p>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             
-            <!-- COLUMNA IZQUIERDA: MOCKUP DE PRODUCTO REAL CON ZONA MOVIBLE -->
-            <div class="lg:col-span-6 bg-slate-800/60 border border-slate-700/60 rounded-3xl p-6 shadow-2xl relative flex flex-col items-center sticky top-24">
-                <div class="absolute top-4 left-4 bg-slate-900/80 border border-slate-700 text-xs px-3 py-1 rounded-full text-amber-400 font-semibold z-30">
-                    Mockup de Producto Real
-                </div>
-
-                <!-- Contenedor del Mockup -->
-                <div id="mockup-container" class="w-full h-96 md:h-[420px] flex items-center justify-center relative my-6 bg-slate-950 rounded-2xl border border-slate-800 overflow-hidden shadow-inner">
-                    
-                    <!-- Fotografía de Producto Real de fondo -->
-                    <img id="imagen-producto" src="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover opacity-90 transition-opacity duration-300" alt="Mockup de producto">
-                    
-                    <!-- Capa oscura sutil -->
-                    <div class="absolute inset-0 bg-slate-950/20 pointer-events-none"></div>
-
-                    <!-- Zona de Estampado Ajustable -->
-                    <div id="zona-estampado" class="absolute flex flex-col items-center justify-center transition-transform duration-75 z-20 max-w-[85%] text-center" style="transform: translate(0px, 0px) scale(1) rotate(0deg);">
-                        <!-- Imagen subida por el cliente -->
-                        <img id="preview-imagen-subida" class="max-h-52 w-auto object-contain drop-shadow-2xl hidden mb-1" alt="Diseño subido">
-                        <span id="placeholder-texto-imagen" class="text-[11px] text-amber-300 font-medium bg-slate-950/80 px-2.5 py-1 rounded-full backdrop-blur-xs border border-slate-700/60 mb-1">Sube tu diseño 🎨</span>
-
-                        <!-- Texto superpuesto -->
-                        <span id="preview-texto" class="font-bold drop-shadow-lg text-white text-xs"></span>
-                    </div>
-                </div>
-
-                <!-- Indicador de Precio en Vivo -->
-                <div class="w-full bg-slate-900/90 border border-slate-700 rounded-2xl p-4 flex justify-between items-center mt-2">
-                    <div>
-                        <p class="text-xs text-slate-400">Precio estimado en pantalla:</p>
-                        <p class="text-2xl font-black text-amber-400" id="precio-total">15.00 €</p>
-                    </div>
-                    <span class="text-xs bg-amber-400/10 text-amber-300 border border-amber-400/30 px-3 py-1 rounded-lg font-medium">
-                        IVA Incluido
+            <!-- COLUMNA IZQUIERDA: MOCKUP INTERACTIVO TÁCTIL MEJORADO -->
+            <div class="lg:col-span-7 bg-slate-900/60 border border-slate-800/80 rounded-3xl p-5 sm:p-6 shadow-2xl relative flex flex-col items-center backdrop-blur-md sticky top-24">
+                
+                <!-- Badge superior informativo -->
+                <div class="absolute top-4 left-4 right-4 flex justify-between items-center z-30 pointer-events-none">
+                    <span class="bg-slate-950/80 border border-slate-800 text-[11px] px-3 py-1.5 rounded-full text-amber-400 font-bold shadow-lg backdrop-blur-md flex items-center gap-1.5">
+                        <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"><span></span></span>
+                        <span>Mueve o pellizca los elementos libremente</span>
                     </span>
+                    <span id="badge-ubicacion-activa" class="bg-amber-500/20 border border-amber-500/40 text-[11px] px-3 py-1 rounded-full text-amber-300 font-bold hidden backdrop-blur-md">
+                        Frente
+                    </span>
+                </div>
+
+                <!-- Contenedor visual del Mockup -->
+                <div id="mockup-container" class="w-full h-[420px] sm:h-[500px] flex items-center justify-center relative my-4 bg-slate-950 rounded-2xl border border-slate-800/80 overflow-hidden shadow-2xl select-none group">
+                    
+                    <!-- Fotografía de Producto de fondo -->
+                    <img id="imagen-producto" src="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover opacity-85 transition-all duration-500 pointer-events-none group-hover:scale-102" alt="Mockup base">
+                    
+                    <!-- Viñeta de sombra sutil para realismo -->
+                    <div class="absolute inset-0 bg-radial from-transparent via-slate-950/40 to-slate-950/80 pointer-events-none"></div>
+
+                    <!-- ZONA DE ESTAMPADO TÁCTIL PRINCIPAL (LOGO / ARTE) -->
+                    <div id="zona-estampado" class="elemento-interactivo absolute flex flex-col items-center justify-center z-20 text-center p-4 rounded-2xl border-2 border-dashed border-amber-400/50 hover:border-amber-400 bg-amber-500/5 hover:bg-amber-500/10 transition-colors shadow-2xl backdrop-blur-[2px]" style="transform: translate(0px, 0px) scale(1) rotate(0deg);">
+                        
+                        <!-- Tirador visual superior táctil -->
+                        <div class="absolute -top-3.5 bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 text-[10px] font-black px-2.5 py-0.5 rounded-full shadow-md pointer-events-none uppercase tracking-wider flex items-center gap-1">
+                            <span>🎨 Logo / Arte (Arrastra)</span>
+                        </div>
+
+                        <!-- Imagen subida -->
+                        <img id="preview-imagen-subida" class="max-h-40 sm:max-h-48 w-auto object-contain drop-shadow-2xl hidden pointer-events-none mb-1" alt="Diseño cliente">
+                        <div id="placeholder-arte" class="flex flex-col items-center justify-center p-4 pointer-events-none">
+                            <span class="text-2xl mb-1">🖼️</span>
+                            <span class="text-[11px] text-amber-300 font-bold bg-slate-950/90 px-3 py-1 rounded-full border border-slate-800 shadow">Sube tu diseño aquí</span>
+                        </div>
+                    </div>
+
+                    <!-- ZONA DE TEXTO TÁCTIL INDEPENDIENTE -->
+                    <div id="zona-texto-flotante" class="elemento-interactivo absolute flex flex-col items-center justify-center z-30 text-center p-3 rounded-xl border border-transparent hover:border-sky-400/60 hover:bg-sky-500/5 transition-colors hidden shadow-lg" style="transform: translate(0px, 90px) scale(1) rotate(0deg);">
+                        
+                        <!-- Tirador visual superior texto -->
+                        <div class="absolute -top-3 bg-gradient-to-r from-sky-400 to-blue-500 text-slate-950 text-[9px] font-black px-2 py-0.5 rounded-full shadow-md pointer-events-none uppercase tracking-wider">
+                            ✍️ Texto (Arrastra)
+                        </div>
+
+                        <span id="preview-texto" class="font-bold drop-shadow-md text-white text-base pointer-events-none px-2"></span>
+                    </div>
+
+                </div>
+
+                <!-- Barra inferior del mockup: Precio y Resumen rápido -->
+                <div class="w-full bg-slate-950/80 border border-slate-800 rounded-2xl p-4 flex justify-between items-center backdrop-blur-md">
+                    <div>
+                        <span class="text-[11px] font-medium text-slate-400 uppercase tracking-wider block">Total Estimado</span>
+                        <div class="flex items-baseline gap-2">
+                            <span class="text-2xl sm:text-3xl font-black text-amber-400" id="precio-total">15.00 €</span>
+                            <span class="text-xs text-slate-500 line-through">19.00 €</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-[11px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-3 py-1.5 rounded-xl font-bold flex items-center gap-1">
+                            <span>🛡️</span> DTF Premium / Alta Durabilidad
+                        </span>
+                    </div>
                 </div>
             </div>
 
-            <!-- COLUMNA DERECHA: CONTROLES DE PERSONALIZACIÓN -->
-            <div class="lg:col-span-6 bg-slate-800/40 border border-slate-700/60 rounded-3xl p-6 md:p-8 shadow-xl">
-                <h2 class="text-xl font-bold mb-6 flex items-center gap-2 text-amber-400">
-                    <span>🛠️</span> Estudio de Personalización
-                </h2>
+            <!-- COLUMNA DERECHA: CONTROLES Y OPCIONES DE CONFIGURACIÓN -->
+            <div class="lg:col-span-5 bg-slate-900/40 border border-slate-800/80 rounded-3xl p-6 sm:p-8 backdrop-blur-md shadow-xl">
+                <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-800">
+                    <h2 class="text-lg font-bold flex items-center gap-2.5 text-amber-400">
+                        <span class="p-2 rounded-xl bg-amber-500/10 border border-amber-500/20">🎛️</span> Panel de Configuración
+                    </h2>
+                    <span class="text-xs text-slate-400 font-medium">Paso a paso</span>
+                </div>
 
                 <form id="order-form" class="space-y-6">
                     
-                    <!-- 1. Elige tu Producto -->
+                    <!-- 1. Selección de Producto -->
                     <div>
-                        <label class="block text-sm font-semibold mb-3 text-slate-300">1. Elige el producto</label>
-                        <div class="grid grid-cols-3 gap-4">
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">1. Selecciona el soporte</label>
+                        <div class="grid grid-cols-3 gap-3">
                             <!-- Camiseta -->
-                            <button type="button" onclick="setProducto('Camiseta', 15, 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=800&auto=format&fit=crop')" class="producto-btn group border-2 border-amber-500 bg-amber-500/10 rounded-2xl p-3 text-center cursor-pointer transition">
-                                <span class="block text-2xl mb-1">👕</span>
-                                <span class="text-xs font-bold block">Camiseta</span>
-                                <span class="text-[11px] text-amber-400 font-semibold">15.00 €</span>
+                            <button type="button" onclick="setProducto('Camiseta', 15, 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=800&auto=format&fit=crop')" class="producto-btn group border-2 border-amber-500 bg-amber-500/10 rounded-2xl p-3 text-center cursor-pointer transition hover:border-amber-400">
+                                <span class="block text-2xl mb-1 group-hover:scale-110 transition-transform">👕</span>
+                                <span class="text-xs font-bold block text-slate-200">Camiseta</span>
+                                <span class="text-[11px] text-amber-400 font-extrabold">15.00 €</span>
                             </button>
                             <!-- Taza -->
-                            <button type="button" onclick="setProducto('Taza de Cerámica', 10, 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=800&auto=format&fit=crop')" class="producto-btn group border-2 border-slate-700 bg-slate-900/60 rounded-2xl p-3 text-center cursor-pointer transition hover:border-slate-500">
-                                <span class="block text-2xl mb-1">☕</span>
-                                <span class="text-xs font-bold block">Taza</span>
-                                <span class="text-[11px] text-amber-400 font-semibold">10.00 €</span>
+                            <button type="button" onclick="setProducto('Taza de Cerámica', 10, 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=800&auto=format&fit=crop')" class="producto-btn group border-2 border-slate-800 bg-slate-950/60 rounded-2xl p-3 text-center cursor-pointer transition hover:border-slate-700">
+                                <span class="block text-2xl mb-1 group-hover:scale-110 transition-transform">☕</span>
+                                <span class="text-xs font-bold block text-slate-300">Taza</span>
+                                <span class="text-[11px] text-amber-400 font-extrabold">10.00 €</span>
                             </button>
                             <!-- Gorra -->
-                            <button type="button" onclick="setProducto('Gorra Trucker', 12, 'https://images.unsplash.com/photo-1588850561407-ed78c282e89b?q=80&w=800&auto=format&fit=crop')" class="producto-btn group border-2 border-slate-700 bg-slate-900/60 rounded-2xl p-3 text-center cursor-pointer transition hover:border-slate-500">
-                                <span class="block text-2xl mb-1">🧢</span>
-                                <span class="text-xs font-bold block">Gorra</span>
-                                <span class="text-[11px] text-amber-400 font-semibold">12.00 €</span>
+                            <button type="button" onclick="setProducto('Gorra Trucker', 12, 'https://images.unsplash.com/photo-1588850561407-ed78c282e89b?q=80&w=800&auto=format&fit=crop')" class="producto-btn group border-2 border-slate-800 bg-slate-950/60 rounded-2xl p-3 text-center cursor-pointer transition hover:border-slate-700">
+                                <span class="block text-2xl mb-1 group-hover:scale-110 transition-transform">🧢</span>
+                                <span class="text-xs font-bold block text-slate-300">Gorra</span>
+                                <span class="text-[11px] text-amber-400 font-extrabold">12.00 €</span>
                             </button>
                         </div>
                     </div>
 
-                    <!-- 2. Opciones de Diseño -->
-                    <div class="space-y-5 pt-2">
-                        <h3 class="text-base font-bold text-amber-400">Detalles del Estampado</h3>
+                    <!-- 2. Subida de Archivo y Ubicación -->
+                    <div class="space-y-4 pt-2">
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-400">2. Tu diseño y posición</label>
                         
-                        <!-- Subir diseño y ubicación -->
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="space-y-3">
                             <div>
-                                <label class="block text-xs font-medium text-slate-400 mb-1.5">2. Sube tu diseño (Logo/Arte)</label>
-                                <input type="file" id="input-archivo" accept="image/*" class="w-full text-xs text-slate-300 bg-slate-950/50 rounded-xl border border-slate-700 p-2 file:mr-3 file:py-1.5 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-amber-500/10 file:text-amber-400 hover:file:bg-amber-500/20 cursor-pointer" onchange="manejarSubidaArchivo(event)">
+                                <label class="block text-[11px] font-medium text-slate-400 mb-1.5">Archivo de imagen (PNG o JPG con buena resolución)</label>
+                                <input type="file" id="input-archivo" accept="image/*" class="w-full text-xs text-slate-300 bg-slate-950/80 rounded-xl border border-slate-800 p-2.5 file:mr-3 file:py-1.5 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-amber-500/10 file:text-amber-400 hover:file:bg-amber-500/20 cursor-pointer transition shadow-inner" onchange="manejarSubidaArchivo(event)">
                             </div>
+                            
                             <div>
-                                <label class="block text-xs font-medium text-slate-400 mb-1.5">3. Ubicación del estampado</label>
-                                <select id="select-ubicacion" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-amber-400 transition">
-                                    <option value="Frente / Centrado">Frente / Centrado</option>
-                                    <option value="Espalda / Reverso">Espalda / Reverso</option>
-                                    <option value="Completo 360º">Completo 360º</option>
+                                <label class="block text-[11px] font-medium text-slate-400 mb-1.5">Ubicación principal de estampado</label>
+                                <select id="select-ubicacion" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-xs sm:text-sm text-slate-200 focus:outline-none focus:border-amber-400 transition shadow-inner">
+                                    <option value="Frente / Centrado">Frente / Centrado principal</option>
+                                    <option value="Espalda / Reverso">Espalda / Reverso completo</option>
+                                    <option value="Pecho Izquierdo (Logo Pequeño)">Pecho Izquierdo (Logo)</option>
                                 </select>
                             </div>
                         </div>
+                    </div>
 
-                        <!-- Añade tu texto -->
-                        <div class="space-y-3 pt-2">
-                            <label class="block text-xs font-medium text-slate-400">Opcional: Añadir texto personalizado</label>
-                            <input type="text" id="input-texto" placeholder="Escribe tu frase o nombre..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-slate-100 focus:outline-none focus:border-amber-400 transition" oninput="actualizarTexto()">
+                    <!-- 3. Texto Personalizado (Integrado sin botones abajo) -->
+                    <div class="space-y-4 pt-2 border-t border-slate-800/80">
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-400">3. Texto opcional integrado</label>
+                        
+                        <div class="space-y-3">
+                            <input type="text" id="input-texto" placeholder="Ej: Tu nombre, frase o lema..." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-xs sm:text-sm text-slate-100 focus:outline-none focus:border-amber-400 transition shadow-inner" oninput="actualizarTexto()">
                             
-                            <div class="grid grid-cols-2 gap-4 pt-1">
+                            <div class="grid grid-cols-2 gap-3">
                                 <div>
-                                    <label class="block text-xs font-medium text-slate-500 mb-1">Tipo de fuente</label>
-                                    <select id="select-fuente" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-300 focus:outline-none focus:border-amber-400" onchange="actualizarFuente()">
+                                    <label class="block text-[10px] uppercase font-bold text-slate-500 mb-1">Tipografía</label>
+                                    <select id="select-fuente" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-300 focus:outline-none focus:border-amber-400 transition" onchange="actualizarFuente()">
                                         <option value="font-sans">Urbano / Moderno</option>
                                         <option value="font-serif">Clásico / Elegante</option>
                                         <option value="font-mono">Street / Blocky</option>
                                     </select>
                                 </div>
                                 <div>
-                                    <label class="block text-xs font-medium text-slate-500 mb-1">Color del texto</label>
-                                    <select id="select-color-texto" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-300 focus:outline-none focus:border-amber-400" onchange="actualizarColorTexto()">
-                                        <option value="text-white">Blanco</option>
+                                    <label class="block text-[10px] uppercase font-bold text-slate-500 mb-1">Color del texto</label>
+                                    <select id="select-color-texto" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-300 focus:outline-none focus:border-amber-400 transition" onchange="actualizarColorTexto()">
+                                        <option value="text-white">Blanco puro</option>
                                         <option value="text-amber-400">Ámbar / Oro</option>
-                                        <option value="text-slate-900">Negro</option>
-                                        <option value="text-red-500">Rojo Neón</option>
+                                        <option value="text-slate-900 bg-white/90 px-1 rounded">Negro sólido</option>
+                                        <option value="text-rose-400">Rojo Neón</option>
                                     </select>
-                                </div>
-                            </div>
-
-                            <!-- PANEL DE CONTROLES TÁCTILES MANUALES (MÓVIL Y ESCRITORIO) -->
-                            <div class="bg-slate-950/80 p-5 rounded-2xl border border-slate-800 space-y-4 pt-3 shadow-inner">
-                                <div class="flex justify-between items-center border-b border-slate-800 pb-2">
-                                    <h4 class="text-xs font-bold text-amber-400 uppercase tracking-wider">Mandos Táctiles de Ajuste</h4>
-                                    <button type="button" onclick="resetearPosicion()" class="text-[11px] bg-slate-800 hover:bg-slate-700 text-amber-300 px-3 py-1 rounded-lg border border-slate-700 transition font-medium">Restablecer 🔄</button>
-                                </div>
-
-                                <!-- 1. Control Táctil de Tamaño -->
-                                <div class="flex items-center justify-between bg-slate-900/60 p-2.5 rounded-xl border border-slate-800/80">
-                                    <div>
-                                        <span class="block text-xs font-bold text-slate-300">Tamaño</span>
-                                        <span id="label-escala" class="text-xs font-extrabold text-amber-400">100%</span>
-                                    </div>
-                                    <div class="flex items-center gap-2">
-                                        <button type="button" onclick="cambiarEscala(-15)" class="bg-slate-800 hover:bg-amber-500 hover:text-slate-950 text-white font-black w-9 h-9 rounded-xl border border-slate-700 transition active:scale-95 flex items-center justify-center text-base shadow">➖</button>
-                                        <button type="button" onclick="cambiarEscala(15)" class="bg-slate-800 hover:bg-amber-500 hover:text-slate-950 text-white font-black w-9 h-9 rounded-xl border border-slate-700 transition active:scale-95 flex items-center justify-center text-base shadow">➕</button>
-                                    </div>
-                                </div>
-
-                                <!-- 2. Control Táctil de Rotación -->
-                                <div class="flex items-center justify-between bg-slate-900/60 p-2.5 rounded-xl border border-slate-800/80">
-                                    <div>
-                                        <span class="block text-xs font-bold text-slate-300">Girar Diseño</span>
-                                        <span id="label-rotacion" class="text-xs font-extrabold text-amber-400">0°</span>
-                                    </div>
-                                    <div class="flex items-center gap-2">
-                                        <button type="button" onclick="cambiarRotacion(-15)" class="bg-slate-800 hover:bg-amber-500 hover:text-slate-950 text-white font-bold px-3 h-9 rounded-xl border border-slate-700 transition active:scale-95 flex items-center justify-center text-xs shadow">↺ -15°</button>
-                                        <button type="button" onclick="cambiarRotacion(15)" class="bg-slate-800 hover:bg-amber-500 hover:text-slate-950 text-white font-bold px-3 h-9 rounded-xl border border-slate-700 transition active:scale-95 flex items-center justify-center text-xs shadow">+15° ↻</button>
-                                    </div>
-                                </div>
-
-                                <!-- 3. Cruceta Táctil de Posición (Mover) -->
-                                <div class="pt-1">
-                                    <span class="block text-xs font-medium text-slate-400 mb-2 text-center">Mover Posición (Arriba / Abajo / Lados)</span>
-                                    <div class="grid grid-cols-3 gap-2 max-w-[200px] mx-auto">
-                                        <div></div>
-                                        <button type="button" onclick="moverManual(0, -18)" class="bg-slate-800 hover:bg-amber-500 hover:text-slate-950 text-slate-200 font-bold py-3 rounded-xl border border-slate-700 transition active:scale-95 flex items-center justify-center text-base shadow">⬆️</button>
-                                        <div></div>
-                                        <button type="button" onclick="moverManual(-18, 0)" class="bg-slate-800 hover:bg-amber-500 hover:text-slate-950 text-slate-200 font-bold py-3 rounded-xl border border-slate-700 transition active:scale-95 flex items-center justify-center text-base shadow">⬅️</button>
-                                        <button type="button" onclick="resetearCentro()" class="bg-slate-900 hover:bg-slate-700 text-amber-400 font-bold py-3 rounded-xl border border-slate-700 transition text-xs shadow flex items-center justify-center">🎯</button>
-                                        <button type="button" onclick="moverManual(18, 0)" class="bg-slate-800 hover:bg-amber-500 hover:text-slate-950 text-slate-200 font-bold py-3 rounded-xl border border-slate-700 transition active:scale-95 flex items-center justify-center text-base shadow">➡️</button>
-                                        <div></div>
-                                        <button type="button" onclick="moverManual(0, 18)" class="bg-slate-800 hover:bg-amber-500 hover:text-slate-950 text-slate-200 font-bold py-3 rounded-xl border border-slate-700 transition active:scale-95 flex items-center justify-center text-base shadow">⬇️</button>
-                                        <div></div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- BOTÓN DE WHATSAPP CON TELÉFONO INTEGRADO -->
-                    <button type="button" onclick="enviarPedidoWhatsApp()" class="w-full bg-gradient-to-r from-emerald-500 to-green-600 text-white font-bold py-4 px-6 rounded-2xl shadow-lg shadow-green-600/20 hover:opacity-95 transition flex items-center justify-center gap-2 cursor-pointer text-base">
-                        <span>📲</span> Haz tu pedido por WhatsApp
-                    </button>
+                    <!-- BOTÓN DE WHATSAPP CON TELÉFONO 650013500 -->
+                    <div class="pt-4">
+                        <button type="button" onclick="enviarPedidoWhatsApp()" class="w-full bg-gradient-to-r from-emerald-500 via-green-500 to-emerald-600 text-slate-950 font-black py-4 px-6 rounded-2xl shadow-xl shadow-green-600/20 hover:scale-[1.02] active:scale-[0.98] transition flex items-center justify-center gap-2.5 cursor-pointer text-sm sm:text-base">
+                            <span class="text-xl">📲</span> Enviar diseño por WhatsApp (650013500)
+                        </button>
+                        <p class="text-[11px] text-center text-slate-500 mt-2.5">
+                            Se abrirá WhatsApp directamente con tu configuración y medidas guardadas.
+                        </p>
+                    </div>
+
                 </form>
             </div>
+
         </div>
     </main>
 
+    <!-- SECCIÓN INFORMATIVA / BENEFICIOS -->
+    <section class="border-t border-slate-800/80 bg-slate-900/30 py-12 px-4" id="garantia">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-slate-900/60 border border-slate-800/80 p-6 rounded-2xl">
+                <span class="text-3xl mb-3 block">🚀</span>
+                <h3 class="text-base font-bold text-white mb-1">Impresión DTF & Sublimación Pro</h3>
+                <p class="text-xs text-slate-400 leading-relaxed">Colores ultra nítidos y durabilidad extrema frente a los lavados más exigentes.</p>
+            </div>
+            <div class="bg-slate-900/60 border border-slate-800/80 p-6 rounded-2xl">
+                <span class="text-3xl mb-3 block">👆</span>
+                <h3 class="text-base font-bold text-white mb-1">Control Táctil Preciso</h3>
+                <p class="text-xs text-slate-400 leading-relaxed">Ajusta milimétricamente el tamaño y posición de tu arte directamente sobre el producto.</p>
+            </div>
+            <div class="bg-slate-900/60 border border-slate-800/80 p-6 rounded-2xl">
+                <span class="text-3xl mb-3 block">⚡</span>
+                <h3 class="text-base font-bold text-white mb-1">Atención Inmediata</h3>
+                <p class="text-xs text-slate-400 leading-relaxed">Envía tu diseño con un solo toque por WhatsApp y revisamos los detalles al instante.</p>
+            </div>
+        </div>
+    </section>
+
     <!-- FOOTER -->
-    <footer class="border-t border-slate-800 bg-slate-950 py-6 text-center text-xs text-slate-500">
-        <p>&copy; 2026 Eloi's Custom Gear. Impresión DTF y Sublimación.</p>
+    <footer class="border-t border-slate-800/80 bg-slate-950 py-8 px-4 text-center text-xs text-slate-500">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+            <p>&copy; 2026 Eloi's Custom Gear. Todos los derechos reservados.</p>
+            <div class="flex space-x-6 text-slate-400">
+                <a href="#estudio" class="hover:text-amber-400 transition">Política de Privacidad</a>
+                <a href="#estudio" class="hover:text-amber-400 transition">Términos de Servicio</a>
+            </div>
+        </div>
     </footer>
 
-    <!-- SCRIPT DE INTERACTIVIDAD -->
+    <!-- SCRIPT DE GESTOS TÁCTILES INDEPENDIENTES (LOGO Y TEXTO) -->
     <script>
         let productoActual = "Camiseta";
         let precioActual = 15.00;
-        let posXActual = 0;
-        let posYActual = 0;
-        let escalaActual = 100;
-        let rotacionActual = 0;
+
+        // Estado del elemento Logo
+        let logoState = { posX: 0, posY: 0, scale: 100, rotation: 0 };
+        // Estado del elemento Texto
+        let textState = { posX: 0, posY: 90, scale: 100, rotation: 0 };
+
+        const zonaEstampado = document.getElementById('zona-estampado');
+        const zonaTextoFlotante = document.getElementById('zona-texto-flotante');
+
+        // Función genérica para manejar gestos táctiles (Mover y Pellizcar/Zoom con 1 o 2 dedos)
+        function habilitarInteraccion(elemento, stateObj) {
+            let punterosActivos = new Map();
+            let distanciaInicialPellizco = 0;
+            let escalaInicialPellizco = 100;
+            let arrastrandoUnDedo = false;
+            let inicioX = 0;
+            let inicioY = 0;
+
+            elemento.addEventListener('pointerdown', (e) => {
+                e.stopPropagation();
+                punterosActivos.set(e.pointerId, e);
+                elemento.setPointerCapture(e.pointerId);
+
+                if (punterosActivos.size === 1) {
+                    arrastrandoUnDedo = true;
+                    inicioX = e.clientX - stateObj.posX;
+                    inicioY = e.clientY - stateObj.posY;
+                } else if (punterosActivos.size === 2) {
+                    arrastrandoUnDedo = false;
+                    const puntos = Array.from(punterosActivos.values());
+                    distanciaInicialPellizco = Math.hypot(puntos[0].clientX - puntos[1].clientX, puntos[0].clientY - puntos[1].clientY);
+                    escalaInicialPellizco = stateObj.scale;
+                }
+            });
+
+            elemento.addEventListener('pointermove', (e) => {
+                if (!punterosActivos.has(e.pointerId)) return;
+                punterosActivos.set(e.pointerId, e);
+
+                if (punterosActivos.size === 1 && arrastrandoUnDedo) {
+                    stateObj.posX = e.clientX - inicioX;
+                    stateObj.posY = e.clientY - inicioY;
+                    actualizarTransformaciones();
+                } else if (punterosActivos.size === 2) {
+                    const puntos = Array.from(punterosActivos.values());
+                    const distanciaActual = Math.hypot(puntos[0].clientX - puntos[1].clientX, puntos[0].clientY - puntos[1].clientY);
+                    if (distanciaInicialPellizco > 0) {
+                        const factor = distanciaActual / distanciaInicialPellizco;
+                        stateObj.scale = Math.max(30, Math.min(350, Math.round(escalaInicialPellizco * factor)));
+                        actualizarTransformaciones();
+                    }
+                }
+            });
+
+            function finalizarPuntero(e) {
+                punterosActivos.delete(e.pointerId);
+                if (punterosActivos.size < 2) {
+                    distanciaInicialPellizco = 0;
+                }
+                if (punterosActivos.size === 1) {
+                    const puntoRestante = Array.from(punterosActivos.values())[0];
+                    arrastrandoUnDedo = true;
+                    inicioX = puntoRestante.clientX - stateObj.posX;
+                    inicioY = puntoRestante.clientY - stateObj.posY;
+                } else if (punterosActivos.size === 0) {
+                    arrastrandoUnDedo = false;
+                }
+            }
+
+            elemento.addEventListener('pointerup', finalizarPuntero);
+            elemento.addEventListener('pointercancel', finalizarPuntero);
+        }
+
+        // Aplicar gestos a ambos contenedores
+        habilitarInteraccion(zonaEstampado, logoState);
+        habilitarInteraccion(zonaTextoFlotante, textState);
+
+        function actualizarTransformaciones() {
+            zonaEstampado.style.transform = `translate(${logoState.posX}px, ${logoState.posY}px) scale(${logoState.scale / 100}) rotate(${logoState.rotation}deg)`;
+            zonaTextoFlotante.style.transform = `translate(${textState.posX}px, ${textState.posY}px) scale(${textState.scale / 100}) rotate(${textState.rotation}deg)`;
+        }
 
         function setProducto(nombre, precio, urlMockup) {
             productoActual = nombre;
@@ -239,15 +359,18 @@
             document.getElementById('precio-total').innerText = precio.toFixed(2) + " €";
             document.getElementById('imagen-producto').src = urlMockup;
 
-            resetearPosicion();
+            // Resetear posiciones al cambiar de producto
+            logoState = { posX: 0, posY: 0, scale: 100, rotation: 0 };
+            textState = { posX: 0, posY: 90, scale: 100, rotation: 0 };
+            actualizarTransformaciones();
 
             const botones = document.querySelectorAll('.producto-btn');
             botones.forEach(btn => {
-                btn.classList.remove('border-amber-500', 'bg-amber-500/10');
-                btn.classList.add('border-slate-700', 'bg-slate-900/60');
+                btn.classList.remove('border-amber-500', 'bg-amber-500/15');
+                btn.classList.add('border-slate-800', 'bg-slate-950/60');
             });
-            event.currentTarget.classList.remove('border-slate-700', 'bg-slate-900/60');
-            event.currentTarget.classList.add('border-amber-500', 'bg-amber-500/10');
+            event.currentTarget.classList.remove('border-slate-800', 'bg-slate-950/60');
+            event.currentTarget.classList.add('border-amber-500', 'bg-amber-500/15');
         }
 
         function manejarSubidaArchivo(event) {
@@ -256,7 +379,7 @@
                 const lector = new FileReader();
                 lector.onload = function(e) {
                     const imgPreview = document.getElementById('preview-imagen-subida');
-                    const placeholder = document.getElementById('placeholder-texto-imagen');
+                    const placeholder = document.getElementById('placeholder-arte');
                     
                     imgPreview.src = e.target.result;
                     imgPreview.classList.remove('hidden');
@@ -268,57 +391,28 @@
 
         function actualizarTexto() {
             const texto = document.getElementById('input-texto').value;
-            document.getElementById('preview-texto').innerText = texto;
+            const preview = document.getElementById('preview-texto');
+            preview.innerText = texto;
+
+            if (texto.trim().length > 0) {
+                zonaTextoFlotante.classList.remove('hidden');
+            } else {
+                zonaTextoFlotante.classList.add('hidden');
+            }
         }
 
         function actualizarFuente() {
             const fuente = document.getElementById('select-fuente').value;
-            document.getElementById('preview-texto').className = `font-bold drop-shadow-lg text-xs ${fuente}`;
+            const preview = document.getElementById('preview-texto');
+            const colorClase = preview.className.split(' ').filter(c => c.startsWith('text-') || c.startsWith('bg-')).join(' ');
+            preview.className = `font-bold drop-shadow-md text-base px-2 ${colorClase} ${fuente}`;
         }
 
         function actualizarColorTexto() {
             const color = document.getElementById('select-color-texto').value;
-            const contenedor = document.getElementById('preview-texto');
+            const preview = document.getElementById('preview-texto');
             const fuenteActual = document.getElementById('select-fuente').value;
-            contenedor.className = `font-bold drop-shadow-lg text-xs ${color} ${fuenteActual}`;
-        }
-
-        function cambiarEscala(delta) {
-            escalaActual = Math.max(20, Math.min(320, escalaActual + delta));
-            actualizarTransformacion();
-        }
-
-        function cambiarRotacion(delta) {
-            rotacionActual = (rotacionActual + delta) % 360;
-            actualizarTransformacion();
-        }
-
-        function moverManual(deltaX, deltaY) {
-            posXActual += deltaX;
-            posYActual += deltaY;
-            actualizarTransformacion();
-        }
-
-        function resetearCentro() {
-            posXActual = 0;
-            posYActual = 0;
-            actualizarTransformacion();
-        }
-
-        function resetearPosicion() {
-            posXActual = 0;
-            posYActual = 0;
-            escalaActual = 100;
-            rotacionActual = 0;
-            actualizarTransformacion();
-        }
-
-        function actualizarTransformacion() {
-            document.getElementById('label-escala').innerText = escalaActual + "%";
-            document.getElementById('label-rotacion').innerText = rotacionActual + "°";
-
-            const zonaEstampado = document.getElementById('zona-estampado');
-            zonaEstampado.style.transform = `translate(${posXActual}px, ${posYActual}px) scale(${escalaActual / 100}) rotate(${rotacionActual}deg)`;
+            preview.className = `font-bold drop-shadow-md text-base px-2 ${color} ${fuenteActual}`;
         }
 
         function enviarPedidoWhatsApp() {
@@ -331,19 +425,19 @@
             const archivoInput = document.getElementById('input-archivo');
             const nombreArchivo = archivoInput.files.length > 0 ? archivoInput.files[0].name : "Ninguno subido";
 
-            // Tu número de teléfono integrado
+            // Teléfono integrado 650013500
             const telefono = "34650013500";
 
             const mensaje = `¡Hola! Quiero hacer un pedido personalizado en Eloi's Custom Gear:
 
-• Producto: ${productoActual}
+• Soporte: ${productoActual}
 • Precio estimado: ${precioActual.toFixed(2)} €
 • Ubicación: ${ubicacion}
 • Archivo de diseño: ${nombreArchivo}
-• Ajustes manuales -> Tamaño: ${escalaActual}% | Rotación: ${rotacionActual}° | Posición X: ${posXActual}px, Y: ${posYActual}px
-• Texto añadido: ${texto} (${fuente}, ${colorTexto})
+• Texto añadido: "${texto}" (${fuente}, ${colorTexto})
+• Ajustes táctiles -> Logo (Escala: ${logoState.scale}%), Texto (Escala: ${textState.scale}%)
 
-Por favor, confirmadme los detalles y el pago. ¡Gracias!`;
+Por favor, confirmadme los detalles del pago y envío. ¡Gracias!`;
 
             const urlWap = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
             window.open(urlWap, '_blank');
