@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eloi's Custom Gear - Personalizador Pro</title>
+    <title>Eloi's Custom Gear - Personalizador Pro con Carrito</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- html2canvas para capturar el diseño -->
@@ -17,11 +17,42 @@
         <span id="toast-message" class="text-xs font-semibold">Mensaje de notificación</span>
     </div>
 
+    <!-- Botón Flotante del Carrito -->
+    <button onclick="toggleModalCarrito()" class="fixed top-6 right-6 z-40 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-4 py-3 rounded-2xl shadow-xl flex items-center gap-2 transition text-xs uppercase tracking-wider">
+        🛒 Carrito <span id="carrito-contador" class="bg-slate-950 text-amber-400 px-2 py-0.5 rounded-full text-xs">0</span>
+    </button>
+
+    <!-- Modal del Carrito de Compras -->
+    <div id="modal-carrito" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl w-full max-w-lg p-6 space-y-6 shadow-2xl max-h-[90vh] flex flex-col">
+            <div class="flex justify-between items-center border-b border-slate-800 pb-4">
+                <h3 class="text-sm font-bold uppercase tracking-wider text-amber-400">Tu Carrito de Personalizaciones</h3>
+                <button onclick="toggleModalCarrito()" class="text-slate-400 hover:text-slate-100 text-lg font-bold">✕</button>
+            </div>
+
+            <!-- Lista de Artículos en el Carrito -->
+            <div id="lista-carrito-items" class="space-y-3 overflow-y-auto flex-1 p-1">
+                <p class="text-xs text-slate-500 text-center py-6">Tu carrito está vacío.</p>
+            </div>
+
+            <div class="border-t border-slate-800 pt-4 space-y-4">
+                <div class="flex justify-between items-center">
+                    <span class="text-xs font-semibold text-slate-400">Total Global del Carrito:</span>
+                    <span id="carrito-total-precio" class="text-lg font-black text-amber-400">0.00 €</span>
+                </div>
+
+                <button onclick="irAlCheckout()" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-3 rounded-xl transition text-xs uppercase tracking-wider">
+                    Proceder al Formulario de Envío
+                </button>
+            </div>
+        </div>
+    </div>
+
     <div class="max-w-6xl mx-auto space-y-8">
         <!-- Cabecera -->
         <header class="text-center space-y-2">
             <h1 class="text-3xl font-extrabold tracking-tight text-amber-400">Eloi's Custom Gear</h1>
-            <p class="text-sm text-slate-400">Personaliza tu estilo o elige uno de nuestros diseños exclusivos</p>
+            <p class="text-sm text-slate-400">Personaliza tu estilo, añade al carrito cuantos quieras y haz tu pedido</p>
         </header>
 
         <div class="grid lg:grid-cols-12 gap-8">
@@ -63,7 +94,7 @@
                 </div>
             </div>
 
-            <!-- Columna Derecha: Controles Avanzados, Opciones, Precio y Formulario (5 columns) -->
+            <!-- Columna Derecha: Controles Avanzados, Opciones, Precio y Botón de Carrito (5 columns) -->
             <div class="lg:col-span-5 space-y-6">
                 
                 <!-- 1. Selector de Soportes, Tallas y Colores Base -->
@@ -88,7 +119,7 @@
                         </button>
                     </div>
 
-                    <!-- Selector de Tallas (Para Camiseta / Gorra) -->
+                    <!-- Selector de Tallas -->
                     <div id="tallas-container" class="space-y-1">
                         <label class="block text-[11px] font-semibold text-slate-400">Talla</label>
                         <div class="grid grid-cols-5 gap-2">
@@ -100,7 +131,7 @@
                         </div>
                     </div>
 
-                    <!-- Selector de Acabado Taza (Oculto por defecto) -->
+                    <!-- Selector de Acabado Taza -->
                     <div id="color-taza-container" class="space-y-1 hidden">
                         <label class="block text-[11px] font-semibold text-slate-400">Modelo de Taza</label>
                         <div class="grid grid-cols-2 gap-2">
@@ -114,12 +145,11 @@
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl space-y-4">
                     <h3 class="text-xs font-bold uppercase tracking-wider text-amber-400">2. Personalización y Ajustes</h3>
                     
-                    <!-- Subir Imagen + Botón Quitar -->
                     <div class="space-y-2">
                         <label class="block text-xs font-semibold text-slate-400">Subir tu propia Imagen / Logo</label>
                         <div class="flex gap-2">
                             <input type="file" id="subir-imagen" accept="image/*" class="w-full text-xs text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-amber-500/10 file:text-amber-400 hover:file:bg-amber-500/20 cursor-pointer">
-                            <button type="button" onclick="quitarImagen()" class="bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/20 px-3 py-2 rounded-xl text-xs font-bold transition" title="Quitar diseño actual">🗑️ Quitar</button>
+                            <button type="button" onclick="quitarImagen()" class="bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/20 px-3 py-2 rounded-xl text-xs font-bold transition" title="Quitar diseño">🗑️ Quitar</button>
                         </div>
                     </div>
 
@@ -136,12 +166,11 @@
 
                     <hr class="border-slate-800">
 
-                    <!-- Texto Personalizado + Botón Quitar Texto -->
                     <div class="space-y-2">
                         <label class="block text-xs font-semibold text-slate-400">Texto Personalizado Adicional</label>
                         <div class="flex gap-2">
                             <input type="text" id="input-texto" placeholder="Escribe tu texto..." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-100 focus:outline-none focus:border-amber-500">
-                            <button type="button" onclick="quitarTexto()" class="bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/20 px-3 py-2 rounded-xl text-xs font-bold transition" title="Quitar texto actual">🗑️ Quitar</button>
+                            <button type="button" onclick="quitarTexto()" class="bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/20 px-3 py-2 rounded-xl text-xs font-bold transition" title="Quitar texto">🗑️ Quitar</button>
                         </div>
                     </div>
 
@@ -166,70 +195,56 @@
                     </div>
                 </div>
 
-                <!-- 3. Resumen Dinámico y Formulario de Envío -->
+                <!-- 3. Precio y Botón de Añadir al Carrito -->
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl space-y-4">
                     <div class="flex justify-between items-center bg-slate-950 border border-slate-800 p-3.5 rounded-xl">
                         <div>
-                            <span class="text-[10px] uppercase tracking-wider text-slate-400 block font-semibold">Total Estimado</span>
+                            <span class="text-[10px] uppercase tracking-wider text-slate-400 block font-semibold">Precio Artículo</span>
                             <span id="precio-total-ui" class="text-xl font-black text-amber-400">15.00 €</span>
                         </div>
                         <span class="text-xs text-slate-400 bg-slate-900 px-3 py-1.5 rounded-lg border border-slate-800" id="resumen-opcion-badge">Talla: S</span>
                     </div>
 
-                    <h3 class="text-xs font-bold uppercase tracking-wider text-amber-400">3. Datos de Envío y Pedido</h3>
-                    
-                    <form id="order-form" class="space-y-3" onsubmit="event.preventDefault(); enviarPedidoConCaptura();">
-                        <div>
-                            <label class="block text-[11px] font-semibold text-slate-400 mb-1">Nombre y Apellidos *</label>
-                            <input type="text" id="fact-nombre" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-100 focus:outline-none focus:border-amber-500">
-                        </div>
-                        <div class="grid grid-cols-2 gap-2">
-                            <div>
-                                <label class="block text-[11px] font-semibold text-slate-400 mb-1">Teléfono / WhatsApp *</label>
-                                <input type="tel" id="fact-telefono" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-100 focus:outline-none focus:border-amber-500">
-                            </div>
-                            <div>
-                                <label class="block text-[11px] font-semibold text-slate-400 mb-1">Email</label>
-                                <input type="email" id="fact-email" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-100 focus:outline-none focus:border-amber-500">
-                            </div>
-                        </div>
-                        <div>
-                            <label class="block text-[11px] font-semibold text-slate-400 mb-1">Dirección de Entrega</label>
-                            <textarea id="fact-direccion" rows="2" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-100 focus:outline-none focus:border-amber-500"></textarea>
-                        </div>
-
-                        <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-3 rounded-xl transition shadow-lg shadow-amber-500/10 text-xs uppercase tracking-wider">
-                            Enviar Pedido por WhatsApp
-                        </button>
-                    </form>
+                    <button type="button" onclick="agregarAlCarrito()" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-3.5 rounded-xl transition shadow-lg shadow-amber-500/10 text-xs uppercase tracking-wider flex items-center justify-center gap-2">
+                        ✨ Añadir este producto al Carrito
+                    </button>
                 </div>
 
             </div>
         </div>
 
-        <!-- 4. Sección de Preguntas Frecuentes (FAQ) -->
-        <section class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4 max-w-4xl mx-auto">
-            <h3 class="text-sm font-bold uppercase tracking-wider text-amber-400 text-center">Preguntas Frecuentes (FAQ)</h3>
-            <div class="space-y-3">
-                <details class="bg-slate-950 border border-slate-800 rounded-xl p-4 cursor-pointer">
-                    <summary class="text-xs font-bold text-slate-200">¿Cómo se realiza el pago del pedido?</summary>
-                    <p class="text-xs text-slate-400 mt-2">Una vez que envíes tu diseño por WhatsApp, nuestro equipo lo revisará y te facilitará un enlace seguro de pago para confirmar tu encargo.</p>
-                </details>
-                <details class="bg-slate-950 border border-slate-800 rounded-xl p-4 cursor-pointer">
-                    <summary class="text-xs font-bold text-slate-200">¿Cuánto tiempo tarda en llegar mi pedido personalizado?</summary>
-                    <p class="text-xs text-slate-400 mt-2">El plazo de producción y envío habitual es de 48 a 72 horas laborables.</p>
-                </details>
-                <details class="bg-slate-950 border border-slate-800 rounded-xl p-4 cursor-pointer">
-                    <summary class="text-xs font-bold text-slate-200">¿Puedo utilizar un diseño propio o un logotipo de empresa?</summary>
-                    <p class="text-xs text-slate-400 mt-2">¡Por supuesto! Puedes subir tu propio archivo o elegir un diseño directamente de nuestra galería automática.</p>
-                </details>
-            </div>
-        </section>
+        <!-- Sección de Datos de Envío y Pedido Final (Oculta hasta abrir el checkout) -->
+        <div id="seccion-checkout" class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4 max-w-2xl mx-auto hidden">
+            <h3 class="text-sm font-bold uppercase tracking-wider text-amber-400 text-center">3. Datos de Envío y Confirmación del Pedido</h3>
+            <form id="order-form" class="space-y-3" onsubmit="event.preventDefault(); enviarPedidoCompletoWhatsApp();">
+                <div>
+                    <label class="block text-[11px] font-semibold text-slate-400 mb-1">Nombre y Apellidos *</label>
+                    <input type="text" id="fact-nombre" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-100 focus:outline-none focus:border-amber-500">
+                </div>
+                <div class="grid grid-cols-2 gap-2">
+                    <div>
+                        <label class="block text-[11px] font-semibold text-slate-400 mb-1">Teléfono / WhatsApp *</label>
+                        <input type="tel" id="fact-telefono" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-100 focus:outline-none focus:border-amber-500">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-semibold text-slate-400 mb-1">Email</label>
+                        <input type="email" id="fact-email" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-100 focus:outline-none focus:border-amber-500">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-[11px] font-semibold text-slate-400 mb-1">Dirección de Entrega</label>
+                    <textarea id="fact-direccion" rows="2" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-100 focus:outline-none focus:border-amber-500"></textarea>
+                </div>
+
+                <button type="submit" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-3 rounded-xl transition shadow-lg text-xs uppercase tracking-wider">
+                    🚀 Enviar Pedido Completo por WhatsApp
+                </button>
+            </form>
+        </div>
     </div>
 
-    <!-- Script de Lógica General, Galería GitHub y Soporte Táctil -->
+    <!-- Script de Carrito y Lógica General -->
     <script>
-        // ⚠️ TUS DATOS DE GITHUB
         const GITHUB_USER = "jjhpanelli";
         const GITHUB_REPO = "PERSONALIZA-T";
         const GITHUB_FOLDER = "GALERIA"; 
@@ -238,6 +253,7 @@
         let precioBase = 15.00;
         let extraPrecio = 0;
         let opcionSeleccionadaValor = 'S';
+        let carrito = [];
 
         function mostrarToast(mensaje, icono = '✨') {
             const toast = document.getElementById('toast-notification');
@@ -249,24 +265,20 @@
             }, 4000);
         }
 
-        // Cargar galería automáticamente desde GitHub
         async function cargarGaleriaGitHub() {
             const contenedor = document.getElementById("galeria-automatica");
             const urlApi = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${GITHUB_FOLDER}`;
 
             try {
                 const respuesta = await fetch(urlApi);
-                if (!respuesta.ok) throw new Error("No se pudo conectar con la carpeta");
-                
+                if (!respuesta.ok) throw new Error("No se pudo conectar");
                 const archivos = await respuesta.json();
                 contenedor.innerHTML = "";
 
-                const imagenes = archivos.filter(archivo => 
-                    /\.(png|jpg|jpeg|webp)$/i.test(archivo.name)
-                );
+                const imagenes = archivos.filter(archivo => /\.(png|jpg|jpeg|webp)$/i.test(archivo.name));
 
                 if (imagenes.length === 0) {
-                    contenedor.innerHTML = `<p class="text-xs text-slate-400 col-span-full text-center py-4">No hay diseños en la carpeta todavía.</p>`;
+                    contenedor.innerHTML = `<p class="text-xs text-slate-400 col-span-full text-center py-4">No hay diseños en la carpeta.</p>`;
                     return;
                 }
 
@@ -282,12 +294,9 @@
                         <img src="${urlRaw}" class="w-full h-16 object-cover rounded-lg group-hover:scale-105 transition" alt="${nombreLimpio}">
                         <span class="text-[10px] text-slate-300 font-medium truncate w-full text-center capitalize">${nombreLimpio}</span>
                     `;
-
                     contenedor.appendChild(div);
                 });
-
             } catch (error) {
-                console.warn("Galería GitHub pendiente.");
                 contenedor.innerHTML = `<p class="text-xs text-slate-500 col-span-full text-center py-3">Sube tus diseños a la carpeta GALERIA en GitHub.</p>`;
             }
         }
@@ -330,7 +339,6 @@
             btn.classList.remove('border-slate-800', 'bg-slate-950', 'text-slate-400');
 
             opcionSeleccionadaValor = btn.innerText;
-
             if (tipo === 'modelo_taza' && btn.innerText.includes('+2€')) {
                 extraPrecio = 2.00;
             } else if (tipo === 'modelo_taza') {
@@ -358,48 +366,37 @@
                     const imgElement = document.getElementById('user-uploaded-image');
                     imgElement.src = event.target.result;
                     imgContainer.classList.remove('hidden');
-                    mostrarToast('Imagen subida correctamente', '📁');
+                    mostrarToast('Imagen subida', '📁');
                 }
                 reader.readAsDataURL(file);
             }
         });
 
-        // Función para quitar/eliminar la imagen actual
         function quitarImagen() {
-            const imgContainer = document.getElementById('user-image-container');
-            const imgElement = document.getElementById('user-uploaded-image');
-            const inputArchivo = document.getElementById('subir-imagen');
-            
-            imgElement.src = "";
-            imgContainer.classList.add('hidden');
-            inputArchivo.value = "";
-            mostrarToast('Diseño de imagen eliminado', '🗑️');
+            document.getElementById('user-uploaded-image').src = "";
+            document.getElementById('user-image-container').classList.add('hidden');
+            document.getElementById('subir-imagen').value = "";
+            mostrarToast('Imagen eliminada', '🗑️');
         }
 
-        // Función para quitar/eliminar el texto actual
         function quitarTexto() {
-            const textContainer = document.getElementById('user-text-container');
-            const inputTexto = document.getElementById('input-texto');
-            const renderedText = document.getElementById('user-rendered-text');
-            
-            renderedText.innerText = "";
-            inputTexto.value = "";
-            textContainer.classList.add('hidden');
+            document.getElementById('user-rendered-text').innerText = "";
+            document.getElementById('input-texto').value = "";
+            document.getElementById('user-text-container').classList.add('hidden');
             mostrarToast('Texto eliminado', '🗑️');
         }
 
-        document.getElementById('range-escala').addEventListener('input', function(e) {
+        document.getElementById('range-escala').addEventListener('input', (e) => {
             document.getElementById('user-image-container').style.width = e.target.value + 'px';
         });
-        document.getElementById('range-opacidad').addEventListener('input', function(e) {
+        document.getElementById('range-opacidad').addEventListener('input', (e) => {
             document.getElementById('user-image-container').style.opacity = e.target.value / 100;
         });
 
         const inputTexto = document.getElementById('input-texto');
-        const textContainer = document.getElementById('user-text-container');
-        const renderedText = document.getElementById('user-rendered-text');
-        
-        inputTexto.addEventListener('input', function(e) {
+        inputTexto.addEventListener('input', (e) => {
+            const textContainer = document.getElementById('user-text-container');
+            const renderedText = document.getElementById('user-rendered-text');
             if (e.target.value.trim() !== '') {
                 renderedText.innerText = e.target.value;
                 textContainer.classList.remove('hidden');
@@ -408,23 +405,138 @@
             }
         });
 
-        document.getElementById('color-texto').addEventListener('input', function(e) {
-            renderedText.style.color = e.target.value;
+        document.getElementById('color-texto').addEventListener('input', (e) => {
+            document.getElementById('user-rendered-text').style.color = e.target.value;
+        });
+        document.getElementById('select-fuente').addEventListener('change', (e) => {
+            document.getElementById('user-rendered-text').style.fontFamily = e.target.value;
+        });
+        document.getElementById('range-tam-texto').addEventListener('input', (e) => {
+            document.getElementById('user-rendered-text').style.fontSize = e.target.value + 'px';
         });
 
-        document.getElementById('select-fuente').addEventListener('change', function(e) {
-            renderedText.style.fontFamily = e.target.value;
-        });
+        // Capturar y Añadir al Carrito
+        function agregarAlCarrito() {
+            const areaCaptura = document.getElementById('captura-area');
+            const precioItem = precioBase + extraPrecio;
+            const textoPersonalizado = document.getElementById('input-texto').value || 'Sin texto';
 
-        document.getElementById('range-tam-texto').addEventListener('input', function(e) {
-            renderedText.style.fontSize = e.target.value + 'px';
-        });
+            html2canvas(areaCaptura, { scale: 2, useCORS: true }).then(canvas => {
+                const imagenCapturaUrl = canvas.toDataURL('image/png');
 
-        // Función de Arrastre y Pellizco Táctil (Móvil y PC)
+                const nuevoItem = {
+                    id: Date.now(),
+                    soporte: productoActual,
+                    opcion: opcionSeleccionadaValor,
+                    precio: precioItem,
+                    texto: textoPersonalizado,
+                    imagen: imagenCapturaUrl
+                };
+
+                carrito.push(nuevoItem);
+                actualizarContadorCarrito();
+                renderizarItemsCarrito();
+                mostrarToast('¡Artículo añadido al carrito!', '🛒');
+            });
+        }
+
+        function actualizarContadorCarrito() {
+            document.getElementById('carrito-contador').innerText = carrito.length;
+        }
+
+        function renderizarItemsCarrito() {
+            const contenedor = document.getElementById('lista-carrito-items');
+            let totalGeneral = 0;
+
+            if (carrito.length === 0) {
+                contenedor.innerHTML = `<p class="text-xs text-slate-500 text-center py-6">Tu carrito está vacío.</p>`;
+                document.getElementById('carrito-total-precio').innerText = "0.00 €";
+                return;
+            }
+
+            contenedor.innerHTML = "";
+            carrito.forEach((item, index) => {
+                totalGeneral += item.precio;
+                const div = document.createElement('div');
+                div.className = "flex items-center justify-between bg-slate-950 border border-slate-800 p-3 rounded-xl gap-3";
+                div.innerHTML = `
+                    <img src="${item.imagen}" class="w-12 h-12 object-contain bg-slate-900 rounded-lg border border-slate-800">
+                    <div class="flex-1">
+                        <h4 class="text-xs font-bold text-slate-200">${item.soporte} (${item.opcion})</h4>
+                        <p class="text-[10px] text-slate-400">Texto: ${item.texto}</p>
+                        <span class="text-xs font-semibold text-amber-400">${item.precio.toFixed(2)} €</span>
+                    </div>
+                    <button onclick="eliminarDelCarrito(${index})" class="text-red-400 hover:text-red-300 text-xs font-bold px-2 py-1 bg-red-500/10 rounded-lg">🗑️</button>
+                `;
+                contenedor.appendChild(div);
+            });
+
+            document.getElementById('carrito-total-precio').innerText = totalGeneral.toFixed(2) + ' €';
+        }
+
+        function eliminarDelCarrito(index) {
+            carrito.splice(index, 1);
+            actualizarContadorCarrito();
+            renderizarItemsCarrito();
+            mostrarToast('Artículo eliminado del carrito', '🗑️');
+        }
+
+        function toggleModalCarrito() {
+            const modal = document.getElementById('modal-carrito');
+            modal.classList.toggle('hidden');
+        }
+
+        function irAlCheckout() {
+            if (carrito.length === 0) {
+                mostrarToast("Agrega al menos un producto al carrito.", "⚠️");
+                return;
+            }
+            toggleModalCarrito();
+            document.getElementById('seccion-checkout').classList.remove('hidden');
+            document.getElementById('seccion-checkout').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function enviarPedidoCompletoWhatsApp() {
+            const nombre = document.getElementById('fact-nombre').value;
+            const telefono = document.getElementById('fact-telefono').value;
+            const direccion = document.getElementById('fact-direccion').value;
+            const email = document.getElementById('fact-email').value;
+
+            if (!nombre || !telefono) {
+                mostrarToast("Completa tu nombre y teléfono.", "⚠️");
+                return;
+            }
+
+            let totalGlobal = carrito.reduce((acc, item) => acc + item.precio, 0);
+
+            let textoWhatsApp = `*¡Nuevo Pedido Múltiple - Eloi's Custom Gear!*%0A%0A` +
+                `👤 *Cliente:* ${encodeURIComponent(nombre)}%0A` +
+                `📞 *Teléfono:* ${encodeURIComponent(telefono)}%0A` +
+                `📧 *Email:* ${encodeURIComponent(email || 'No especificado')}%0A` +
+                `🏠 *Dirección:* ${encodeURIComponent(direccion || 'No especificada')}%0A%0A` +
+                `🛒 *Resumen de Artículos (${carrito.length}):*%0A`;
+
+            carrito.forEach((item, i) => {
+                textoWhatsApp += `%0A*${i + 1}. ${item.soporte}* - ${item.opcion} — *${item.precio.toFixed(2)}€*`;
+                // Descargar automáticamente cada captura de diseño asociada al pedido
+                const enlace = document.createElement('a');
+                enlace.download = `articulo-${i+1}-${nombre.replace(/\s+/g, '_')}.png`;
+                enlace.href = item.imagen;
+                enlace.click();
+            });
+
+            textoWhatsApp += `%0A%0A💰 *TOTAL GLOBAL:* *${totalGlobal.toFixed(2)}€*%0A%0A` +
+                `_*(Las imágenes con los diseños se han descargado en tu dispositivo para que puedas adjuntarlas aquí)*_`;
+
+            // ⚠️ REEMPLAZA 34000000000 por tu número de WhatsApp real
+            window.open(`https://wa.me/34650013500?text=${textoWhatsApp}`, '_blank');
+            mostrarToast("¡Pedido generado y WhatsApp abierto con éxito!", "🚀");
+        }
+
+        // Funciones de Arrastre (Móvil y PC)
         function hacerArrastrable(elmnt) {
             let posX = 0, posY = 0, startX = 0, startY = 0;
-            let initialDistance = 0;
-            let initialWidth = 150;
+            let initialDistance = 0, initialWidth = 150;
 
             elmnt.onmousedown = dragMouseDown;
             elmnt.addEventListener('touchstart', touchStartHandler, { passive: false });
@@ -436,7 +548,6 @@
                 document.onmouseup = closeDragElement;
                 document.onmousemove = elementDrag;
             }
-
             function elementDrag(e) {
                 e.preventDefault();
                 posX = startX - e.clientX;
@@ -446,12 +557,10 @@
                 elmnt.style.top = (elmnt.offsetTop - posY) + "px";
                 elmnt.style.left = (elmnt.offsetLeft - posX) + "px";
             }
-
             function closeDragElement() {
                 document.onmouseup = null;
                 document.onmousemove = null;
             }
-
             function touchStartHandler(e) {
                 if (e.touches.length === 1) {
                     startX = e.touches[0].clientX;
@@ -459,16 +568,12 @@
                     document.ontouchend = closeTouchElement;
                     document.ontouchmove = touchMoveHandler;
                 } else if (e.touches.length === 2) {
-                    initialDistance = Math.hypot(
-                        e.touches[0].clientX - e.touches[1].clientX,
-                        e.touches[0].clientY - e.touches[1].clientY
-                    );
+                    initialDistance = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
                     initialWidth = elmnt.offsetWidth;
                     document.ontouchend = closeTouchElement;
                     document.ontouchmove = pinchMoveHandler;
                 }
             }
-
             function touchMoveHandler(e) {
                 if (e.touches.length === 1) {
                     e.preventDefault();
@@ -480,27 +585,18 @@
                     elmnt.style.left = (elmnt.offsetLeft - posX) + "px";
                 }
             }
-
             function pinchMoveHandler(e) {
                 if (e.touches.length === 2) {
                     e.preventDefault();
-                    const currentDistance = Math.hypot(
-                        e.touches[0].clientX - e.touches[1].clientX,
-                        e.touches[0].clientY - e.touches[1].clientY
-                    );
+                    const currentDistance = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
                     const scaleFactor = currentDistance / initialDistance;
                     let newWidth = initialWidth * scaleFactor;
-                    
                     if (newWidth >= 50 && newWidth <= 400) {
                         elmnt.style.width = newWidth + 'px';
-                        const rangeEscala = document.getElementById('range-escala');
-                        if (rangeEscala && elmnt.id === 'user-image-container') {
-                            rangeEscala.value = newWidth;
-                        }
+                        document.getElementById('range-escala').value = newWidth;
                     }
                 }
             }
-
             function closeTouchElement() {
                 document.ontouchmove = null;
                 document.ontouchend = null;
@@ -509,46 +605,6 @@
 
         hacerArrastrable(document.getElementById('user-image-container'));
         hacerArrastrable(document.getElementById('user-text-container'));
-
-        function enviarPedidoConCaptura() {
-            const nombre = document.getElementById('fact-nombre').value;
-            const telefono = document.getElementById('fact-telefono').value;
-            const direccion = document.getElementById('fact-direccion').value;
-            const email = document.getElementById('fact-email').value;
-            const precioTotalFinal = (precioBase + extraPrecio).toFixed(2);
-
-            if (!nombre || !telefono) {
-                mostrarToast("Completa al menos tu nombre y teléfono.", "⚠️");
-                return;
-            }
-
-            const areaCaptura = document.getElementById('captura-area');
-            
-            html2canvas(areaCaptura, { scale: 2, useCORS: true }).then(canvas => {
-                const enlaceDescarga = document.createElement('a');
-                enlaceDescarga.download = `pedido-${nombre.replace(/\s+/g, '_')}.png`;
-                enlaceDescarga.href = canvas.toDataURL('image/png');
-                enlaceDescarga.click();
-
-                const textoWhatsApp = `*¡Nuevo Pedido - Eloi's Custom Gear!*%0A%0A` +
-                    `👕 *Soporte:* ${productoActual}%0A` +
-                    `📏 *Opción/Talla:* ${opcionSeleccionadaValor}%0A` +
-                    `💰 *Precio Total:* ${precioTotalFinal}€%0A%0A` +
-                    `👤 *Cliente:* ${encodeURIComponent(nombre)}%0A` +
-                    `📞 *Teléfono:* ${encodeURIComponent(telefono)}%0A` +
-                    `📧 *Email:* ${encodeURIComponent(email || 'No especificado')}%0A` +
-                    `🏠 *Dirección:* ${encodeURIComponent(direccion || 'No especificada')}%0A%0A` +
-                    `_*(La imagen de tu diseño se ha descargado en tu dispositivo para que puedas adjuntarla aquí)*_`;
-
-                // ⚠️ REEMPLAZA 34000000000 por tu número real de WhatsApp con prefijo de país
-                window.open(`https://wa.me/34000000000?text=${textoWhatsApp}`, '_blank');
-                mostrarToast("¡Diseño guardado y WhatsApp abierto con éxito!", "🚀");
-            }).catch(err => {
-                console.error("Error al capturar imagen:", err);
-                mostrarToast("El pedido se procesará por WhatsApp directamente.", "⚠️");
-                window.open(`https://wa.me/34000000000?text=Pedido%20de%20${encodeURIComponent(nombre)}`, '_blank');
-            });
-        }
     </script>
 </body>
 </html>
