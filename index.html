@@ -4,7 +4,7 @@
     <title>Eloi's Custom Gear | Estudio de Personalización Pro</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&family=Bebas+Neue&family=Permanent+Marker&family=Cinzel:wght@700&family=Montserrat:wght@800&family=VT323&family=Pacifico&family=Press+Start+2P&family=Anton&family=Rye&family=Creepster&family=Rubik+Glitch&family=Special+Elite&family=Bungee&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&family=Bebas+Neue&family=Permanent+Marker&family=Cinzel:wght@700&family=Montserrat:wght@800&family=VT323&family=Pacifico&family=Press+Start+2P&family=Anton&family=Rye&family=Creepster&family=Rubik+Glitch&family=Special+Elite&family=Bungee&display=stylesheet" rel="stylesheet">
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; touch-action: pan-x pan-y; }
         .elemento-interactivo { touch-action: none; cursor: grab; }
@@ -72,7 +72,7 @@
                 Personaliza sin límites. <br><span class="bg-gradient-to-r from-amber-400 via-orange-400 to-yellow-300 bg-clip-text text-transparent">Diseña, factura y encarga</span>
             </h1>
             <p class="text-slate-400 text-sm sm:text-base leading-relaxed">
-                Genera tu mockup, añade tus datos de facturación y envía el pedido completo al instante.
+                Genera tu mockup con tus diseños propios, añade tus datos y envía el pedido completo al instante.
             </p>
         </div>
 
@@ -92,9 +92,10 @@
                 </div>
 
                 <div id="mockup-container" class="w-full h-[420px] sm:h-[500px] flex items-center justify-center relative my-4 bg-slate-950 rounded-2xl border border-slate-800/80 overflow-hidden shadow-2xl select-none group">
-                    <img id="imagen-producto" src="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover opacity-85 transition-all duration-500 pointer-events-none" alt="Mockup base">
+                    <!-- USANDO TUS MOCKUPS DE PHOTOSHOP -->
+                    <img id="imagen-producto" src="camiseta.png" class="w-full h-full object-cover opacity-95 transition-all duration-500 pointer-events-none" alt="Mockup base Photoshop">
                     
-                    <div class="absolute inset-0 bg-radial from-transparent via-slate-950/40 to-slate-950/80 pointer-events-none"></div>
+                    <div class="absolute inset-0 bg-radial from-transparent via-slate-950/20 to-slate-950/60 pointer-events-none"></div>
 
                     <!-- ZONA LOGO CON CONTENEDOR DE MARCOS -->
                     <div id="zona-estampado" class="elemento-interactivo absolute flex flex-col items-center justify-center z-20 text-center p-4 rounded-2xl border-2 border-dashed border-amber-400/40 hover:border-amber-400 bg-amber-500/5 transition-colors shadow-2xl backdrop-blur-[2px]" style="transform: translate(0px, -40px) scale(1) rotate(0deg);">
@@ -129,7 +130,7 @@
                         <button type="button" onclick="cerrarPreview()" class="text-slate-400 hover:text-white text-xs font-bold px-2 py-0.5 rounded bg-slate-900 border border-slate-800">✕ Cerrar</button>
                     </div>
                     <div id="contenedor-imagen-resultado" class="w-full flex justify-center rounded-xl overflow-hidden border border-slate-800 bg-slate-950 max-h-56"></div>
-                    <p class="text-[10px] text-slate-400 text-center mt-2">💡 Mantén pulsada la imagen para guardarla en tu dispositivo.</p>
+                    <p class="text-[10px] text-slate-400 text-center mt-2">💡 Esta vista previa se adjuntará automáticamente a tu pedido.</p>
                 </div>
 
                 <div class="w-full bg-slate-950/80 border border-slate-800 rounded-2xl p-4 flex justify-between items-center backdrop-blur-md mt-2">
@@ -149,23 +150,29 @@
                     </h2>
                 </div>
 
-                <form id="order-form" class="space-y-6">
+                <!-- FORMULARIO INTEGRADO CON WEB3FORMS (ENVÍO DE ARCHIVOS Y DATOS) -->
+                <form id="order-form" action="https://api.web3forms.com/submit" method="POST" class="space-y-6">
+                    
+                    <!-- Configuración de Web3Forms (Introduce tu clave gratuita aquí) -->
+                    <input type="hidden" name="access_key" value="TU_CLAVE_DE_ACCES_AQUÍ">
+                    <input type="hidden" name="subject" value="Nuevo Pedido desde la Web de Eloi's Custom Gear">
+                    <input type="hidden" name="imagen_mockup" id="input-imagen-oculta">
                     
                     <!-- 1. Soporte -->
                     <div>
                         <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">1. Selecciona el soporte</label>
                         <div class="grid grid-cols-3 gap-3">
-                            <button type="button" onclick="setProducto('Camiseta', 15, 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=800&auto=format&fit=crop')" class="producto-btn group border-2 border-amber-500 bg-amber-500/10 rounded-2xl p-3 text-center cursor-pointer transition">
+                            <button type="button" onclick="setProducto('Camiseta', 15, 'camiseta.png')" class="producto-btn group border-2 border-amber-500 bg-amber-500/10 rounded-2xl p-3 text-center cursor-pointer transition">
                                 <span class="block text-2xl mb-1">👕</span>
                                 <span class="text-xs font-bold block text-slate-200">Camiseta</span>
                                 <span class="text-[11px] text-amber-400 font-extrabold">15.00 €</span>
                             </button>
-                            <button type="button" onclick="setProducto('Taza de Cerámica', 10, 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=800&auto=format&fit=crop')" class="producto-btn group border-2 border-slate-800 bg-slate-950/60 rounded-2xl p-3 text-center cursor-pointer transition">
+                            <button type="button" onclick="setProducto('Taza de Cerámica', 10, 'taza.png')" class="producto-btn group border-2 border-slate-800 bg-slate-950/60 rounded-2xl p-3 text-center cursor-pointer transition">
                                 <span class="block text-2xl mb-1">☕</span>
                                 <span class="text-xs font-bold block text-slate-300">Taza</span>
                                 <span class="text-[11px] text-amber-400 font-extrabold">10.00 €</span>
                             </button>
-                            <button type="button" onclick="setProducto('Gorra Trucker', 12, 'https://images.unsplash.com/photo-1588850561407-ed78c282e89b?q=80&w=800&auto=format&fit=crop')" class="producto-btn group border-2 border-slate-800 bg-slate-950/60 rounded-2xl p-3 text-center cursor-pointer transition">
+                            <button type="button" onclick="setProducto('Gorra Trucker', 12, 'gorra.png')" class="producto-btn group border-2 border-slate-800 bg-slate-950/60 rounded-2xl p-3 text-center cursor-pointer transition">
                                 <span class="block text-2xl mb-1">🧢</span>
                                 <span class="text-xs font-bold block text-slate-300">Gorra</span>
                                 <span class="text-[11px] text-amber-400 font-extrabold">12.00 €</span>
@@ -179,13 +186,13 @@
                         <div class="space-y-3">
                             <div>
                                 <label class="block text-[11px] font-medium text-slate-400 mb-1.5">Archivo de imagen original (Obligatorio)</label>
-                                <input type="file" id="input-archivo" accept="image/*" class="w-full text-xs text-slate-300 bg-slate-950/80 rounded-xl border border-slate-800 p-2.5 file:mr-3 file:py-1.5 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-amber-500/10 file:text-amber-400 cursor-pointer transition" onchange="manejarSubidaArchivo(event)">
+                                <input type="file" id="input-archivo" name="archivo_diseno" accept="image/*" class="w-full text-xs text-slate-300 bg-slate-950/80 rounded-xl border border-slate-800 p-2.5 file:mr-3 file:py-1.5 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-amber-500/10 file:text-amber-400 cursor-pointer transition" onchange="manejarSubidaArchivo(event)">
                             </div>
                             
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                 <div>
                                     <label class="block text-[10px] uppercase font-bold text-slate-500 mb-1">Estilo de Marco / Borde</label>
-                                    <select id="select-marco" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-amber-300 font-bold focus:outline-none focus:border-amber-400 transition" onchange="actualizarMarco()">
+                                    <select id="select-marco" name="estilo_marco" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-amber-300 font-bold focus:outline-none focus:border-amber-400 transition" onchange="actualizarMarco()">
                                         <option value="sin-marco">Sin borde</option>
                                         <option value="marco-blanco">Borde Blanco Sólido</option>
                                         <option value="marco-oro">Borde Oro / Ámbar</option>
@@ -200,7 +207,7 @@
                                 </div>
                                 <div>
                                     <label class="block text-[10px] uppercase font-bold text-slate-500 mb-1">Ubicación principal</label>
-                                    <select id="select-ubicacion" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-amber-400 transition">
+                                    <select id="select-ubicacion" name="ubicacion_estampado" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-amber-400 transition">
                                         <option value="Frente / Centrado">Frente / Centrado principal</option>
                                         <option value="Espalda / Reverso">Espalda / Reverso completo</option>
                                         <option value="Pecho Izquierdo (Logo)">Pecho Izquierdo (Logo)</option>
@@ -215,7 +222,7 @@
                         <label class="block text-xs font-bold uppercase tracking-wider text-slate-400">3. Texto y Tipografías Pro</label>
                         
                         <div class="space-y-3">
-                            <input type="text" id="input-texto" placeholder="Escribe tu frase o nombre..." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-xs sm:text-sm text-slate-100 focus:outline-none focus:border-amber-400 transition shadow-inner" oninput="actualizarTexto()">
+                            <input type="text" id="input-texto" name="texto_personalizado" placeholder="Escribe tu frase o nombre..." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-xs sm:text-sm text-slate-100 focus:outline-none focus:border-amber-400 transition shadow-inner" oninput="actualizarTexto()">
                             
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                 <div>
@@ -258,31 +265,31 @@
                         <div class="space-y-3">
                             <div>
                                 <label class="block text-[10px] uppercase font-bold text-slate-500 mb-1">Nombre y Apellidos / Empresa</label>
-                                <input type="text" id="fact-nombre" placeholder="Ej. Juan Pérez" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-slate-100 focus:outline-none focus:border-amber-400 transition">
+                                <input type="text" id="fact-nombre" name="nombre_cliente" placeholder="Ej. Juan Pérez" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-slate-100 focus:outline-none focus:border-amber-400 transition">
                             </div>
                             
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                 <div>
                                     <label class="block text-[10px] uppercase font-bold text-slate-500 mb-1">DNI / NIF</label>
-                                    <input type="text" id="fact-dni" placeholder="Ej. 12345678X" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-slate-100 focus:outline-none focus:border-amber-400 transition">
+                                    <input type="text" id="fact-dni" name="dni_cliente" placeholder="Ej. 12345678X" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-slate-100 focus:outline-none focus:border-amber-400 transition">
                                 </div>
                                 <div>
                                     <label class="block text-[10px] uppercase font-bold text-slate-500 mb-1">Teléfono de contacto</label>
-                                    <input type="tel" id="fact-telefono" placeholder="Ej. 600123456" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-slate-100 focus:outline-none focus:border-amber-400 transition">
+                                    <input type="tel" id="fact-telefono" name="telefono_cliente" placeholder="Ej. 600123456" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-slate-100 focus:outline-none focus:border-amber-400 transition">
                                 </div>
                             </div>
 
                             <div>
                                 <label class="block text-[10px] uppercase font-bold text-slate-500 mb-1">Dirección de Envío y Código Postal</label>
-                                <input type="text" id="fact-direccion" placeholder="Calle, Número, Piso, Ciudad, CP" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-slate-100 focus:outline-none focus:border-amber-400 transition">
+                                <input type="text" id="fact-direccion" name="direccion_cliente" placeholder="Calle, Número, Piso, Ciudad, CP" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-slate-100 focus:outline-none focus:border-amber-400 transition">
                             </div>
                         </div>
                     </div>
 
-                    <!-- BOTÓN WHATSAPP -->
+                    <!-- BOTÓN DE ENVÍO AUTOMATIZADO -->
                     <div class="pt-4">
-                        <button type="button" onclick="enviarPedidoWhatsApp()" class="w-full bg-gradient-to-r from-emerald-500 via-green-500 to-emerald-600 text-slate-950 font-black py-4 px-6 rounded-2xl shadow-xl shadow-green-600/20 hover:scale-[1.02] active:scale-[0.98] transition flex items-center justify-center gap-2.5 cursor-pointer text-sm sm:text-base">
-                            <span class="text-xl">📲</span> Descargar Mockup y Enviar por WhatsApp
+                        <button type="button" onclick="enviarPedidoConArchivos()" class="w-full bg-gradient-to-r from-emerald-500 via-green-500 to-emerald-600 text-slate-950 font-black py-4 px-6 rounded-2xl shadow-xl shadow-green-600/20 hover:scale-[1.02] active:scale-[0.98] transition flex items-center justify-center gap-2.5 cursor-pointer text-sm sm:text-base">
+                            <span class="text-xl">📲</span> Enviar Pedido y Archivos por Email y WhatsApp
                         </button>
                     </div>
 
@@ -400,11 +407,11 @@
             }
         }
 
-        function setProducto(nombre, precio, urlMockup) {
+        function setProducto(nombre, precio, archivoMockup) {
             productoActual = nombre;
             precioActual = precio;
             document.getElementById('precio-total').innerText = precio.toFixed(2) + " €";
-            document.getElementById('imagen-producto').src = urlMockup;
+            document.getElementById('imagen-producto').src = archivoMockup;
 
             logoState = { posX: 0, posY: -40, scale: 100, rotation: 0 };
             textState = { posX: 0, posY: 90, scale: 100, rotation: 0 };
@@ -522,33 +529,54 @@
             document.getElementById('modal-preview').classList.add('hidden');
         }
 
-        async function enviarPedidoWhatsApp() {
+        async function enviarPedidoConArchivos() {
             const nombre = document.getElementById('fact-nombre').value;
-            const dni = document.getElementById('fact-dni').value;
             const telefono = document.getElementById('fact-telefono').value;
             const direccion = document.getElementById('fact-direccion').value;
-            const ubicacion = document.getElementById('select-ubicacion').value;
-            const textoPersonalizado = document.getElementById('input-texto').value;
 
             if (!nombre || !telefono || !direccion) {
                 alert("Por favor, completa al menos tu nombre, teléfono y dirección de envío.");
                 return;
             }
 
-            const mensaje = `Hola! 👋 Quiero realizar un pedido en Eloi's Custom Gear:
-            
-• *Producto:* ${productoActual} (${precioActual.toFixed(2)} €)
-• *Ubicación:* ${ubicacion}
-• *Texto opcional:* ${textoPersonalizado || 'Ninguno'}
-• *Cliente:* ${nombre}
-• *DNI/NIF:* ${dni || 'No indicado'}
-• *Teléfono:* ${telefono}
-• *Dirección:* ${direccion}
+            const mockupContainer = document.getElementById('mockup-container');
+            mockupContainer.classList.add('modo-limpio');
 
-¡Adjunto mi diseño y mockup generado! ⚡`;
+            try {
+                // 1. Renderizar la imagen del mockup limpio
+                const canvas = await html2canvas(mockupContainer, { scale: 2, useCORS: true, backgroundColor: null });
+                const imagenURL = canvas.toDataURL('image/png');
+                
+                // 2. Inyectarla en el input oculto
+                document.getElementById('input-imagen-oculta').value = imagenURL;
 
-            const urlWhatsApp = `https://wa.me/34600000000?text=${encodeURIComponent(mensaje)}`;
-            window.open(urlWhatsApp, '_blank');
+                // 3. Enviar a Web3Forms (llega al correo con el archivo adjunto y el mockup)
+                const formElement = document.getElementById('order-form');
+                const formData = new FormData(formElement);
+                
+                const response = await fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (response.ok) {
+                    alert("¡Pedido enviado con éxito! Te redirigiremos a WhatsApp para confirmar los detalles con Eloi.");
+                    
+                    // 4. Abrir WhatsApp con el resumen
+                    const ubicacion = document.getElementById('select-ubicacion').value;
+                    const textoPersonalizado = document.getElementById('input-texto').value;
+                    const mensaje = `Hola! 👋 Acabo de enviar mi pedido y diseño desde la web:\n\n• *Producto:* ${productoActual} (${precioActual.toFixed(2)} €)\n• *Ubicación:* ${ubicacion}\n• *Texto:* ${textoPersonalizado || 'Ninguno'}\n• *Cliente:* ${nombre}\n• *Teléfono:* ${telefono}`;
+                    window.open(`https://wa.me/34600000000?text=${encodeURIComponent(mensaje)}`, '_blank');
+                } else {
+                    alert("Hubo un problema al enviar el formulario. Por favor, revisa tu clave de Web3Forms.");
+                }
+
+            } catch (error) {
+                console.error("Error:", error);
+                alert("Error al procesar el envío del diseño.");
+            } finally {
+                mockupContainer.classList.remove('modo-limpio');
+            }
         }
     </script>
 </body></html>
