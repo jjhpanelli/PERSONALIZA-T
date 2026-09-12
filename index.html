@@ -1,437 +1,260 @@
 <!DOCTYPE html>
-<html lang="es" class="scroll-smooth">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Eloi's Custom Gear | Estudio de Personalización Pro</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudio de Personalización | Eloísa Neleb Modas</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- html2canvas para generar la previsualización y captura para WhatsApp -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&family=Bebas+Neue&family=Permanent+Marker&family=Cinzel:wght@700&family=Montserrat:wght@800&family=VT323&family=Pacifico&family=Press+Start+2P&family=Anton&family=Rye&family=Creepster&family=Rubik+Glitch&family=Special+Elite&family=Bungee&display=swap" rel="stylesheet">
+    <!-- Google Fonts para tipografías personalizadas -->
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Cinzel:wght@700&family=Montserrat:wght@400;700&family=Pacifico&family=Press+Start+2P&family=Caveat:wght@700&display=swap" rel="stylesheet">
+    
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; touch-action: manipulation; }
-        .elemento-interactivo { cursor: grab; user-select: none; touch-action: none; }
-        .elemento-interactivo:active { cursor: grabbing; }
-        
-        .font-urban { font-family: 'Plus Jakarta Sans', sans-serif; }
-        .font-bebas { font-family: 'Bebas Neue', sans-serif; letter-spacing: 1px; }
-        .font-marker { font-family: 'Permanent Marker', cursive; }
+        .font-bangers { font-family: 'Bangers', cursive; }
         .font-cinzel { font-family: 'Cinzel', serif; }
         .font-montserrat { font-family: 'Montserrat', sans-serif; }
-        .font-retro { font-family: 'VT323', monospace; }
         .font-pacifico { font-family: 'Pacifico', cursive; }
-        .font-arcade { font-family: 'Press Start 2P', monospace; font-size: 10px !important; }
-        .font-anton { font-family: 'Anton', sans-serif; letter-spacing: 0.5px; }
-        .font-rye { font-family: 'Rye', serif; }
-        .font-creepster { font-family: 'Creepster', cursive; }
-        .font-glitch { font-family: 'Rubik Glitch', cursive; }
-        .font-typewriter { font-family: 'Special Elite', cursive; }
-        .font-bungee { font-family: 'Bungee', cursive; font-size: 11px !important; }
+        .font-retro { font-family: 'Press Start 2P', monospace; }
+        .font-caveat { font-family: 'Caveat', cursive; }
 
-        .modo-limpio .guia-ui { display: none !important; }
-        .modo-limpio .elemento-interactivo {
-            border: none !important;
-            background: transparent !important;
-            backdrop-filter: none !important;
+        /* Ocultar elementos de UI durante la captura de pantalla con html2canvas */
+        .modo-limpio .ocultar-en-captura {
+            display: none !important;
         }
     </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-amber-500 selection:text-slate-950">
+<body class="bg-slate-950 text-slate-100 font-montserrat min-h-screen flex flex-col">
 
-    <!-- HEADER -->
-    <header class="border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-xl sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
-            <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-500 to-orange-500 flex items-center justify-center shadow-lg shadow-amber-500/20">
-                    <span class="text-slate-950 font-black text-xl">E</span>
-                </div>
-                <div>
-                    <span class="text-lg sm:text-xl font-extrabold tracking-tight bg-gradient-to-r from-white via-slate-200 to-amber-400 bg-clip-text text-transparent block leading-tight">
-                        Eloi's Custom Gear
-                    </span>
-                    <span class="text-[10px] text-amber-400/80 font-bold tracking-widest uppercase block">Merch & Streetwear Lab</span>
-                </div>
+    <!-- Cabecera -->
+    <header class="bg-slate-900 border-b border-slate-800 py-4 px-6 sticky top-0 z-50 shadow-md">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <span class="bg-amber-500 text-slate-950 font-bold px-3 py-1 rounded-lg text-sm uppercase tracking-wider">Estudio Pro</span>
+                <h1 class="text-xl font-bold tracking-tight text-white">Eloísa Neleb Modas</h1>
             </div>
-            
-            <a href="#estudio" class="bg-gradient-to-r from-amber-400 to-orange-500 text-slate-950 font-extrabold px-5 py-2.5 rounded-full shadow-lg shadow-orange-500/20 hover:scale-105 active:scale-95 transition text-xs sm:text-sm">
-                Diseñar Ahora ⚡
-            </a>
+            <div class="flex items-center gap-4">
+                <span class="text-xs text-slate-400">Total Estimado:</span>
+                <span id="display-precio" class="text-2xl font-black text-amber-400">19.99 €</span>
+                <button onclick="generarVistaPrevia()" class="bg-slate-800 hover:bg-slate-700 text-amber-400 border border-amber-500/30 px-4 py-2 rounded-xl text-sm font-semibold transition shadow-sm">
+                    📸 Ver Mockup
+                </button>
+            </div>
         </div>
     </header>
 
-    <!-- ESTUDIO PRINCIPAL -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12 flex-grow w-full" id="estudio">
+    <!-- Contenido Principal -->
+    <main class="max-w-7xl mx-auto w-full p-4 md:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 flex-grow">
         
-        <div class="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
-            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-bold mb-4 tracking-wide uppercase">
-                <span>✨</span> Estudio de Diseño Interactivo Pro
+        <!-- Columna Izquierda: Controles y Herramientas (7 columnas) -->
+        <div class="lg:col-span-7 space-y-6 bg-slate-900/60 p-5 rounded-2xl border border-slate-800/80 backdrop-blur-sm">
+            
+            <!-- Paso 1: Selección de Soporte / Producto -->
+            <div>
+                <h2 class="text-sm font-bold uppercase tracking-wider text-amber-400 mb-3">1. Elige el Soporte</h2>
+                <div class="grid grid-cols-3 gap-3">
+                    <button onclick="setProducto('Camiseta Básica', 19.99, event)" class="producto-btn border-2 border-amber-500 bg-amber-500/10 p-3 rounded-xl text-left transition flex flex-col justify-between">
+                        <span class="text-sm font-bold">Camiseta</span>
+                        <span class="text-xs text-amber-400 font-semibold mt-2">19.99 €</span>
+                    </button>
+                    <button onclick="setProducto('Taza Mágica', 14.99, event)" class="producto-btn border-2 border-slate-800 bg-slate-950/60 p-3 rounded-xl text-left transition flex flex-col justify-between">
+                        <span class="text-sm font-bold">Taza</span>
+                        <span class="text-xs text-slate-400 font-semibold mt-2">14.99 €</span>
+                    </button>
+                    <button onclick="setProducto('Gorra Trucker', 16.50, event)" class="producto-btn border-2 border-slate-800 bg-slate-950/60 p-3 rounded-xl text-left transition flex flex-col justify-between">
+                        <span class="text-sm font-bold">Gorra</span>
+                        <span class="text-xs text-slate-400 font-semibold mt-2">16.50 €</span>
+                    </button>
+                </div>
             </div>
-            <h1 class="text-3xl sm:text-6xl font-black tracking-tight mb-4 leading-tight">
-                Personaliza sin límites. <br><span class="bg-gradient-to-r from-amber-400 via-orange-400 to-yellow-300 bg-clip-text text-transparent">Diseña, factura y encarga</span>
-            </h1>
-            <p class="text-slate-400 text-sm sm:text-base leading-relaxed">
-                Genera tu mockup profesional, añade tus datos y envía el pedido completo al instante.
-            </p>
+
+            <!-- Paso 2: Subir Imagen o Arte -->
+            <div class="pt-3 border-t border-slate-800">
+                <h2 class="text-sm font-bold uppercase tracking-wider text-amber-400 mb-3">2. Añade tu Imagen o Diseño</h2>
+                <div class="flex items-center gap-4">
+                    <label class="flex-1 flex flex-col items-center justify-center border-2 border-dashed border-slate-700 hover:border-amber-500 bg-slate-950/40 rounded-xl p-4 cursor-pointer transition">
+                        <span class="text-xs text-slate-300 font-medium">Sube tu archivo (PNG / JPG)</span>
+                        <input type="file" id="input-archivo" accept="image/*" class="hidden" onchange="manejarSubidaArchivo(event)">
+                    </label>
+                </div>
+            </div>
+
+            <!-- Paso 3: Texto Personalizado -->
+            <div class="pt-3 border-t border-slate-800">
+                <h2 class="text-sm font-bold uppercase tracking-wider text-amber-400 mb-3">3. Texto Personalizado</h2>
+                <div class="space-y-3">
+                    <input type="text" id="input-texto" placeholder="Escribe tu frase o nombre aquí..." oninput="actualizarTexto()" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-amber-500 transition">
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                            <label class="text-xs text-slate-400 block mb-1">Tipografía:</label>
+                            <select id="select-fuente" onchange="actualizarFuente()" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-amber-500">
+                                <option value="font-montserrat">Moderna (Montserrat)</option>
+                                <option value="font-caveat">Manuscrita (Caveat)</option>
+                                <option value="font-pacifico">Divertida (Pacifico)</option>
+                                <option value="font-cinzel">Elegante (Cinzel)</option>
+                                <option value="font-bangers">Cómic (Bangers)</option>
+                                <option value="font-retro">Retro Pixel</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="text-xs text-slate-400 block mb-1">Estilo de Color:</label>
+                            <select id="select-color-texto" onchange="actualizarColorTexto()" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-amber-500">
+                                <option value="text-slate-950 bg-white/90 px-2 py-1 rounded">Oscuro sobre Fondo Claro</option>
+                                <option value="text-white drop-shadow-lg">Blanco Puro con Sombra</option>
+                                <option value="text-amber-400 drop-shadow-md">Amarillo Oro</option>
+                                <option value="text-rose-500 bg-white/90 px-2 py-1 rounded">Rosa Vibrante</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Paso 4: Marcos y Efectos -->
+            <div class="pt-3 border-t border-slate-800">
+                <h2 class="text-sm font-bold uppercase tracking-wider text-amber-400 mb-3">4. Marco o Efecto Visual</h2>
+                <select id="select-marco" onchange="actualizarMarco()" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs focus:outline-none focus:border-amber-500">
+                    <option value="sin-marco">Sin Marco (Diseño Limpio)</option>
+                    <option value="marco-blanco">Marco Blanco Clásico</option>
+                    <option value="marco-oro">Marco Elegante Dorado</option>
+                    <option value="marco-neon">Marco Neón Azul</option>
+                    <option value="marco-redondo">Corte Circular Estilizado</option>
+                    <option value="marco-desgastado">Estilo Vintage / Desgastado</option>
+                    <option value="marco-sombra">Sombra Flotante 3D</option>
+                    <option value="marco-polaroid">Estilo Polaroid</option>
+                    <option value="marco-doble">Doble Borde Elegante</option>
+                </select>
+            </div>
+
+            <!-- Paso 5: Datos de Envío y Facturación -->
+            <div class="pt-3 border-t border-slate-800 space-y-3">
+                <h2 class="text-sm font-bold uppercase tracking-wider text-amber-400">5. Datos de Envío y Pedido</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <input type="text" id="fact-nombre" placeholder="Nombre y Apellidos *" class="bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-amber-500">
+                    <input type="text" id="fact-telefono" placeholder="Teléfono / WhatsApp *" class="bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-amber-500">
+                </div>
+                <input type="text" id="fact-direccion" placeholder="Dirección completa de entrega (Calle, Ciudad, CP) *" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-amber-500">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <input type="text" id="fact-dni" placeholder="DNI / NIF (Opcional para factura)" class="bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-amber-500">
+                    <select id="select-ubicacion" class="bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-amber-500">
+                        <option value="Península">Envío a Península</option>
+                        <option value="Baleares / Canarias">Baleares / Canarias</option>
+                        <option value="Recogida en Tienda">Recogida en Tienda Física</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Botón de Pedido por WhatsApp -->
+            <button onclick="enviarPedidoWhatsApp()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3.5 px-6 rounded-xl transition shadow-lg flex items-center justify-center gap-2 text-sm tracking-wide">
+                <span>💬 Enviar Pedido por WhatsApp</span>
+            </button>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            
-            <!-- COLUMNA IZQUIERDA: MOCKUP REAL -->
-            <div class="lg:col-span-7 bg-slate-900/60 border border-slate-800/80 rounded-3xl p-5 sm:p-6 shadow-2xl relative flex flex-col items-center backdrop-blur-md sticky top-24">
+        <!-- Columna Derecha: Vista Previa / Mockup (5 columnas) -->
+        <div class="lg:col-span-5 flex flex-col items-center justify-center bg-slate-900/40 p-6 rounded-2xl border border-slate-800/80">
+            <div class="w-full text-center mb-3">
+                <span class="text-xs uppercase tracking-widest text-slate-400 font-semibold">Previsualización en Vivo</span>
+            </div>
+
+            <!-- Contenedor del Mockup con la Camiseta Realista de Fondo -->
+            <div id="mockup-container" class="relative w-full max-w-sm aspect-[3/4] bg-slate-900 rounded-2xl overflow-hidden shadow-2xl border border-slate-800 flex items-center justify-center">
                 
-                <div class="absolute top-4 left-4 right-4 flex justify-between items-center z-30 pointer-events-none">
-                    <button type="button" id="btn-modo-limpio" onclick="alternarModoLimpio()" class="bg-slate-900/90 hover:bg-slate-800 border border-slate-700 text-slate-200 text-xs font-bold px-3 py-2 rounded-xl shadow-lg transition flex items-center gap-1.5 cursor-pointer pointer-events-auto active:scale-95">
-                        <span id="icono-ojo">👁️</span> <span id="texto-modo-limpio">Ocultar Guías</span>
-                    </button>
+                <!-- Imagen de fondo de la camiseta realista actualizada -->
+                <img id="imagen-base-producto" src="Camisa branca png _ Mockup camiseta branca, Blusa branca masculina, Modelos de_2.jpg" alt="Mockup Camiseta" class="absolute inset-0 w-full h-full object-cover z-0">
+
+                <!-- Zona de impresión / Área interactiva sobre el pecho de la camiseta -->
+                <div id="zona-impresion" class="relative z-10 w-44 h-52 flex flex-col items-center justify-center text-center mt-6">
                     
-                    <button type="button" onclick="generarVistaPrevia()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-black px-3.5 py-2 rounded-xl shadow-lg transition flex items-center gap-1.5 cursor-pointer pointer-events-auto active:scale-95">
-                        <span>📸</span> Previa HD
-                    </button>
-                </div>
-
-                <div id="mockup-container" class="w-full h-[420px] sm:h-[500px] flex items-center justify-center relative my-4 bg-slate-950 rounded-2xl border border-slate-800/80 overflow-hidden shadow-2xl select-none group">
-                    <img id="imagen-producto" crossorigin="anonymous" src="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover opacity-85 transition-all duration-500 pointer-events-none" alt="Mockup base">
-                    
-                    <div class="absolute inset-0 bg-radial from-transparent via-slate-950/30 to-slate-950/80 pointer-events-none"></div>
-
-                    <!-- ZONA LOGO CON CONTENEDOR DE MARCOS -->
-                    <div id="zona-estampado" class="elemento-interactivo absolute flex flex-col items-center justify-center z-20 text-center p-4 rounded-2xl border-2 border-dashed border-amber-400/40 hover:border-amber-400 bg-amber-500/5 transition-colors shadow-2xl backdrop-blur-[2px]" style="transform: translate(0px, -40px) scale(1);">
-                        <div class="guia-ui absolute -top-3.5 bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 text-[10px] font-black px-2.5 py-0.5 rounded-full shadow-md pointer-events-none uppercase tracking-wider">
-                            🎨 Logo (Arrastra / Zoom)
+                    <!-- Contenedor de la Imagen / Arte subido -->
+                    <div id="marco-imagen-wrapper" class="relative transition-all duration-300 max-w-full max-h-36 flex items-center justify-center">
+                        <div id="svgArte" class="w-28 h-28 flex items-center justify-center text-slate-400">
+                            <!-- Gráfico o vector inicial por defecto -->
+                            <svg class="w-20 h-20 opacity-50" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>
                         </div>
-                        
-                        <div id="marco-imagen-wrapper" class="p-0 transition-all duration-300">
-                            <img id="preview-imagen-subida" crossorigin="anonymous" class="max-h-36 sm:max-h-44 w-auto object-contain drop-shadow-2xl hidden pointer-events-none" alt="Diseño cliente">
-                        </div>
-
-                        <div id="placeholder-arte" class="guia-ui flex flex-col items-center justify-center p-4 pointer-events-none">
-                            <span class="text-2xl mb-1">🖼️</span>
-                            <span class="text-[11px] text-amber-300 font-bold bg-slate-950/90 px-3 py-1 rounded-full border border-slate-800 shadow">Sube tu diseño aquí</span>
-                        </div>
+                        <img id="preview-imagen-subida" class="hidden max-h-32 w-auto object-contain rounded" alt="Diseño subido">
+                        <div id="placeholder-arte" class="absolute inset-0 border border-dashed border-amber-500/40 rounded-lg pointer-events-none flex items-center justify-center text-[10px] text-amber-400/70 bg-slate-950/20 backdrop-blur-[1px]">Área de Diseño</div>
                     </div>
 
-                    <!-- ZONA TEXTO -->
-                    <div id="zona-texto-flotante" class="elemento-interactivo absolute flex flex-col items-center justify-center z-30 text-center p-3 rounded-xl border border-dashed border-sky-400/40 hover:border-sky-400 bg-sky-500/5 transition-colors hidden shadow-2xl backdrop-blur-[2px]" style="transform: translate(0px, 90px) scale(1);">
-                        <div class="guia-ui absolute -top-3 bg-gradient-to-r from-sky-400 to-blue-500 text-slate-950 text-[9px] font-black px-2 py-0.5 rounded-full shadow-md pointer-events-none uppercase tracking-wider">
-                            ✍️ Texto (Arrastra / Zoom)
-                        </div>
-                        <span id="preview-texto" class="font-bold drop-shadow-md text-white text-xl pointer-events-none px-3 py-1 font-urban"></span>
+                    <!-- Texto personalizado flotante -->
+                    <div id="zona-texto-flotante" class="hidden mt-1 px-2 py-0.5">
+                        <p id="preview-texto" class="text-xs font-bold text-slate-900 transition-all"></p>
                     </div>
-
-                </div>
-
-                <!-- Botones de Control Manual de Zoom -->
-                <div class="w-full grid grid-cols-2 gap-3 mb-2">
-                    <div class="bg-slate-950/90 border border-slate-800 rounded-xl p-2.5 flex items-center justify-between">
-                        <span class="text-[11px] font-bold text-amber-400">🔍 Zoom Logo</span>
-                        <div class="flex gap-1">
-                            <button type="button" onclick="cambiarZoom('logo', -15)" class="w-7 h-7 bg-slate-900 border border-slate-700 rounded-lg text-xs font-bold hover:bg-slate-800 active:scale-95">-</button>
-                            <button type="button" onclick="cambiarZoom('logo', 15)" class="w-7 h-7 bg-slate-900 border border-slate-700 rounded-lg text-xs font-bold hover:bg-slate-800 active:scale-95">+</button>
-                        </div>
-                    </div>
-                    <div class="bg-slate-950/90 border border-slate-800 rounded-xl p-2.5 flex items-center justify-between">
-                        <span class="text-[11px] font-bold text-sky-400">🔍 Zoom Texto</span>
-                        <div class="flex gap-1">
-                            <button type="button" onclick="cambiarZoom('texto', -15)" class="w-7 h-7 bg-slate-900 border border-slate-700 rounded-lg text-xs font-bold hover:bg-slate-800 active:scale-95">-</button>
-                            <button type="button" onclick="cambiarZoom('texto', 15)" class="w-7 h-7 bg-slate-900 border border-slate-700 rounded-lg text-xs font-bold hover:bg-slate-800 active:scale-95">+</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Modal de Vista Previa -->
-                <div id="modal-preview" class="w-full bg-slate-950 border border-slate-800 rounded-2xl p-4 hidden mt-2 animate-fade-in">
-                    <div class="flex justify-between items-center mb-2">
-                        <h4 class="text-xs font-bold text-amber-400 uppercase tracking-wider">✨ Vista Previa Capturada</h4>
-                        <button type="button" onclick="cerrarPreview()" class="text-slate-400 hover:text-white text-xs font-bold px-2 py-0.5 rounded bg-slate-900 border border-slate-800">✕ Cerrar</button>
-                    </div>
-                    <div id="contenedor-imagen-resultado" class="w-full flex justify-center rounded-xl overflow-hidden border border-slate-800 bg-slate-950 max-h-56"></div>
-                    <p class="text-[10px] text-slate-400 text-center mt-2">💡 Mantén pulsada la imagen para guardarla en tu dispositivo.</p>
-                </div>
-
-                <div class="w-full bg-slate-950/80 border border-slate-800 rounded-2xl p-4 flex justify-between items-center backdrop-blur-md mt-2">
-                    <div>
-                        <span class="text-[11px] font-medium text-slate-400 uppercase tracking-wider block">Total Estimado</span>
-                        <span class="text-2xl sm:text-3xl font-black text-amber-400" id="precio-total">15.00 €</span>
-                    </div>
-                    <span class="text-xs bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-3 py-1.5 rounded-xl font-bold">🛡️ DTF Premium</span>
                 </div>
             </div>
-
-            <!-- COLUMNA DERECHA: CONFIGURACIÓN Y FACTURACIÓN -->
-            <div class="lg:col-span-5 bg-slate-900/40 border border-slate-800/80 rounded-3xl p-6 sm:p-8 backdrop-blur-md shadow-xl">
-                <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-800">
-                    <h2 class="text-lg font-bold flex items-center gap-2.5 text-amber-400">
-                        <span class="p-2 rounded-xl bg-amber-500/10 border border-amber-500/20">🎛️</span> Panel de Configuración
-                    </h2>
-                </div>
-
-                <form id="order-form" class="space-y-6">
-                    
-                    <!-- 1. Soporte -->
-                    <div>
-                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">1. Selecciona el soporte</label>
-                        <div class="grid grid-cols-3 gap-3">
-                            <button type="button" onclick="setProducto('Camiseta', 15, 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=800&auto=format&fit=crop')" class="producto-btn group border-2 border-amber-500 bg-amber-500/10 rounded-2xl p-3 text-center cursor-pointer transition">
-                                <span class="block text-2xl mb-1">👕</span>
-                                <span class="text-xs font-bold block text-slate-200">Camiseta</span>
-                                <span class="text-[11px] text-amber-400 font-extrabold">15.00 €</span>
-                            </button>
-                            <button type="button" onclick="setProducto('Taza de Cerámica', 10, 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=800&auto=format&fit=crop')" class="producto-btn group border-2 border-slate-800 bg-slate-950/60 rounded-2xl p-3 text-center cursor-pointer transition">
-                                <span class="block text-2xl mb-1">☕</span>
-                                <span class="text-xs font-bold block text-slate-300">Taza</span>
-                                <span class="text-[11px] text-amber-400 font-extrabold">10.00 €</span>
-                            </button>
-                            <button type="button" onclick="setProducto('Gorra Trucker', 12, 'https://images.unsplash.com/photo-1588850561407-ed78c282e89b?q=80&w=800&auto=format&fit=crop')" class="producto-btn group border-2 border-slate-800 bg-slate-950/60 rounded-2xl p-3 text-center cursor-pointer transition">
-                                <span class="block text-2xl mb-1">🧢</span>
-                                <span class="text-xs font-bold block text-slate-300">Gorra</span>
-                                <span class="text-[11px] text-amber-400 font-extrabold">12.00 €</span>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- 2. Archivo, Ubicación y Marcos -->
-                    <div class="space-y-4 pt-2">
-                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-400">2. Tu diseño, posición y marcos</label>
-                        <div class="space-y-3">
-                            <div>
-                                <label class="block text-[11px] font-medium text-slate-400 mb-1.5">Archivo de imagen original (Obligatorio)</label>
-                                <input type="file" id="input-archivo" accept="image/*" class="w-full text-xs text-slate-300 bg-slate-950/80 rounded-xl border border-slate-800 p-2.5 file:mr-3 file:py-1.5 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-amber-500/10 file:text-amber-400 cursor-pointer transition" onchange="manejarSubidaArchivo(event)">
-                            </div>
-                            
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                <div>
-                                    <label class="block text-[10px] uppercase font-bold text-slate-500 mb-1">Estilo de Marco / Borde</label>
-                                    <select id="select-marco" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-amber-300 font-bold focus:outline-none focus:border-amber-400 transition" onchange="actualizarMarco()">
-                                        <option value="sin-marco">Sin borde</option>
-                                        <option value="marco-blanco">Borde Blanco Sólido</option>
-                                        <option value="marco-oro">Borde Oro / Ámbar</option>
-                                        <option value="marco-neon">Neón Eléctrico</option>
-                                        <option value="marco-redondo">Corte Circular Suave</option>
-                                        <option value="marco-desgastado">Vintage / Desgastado</option>
-                                        <option value="marco-difuminado">Difuminado / Vignette</option>
-                                        <option value="marco-sombra">Sombra Elevada 3D</option>
-                                        <option value="marco-polaroid">Estilo Polaroid</option>
-                                        <option value="marco-doble">Doble Marco Fino</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label class="block text-[10px] uppercase font-bold text-slate-500 mb-1">Ubicación principal</label>
-                                    <select id="select-ubicacion" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-amber-400 transition">
-                                        <option value="Frente / Centrado">Frente / Centrado principal</option>
-                                        <option value="Espalda / Reverso">Espalda / Reverso completo</option>
-                                        <option value="Pecho Izquierdo (Logo)">Pecho Izquierdo (Logo)</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 3. Texto y Tipografías -->
-                    <div class="space-y-4 pt-2 border-t border-slate-800/80">
-                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-400">3. Texto y Tipografías Pro</label>
-                        
-                        <div class="space-y-3">
-                            <input type="text" id="input-texto" placeholder="Escribe tu frase o nombre..." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-xs sm:text-sm text-slate-100 focus:outline-none focus:border-amber-400 transition shadow-inner" oninput="actualizarTexto()">
-                            
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                <div>
-                                    <label class="block text-[10px] uppercase font-bold text-slate-500 mb-1">Selecciona la Fuente</label>
-                                    <select id="select-fuente" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-amber-300 font-bold focus:outline-none focus:border-amber-400 transition" onchange="actualizarFuente()">
-                                        <option value="font-urban" class="font-urban text-sm">Abc Urban Modern</option>
-                                        <option value="font-bebas" class="font-bebas text-base">ABC BEBAS STREET</option>
-                                        <option value="font-anton" class="font-anton text-base">ABC ANTON HEAVY</option>
-                                        <option value="font-bungee" class="font-bungee text-xs">ABC 3D BUNGEE</option>
-                                        <option value="font-marker" class="font-marker text-sm">Abc Graffiti Marker</option>
-                                        <option value="font-rye" class="font-rye text-sm">ABC RYE WESTERN</option>
-                                        <option value="font-cinzel" class="font-cinzel text-sm">ABC CINZEL LUXURY</option>
-                                        <option value="font-montserrat" class="font-montserrat text-sm">ABC MONTSERRAT</option>
-                                        <option value="font-glitch" class="font-glitch text-sm">ABC GLITCH CYBER</option>
-                                        <option value="font-creepster" class="font-creepster text-sm">ABC CREEPSTER ROCK</option>
-                                        <option value="font-typewriter" class="font-typewriter text-xs">ABC TYPEWRITER</option>
-                                        <option value="font-retro" class="font-retro text-base">Abc Retro Digital</option>
-                                        <option value="font-pacifico" class="font-pacifico text-sm">Abc Pacifico Script</option>
-                                        <option value="font-arcade" class="font-arcade text-xs">ABC 8-BIT ARCADE</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label class="block text-[10px] uppercase font-bold text-slate-500 mb-1">Color del texto</label>
-                                    <select id="select-color-texto" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-slate-300 focus:outline-none focus:border-amber-400 transition" onchange="actualizarColorTexto()">
-                                        <option value="text-white">Blanco puro</option>
-                                        <option value="text-amber-400">Ámbar / Oro brillante</option>
-                                        <option value="text-slate-950 bg-white px-2 py-0.5 rounded font-black">Negro sólido</option>
-                                        <option value="text-rose-400">Rojo Neón</option>
-                                        <option value="text-sky-400">Azul Eléctrico</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 4. DATOS DE FACTURACIÓN Y ENVÍO -->
-                    <div class="space-y-4 pt-2 border-t border-slate-800/80">
-                        <label class="block text-xs font-bold uppercase tracking-wider text-amber-400">4. Datos de Facturación y Envío</label>
-                        
-                        <div class="space-y-3">
-                            <div>
-                                <label class="block text-[10px] uppercase font-bold text-slate-500 mb-1">Nombre y Apellidos / Empresa</label>
-                                <input type="text" id="fact-nombre" placeholder="Ej. Juan Pérez" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-slate-100 focus:outline-none focus:border-amber-400 transition">
-                            </div>
-                            
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                <div>
-                                    <label class="block text-[10px] uppercase font-bold text-slate-500 mb-1">DNI / NIF</label>
-                                    <input type="text" id="fact-dni" placeholder="Ej. 12345678X" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-slate-100 focus:outline-none focus:border-amber-400 transition">
-                                </div>
-                                <div>
-                                    <label class="block text-[10px] uppercase font-bold text-slate-500 mb-1">Teléfono de contacto</label>
-                                    <input type="tel" id="fact-telefono" placeholder="Ej. 600123456" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-slate-100 focus:outline-none focus:border-amber-400 transition">
-                                </div>
-                            </div>
-
-                            <div>
-                                <label class="block text-[10px] uppercase font-bold text-slate-500 mb-1">Dirección de Envío y Código Postal</label>
-                                <input type="text" id="fact-direccion" placeholder="Calle, Número, Piso, Ciudad, CP" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-slate-100 focus:outline-none focus:border-amber-400 transition">
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- BOTÓN WHATSAPP -->
-                    <div class="pt-4">
-                        <button type="button" onclick="enviarPedidoWhatsApp()" class="w-full bg-gradient-to-r from-emerald-500 via-green-500 to-emerald-600 text-slate-950 font-black py-4 px-6 rounded-2xl shadow-xl shadow-green-600/20 hover:scale-[1.02] active:scale-[0.98] transition flex items-center justify-center gap-2.5 cursor-pointer text-sm sm:text-base">
-                            <span class="text-xl">📲</span> Descargar Mockup y Enviar por WhatsApp
-                        </button>
-                    </div>
-
-                </form>
-            </div>
-
+            
+            <p class="text-[11px] text-slate-500 text-center mt-4">El diseño se ajusta automáticamente sobre el pecho del mockup seleccionado.</p>
         </div>
     </main>
 
-    <!-- FOOTER -->
-    <footer class="border-t border-slate-800/80 bg-slate-950 py-8 px-4 text-center text-xs text-slate-500">
-        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
-            <p>&copy; 2026 Eloi's Custom Gear. Todos los derechos reservados.</p>
+    <!-- Modal de Resultado de Mockup -->
+    <div id="modal-preview" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-md w-full p-6 text-center space-y-4 shadow-2xl">
+            <h3 class="text-lg font-bold text-white">¡Mockup Generado con Éxito!</h3>
+            <p class="text-xs text-slate-400">Hemos preparado la imagen de tu diseño personalizado listo para adjuntar en tu pedido.</p>
+            <div id="contenedor-imagen-resultado" class="flex justify-center my-4"></div>
+            <div class="flex gap-3">
+                <button onclick="cerrarPreview()" class="flex-1 bg-slate-800 hover:bg-slate-700 text-white font-semibold py-2.5 rounded-xl text-xs transition">Cerrar</button>
+            </div>
         </div>
-    </footer>
+    </div>
 
-    <!-- SCRIPT DE INTERACCIÓN CON PUNTEROS UNIFICADOS -->
+    <!-- Scripts de Control -->
     <script>
-        let productoActual = "Camiseta";
-        let precioActual = 15.00;
+        let productoActual = 'Camiseta Básica';
+        let precioActual = 19.99;
 
-        let logoState = { posX: 0, posY: -40, scale: 100 };
-        let textState = { posX: 0, posY: 90, scale: 100 };
+        const formasVectoriales = {
+            'camiseta': `<svg class="w-20 h-20 opacity-50" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>`,
+            'taza': `<svg class="w-20 h-20 opacity-50" fill="currentColor" viewBox="0 0 24 24"><path d="M2 21h18v-2H2M20 8h-2V5H4v3H2v2c0 2.21 1.79 4 4 4h8c2.21 0 4-1.79 4-4v-2h2V8m-2 2c0 1.1-.9 2-2 2H6c-1.1 0-2-.9-2-2v-1h12v1Z"/></svg>`,
+            'gorra': `<svg class="w-20 h-20 opacity-50" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 .5.04 1 .11 1.5H3v2h2.2c.6 1.8 2.1 3.1 4 3.4v.6h6v-.6c1.9-.3 3.4-1.6 4-3.4H21v-2h-.11c.07-.5.11-1 .11-1.5 0-4.97-4.03-9-9-9zm0 2c3.87 0 7 3.13 7 7 0 .34-.03.67-.08 1H5.08c-.05-.33-.08-.66-.08-1 0-3.87 3.13-7 7-7z"/></svg>`
+        };
 
-        const zonaEstampado = document.getElementById('zona-estampado');
-        const zonaTextoFlotante = document.getElementById('zona-texto-flotante');
-        const mockupContainer = document.getElementById('mockup-container');
-
-        function configurarArrastreConPunteros(elemento, stateObj) {
-            let estaArrastrando = false;
-            let inicioX = 0;
-            let inicioY = 0;
-            let idPointer = null;
-
-            elemento.addEventListener('pointerdown', (e) => {
-                estaArrastrando = true;
-                idPointer = e.pointerId;
-                inicioX = e.clientX - stateObj.posX;
-                inicioY = e.clientY - stateObj.posY;
-                elemento.setPointerCapture(e.pointerId);
-                elemento.style.zIndex = 60;
-                e.preventDefault();
-            });
-
-            elemento.addEventListener('pointermove', (e) => {
-                if (!estaArrastrando || e.pointerId !== idPointer) return;
-                stateObj.posX = e.clientX - inicioX;
-                stateObj.posY = e.clientY - inicioY;
-                actualizarTransformaciones();
-            });
-
-            const finalizarArrastre = (e) => {
-                if (!estaArrastrando || (e.pointerId && e.pointerId !== idPointer)) return;
-                estaArrastrando = false;
-                idPointer = null;
-            };
-
-            elemento.addEventListener('pointerup', finalizarArrastre);
-            elemento.addEventListener('pointercancel', finalizarArrastre);
-
-            // Zoom con rueda de ratón
-            elemento.addEventListener('wheel', (e) => {
-                e.preventDefault();
-                if (e.deltaY < 0) {
-                    stateObj.scale = Math.min(400, stateObj.scale + 15);
-                } else {
-                    stateObj.scale = Math.max(30, stateObj.scale - 15);
-                }
-                actualizarTransformaciones();
-            }, { passive: false });
-        }
-
-        configurarArrastreConPunteros(zonaEstampado, logoState);
-        configurarArrastreConPunteros(zonaTextoFlotante, textState);
-
-        function actualizarTransformaciones() {
-            zonaEstampado.style.transform = `translate(${logoState.posX}px, ${logoState.posY}px) scale(${logoState.scale / 100})`;
-            zonaTextoFlotante.style.transform = `translate(${textState.posX}px, ${textState.posY}px) scale(${textState.scale / 100})`;
-        }
-
-        function cambiarZoom(tipo, valor) {
-            if (tipo === 'logo') {
-                logoState.scale = Math.min(400, Math.max(30, logoState.scale + valor));
-            } else {
-                textState.scale = Math.min(400, Math.max(30, textState.scale + valor));
-            }
-            actualizarTransformaciones();
-        }
-
-        let modoLimpioActivo = false;
-        function alternarModoLimpio() {
-            modoLimpioActivo = !modoLimpioActivo;
-            if (modoLimpioActivo) {
-                mockupContainer.classList.add('modo-limpio');
-                document.getElementById('icono-ojo').innerText = "🙈";
-                document.getElementById('texto-modo-limpio').innerText = "Mostrar Guías";
-            } else {
-                mockupContainer.classList.remove('modo-limpio');
-                document.getElementById('icono-ojo').innerText = "👁️";
-                document.getElementById('texto-modo-limpio').innerText = "Ocultar Guías";
-            }
-        }
-
-        function setProducto(nombre, precio, urlMockup) {
-            productoActual = nombre;
+        function setProducto(tipo, precio, event) {
+            productoActual = tipo;
             precioActual = precio;
-            document.getElementById('precio-total').innerText = precio.toFixed(2) + " €";
-            document.getElementById('imagen-producto').src = urlMockup;
+            document.getElementById('display-precio').innerText = precio.toFixed(2) + ' €';
 
-            logoState = { posX: 0, posY: -40, scale: 100 };
-            textState = { posX: 0, posY: 90, scale: 100 };
-            actualizarTransformaciones();
-            cerrarPreview();
+            const imagenBase = document.getElementById('imagen-base-producto');
+            const svgArte = document.getElementById('svgArte');
 
+            if (tipo.includes('Camiseta')) {
+                imagenBase.src = "Camisa branca png _ Mockup camiseta branca, Blusa branca masculina, Modelos de_2.jpg";
+                imagenBase.classList.remove('hidden');
+                svgArte.innerHTML = formasVectoriales['camiseta'];
+            } else if (tipo.includes('Gorra')) {
+                imagenBase.classList.add('hidden');
+                svgArte.innerHTML = formasVectoriales['gorra'];
+            } else if (tipo.includes('Taza')) {
+                imagenBase.classList.add('hidden');
+                svgArte.innerHTML = formasVectoriales['taza'];
+            }
+
+            // Actualizar botones seleccionados
             const botones = document.querySelectorAll('.producto-btn');
             botones.forEach(btn => {
-                btn.classList.remove('border-amber-500', 'bg-amber-500/15');
+                btn.classList.remove('border-amber-500', 'bg-amber-500/10');
                 btn.classList.add('border-slate-800', 'bg-slate-950/60');
             });
-            event.currentTarget.classList.remove('border-slate-800', 'bg-slate-950/60');
-            event.currentTarget.classList.add('border-amber-500', 'bg-amber-500/15');
+            if (event && event.currentTarget) {
+                event.currentTarget.classList.remove('border-slate-800', 'bg-slate-950/60');
+                event.currentTarget.classList.add('border-amber-500', 'bg-amber-500/10');
+            }
         }
 
-        function manejarSubidaArchivo(event) {
-            const archivo = event.target.files[0];
+        function manejarSubidaArchivo(e) {
+            const archivo = e.target.files[0];
             if (archivo) {
                 const lector = new FileReader();
-                lector.onload = function(e) {
-                    const imgPreview = document.getElementById('preview-imagen-subida');
+                lector.onload = function(evento) {
+                    const img = document.getElementById('preview-imagen-subida');
+                    img.src = evento.target.result;
+                    img.classList.remove('hidden');
+                    // Ocultamos tanto el SVG por defecto como el texto de placeholder para que luzca limpio
+                    const svgContainer = document.getElementById('svgArte');
+                    if(svgContainer) svgContainer.style.display = 'none';
                     const placeholder = document.getElementById('placeholder-arte');
-                    
-                    imgPreview.src = e.target.result;
-                    imgPreview.classList.remove('hidden');
-                    placeholder.classList.add('hidden');
+                    if(placeholder) placeholder.classList.add('hidden');
                 }
                 lector.readAsDataURL(archivo);
             }
@@ -440,165 +263,132 @@
         function actualizarMarco() {
             const estilo = document.getElementById('select-marco').value;
             const wrapper = document.getElementById('marco-imagen-wrapper');
-            
-            wrapper.className = "p-0 transition-all duration-300";
+            wrapper.className = "relative transition-all duration-300 max-w-full max-h-36 flex items-center justify-center p-0";
 
-            if (estilo === 'marco-blanco') {
-                wrapper.className = "p-3 bg-white rounded-xl shadow-2xl transition-all duration-300";
-            } else if (estilo === 'marco-oro') {
-                wrapper.className = "p-3 bg-gradient-to-tr from-amber-500 to-yellow-300 rounded-xl shadow-2xl transition-all duration-300";
-            } else if (estilo === 'marco-neon') {
-                wrapper.className = "p-3 bg-sky-500/20 border-2 border-sky-400 rounded-xl shadow-[0_0_25px_rgba(56,189,248,0.7)] transition-all duration-300";
-            } else if (estilo === 'marco-redondo') {
-                wrapper.className = "p-1 bg-slate-900 border-2 border-amber-400 rounded-full overflow-hidden shadow-2xl transition-all duration-300";
-            } else if (estilo === 'marco-desgastado') {
-                wrapper.className = "p-4 bg-stone-900 border-4 border-dashed border-stone-600 rounded-lg shadow-[inset_0_0_15px_rgba(0,0,0,0.9)] transition-all duration-300";
-            } else if (estilo === 'marco-difuminado') {
-                wrapper.className = "p-5 bg-gradient-to-b from-slate-900/80 to-slate-950/90 rounded-3xl backdrop-blur-md shadow-[0_0_30px_rgba(255,255,255,0.15)] transition-all duration-300";
-            } else if (estilo === 'marco-sombra') {
-                wrapper.className = "p-2 bg-slate-900/60 border border-slate-700/50 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.8)] transition-all duration-300";
-            } else if (estilo === 'marco-polaroid') {
-                wrapper.className = "pt-3 px-3 pb-8 bg-white text-slate-900 rounded shadow-2xl transition-all duration-300 rotate-1";
-            } else if (estilo === 'marco-doble') {
-                wrapper.className = "p-1.5 bg-amber-500/20 border border-amber-400/80 rounded-2xl shadow-xl ring-4 ring-slate-950/80 transition-all duration-300";
+            switch(estilo) {
+                case 'marco-blanco':
+                    wrapper.className = "relative transition-all duration-300 max-w-full max-h-36 flex items-center justify-center p-2.5 bg-white rounded-xl shadow-xl";
+                    break;
+                case 'marco-oro':
+                    wrapper.className = "relative transition-all duration-300 max-w-full max-h-36 flex items-center justify-center p-2.5 bg-gradient-to-tr from-amber-500 to-yellow-300 rounded-xl shadow-lg shadow-amber-500/20";
+                    break;
+                case 'marco-neon':
+                    wrapper.className = "relative transition-all duration-300 max-w-full max-h-36 flex items-center justify-center p-2.5 bg-slate-950 border border-sky-400 rounded-xl shadow-lg shadow-sky-500/40";
+                    break;
+                case 'marco-redondo':
+                    wrapper.className = "relative transition-all duration-300 max-w-full max-h-36 flex items-center justify-center p-2 bg-slate-900 rounded-full overflow-hidden border border-amber-400 shadow-lg";
+                    break;
+                case 'marco-desgastado':
+                    wrapper.className = "relative transition-all duration-300 max-w-full max-h-36 flex items-center justify-center p-2 bg-slate-900 border-2 border-dashed border-slate-600 rounded-lg";
+                    break;
+                case 'marco-sombra':
+                    wrapper.className = "relative transition-all duration-300 max-w-full max-h-36 flex items-center justify-center p-2.5 bg-slate-900 rounded-xl shadow-2xl shadow-black/80 border border-slate-700";
+                    break;
+                case 'marco-polaroid':
+                    wrapper.className = "relative transition-all duration-300 max-w-full max-h-36 flex items-center justify-center p-2 pb-6 bg-white rounded shadow-xl text-slate-950";
+                    break;
+                case 'marco-doble':
+                    wrapper.className = "relative transition-all duration-300 max-w-full max-h-36 flex items-center justify-center p-2 bg-slate-950 border-2 border-slate-800 outline outline-1 outline-amber-400 rounded-xl";
+                    break;
             }
         }
 
         function actualizarTexto() {
             const texto = document.getElementById('input-texto').value;
-            const preview = document.getElementById('preview-texto');
-            preview.innerText = texto;
+            const elementoTexto = document.getElementById('preview-texto');
+            const contenedorTexto = document.getElementById('zona-texto-flotante');
 
-            if (texto.trim().length > 0) {
-                zonaTextoFlotante.classList.remove('hidden');
+            if (texto.trim() !== "") {
+                elementoTexto.innerText = texto;
+                contenedorTexto.classList.remove('hidden');
             } else {
-                zonaTextoFlotante.classList.add('hidden');
+                contenedorTexto.classList.add('hidden');
             }
         }
 
         function actualizarFuente() {
-            const fuente = document.getElementById('select-fuente').value;
-            const preview = document.getElementById('preview-texto');
-            const clasesExistentes = Array.from(preview.classList).filter(c => c.startsWith('text-') || c.startsWith('bg-') || c.startsWith('font-') || c === 'font-bold' || c === 'drop-shadow-md' || c === 'px-3' || c === 'py-1');
-            const clasesColor = clasesExistentes.filter(c => c.startsWith('text-') || c.startsWith('bg-')).join(' ');
-            
-            preview.className = `drop-shadow-md px-3 py-1 font-bold ${clasesColor} ${fuente}`;
+            const fuenteSeleccionada = document.getElementById('select-fuente').value;
+            const elementoTexto = document.getElementById('preview-texto');
+            elementoTexto.className = elementoTexto.className.replace(/font-\S+/g, '');
+            elementoTexto.classList.add(fuenteSeleccionada);
         }
 
         function actualizarColorTexto() {
-            const color = document.getElementById('select-color-texto').value;
-            const preview = document.getElementById('preview-texto');
+            const colorSeleccionado = document.getElementById('select-color-texto').value;
+            const elementoTexto = document.getElementById('preview-texto');
+            elementoTexto.className = elementoTexto.className.replace(/(text-\S+|bg-\S+|px-\S+|py-\S+|rounded-\S+|font-\S+|drop-shadow-\S+)/g, '');
             const fuenteActual = document.getElementById('select-fuente').value;
-            
-            preview.className = `drop-shadow-md px-3 py-1 font-bold ${color} ${fuenteActual}`;
+            elementoTexto.classList.add(fuenteActual, 'text-xs', 'font-bold');
+            colorSeleccionado.split(' ').forEach(clase => elementoTexto.classList.add(clase));
         }
 
-        let imagenBase64Preview = "";
+        async function generarVistaPrevia() {
+            const mockupEl = document.getElementById('mockup-container');
+            mockupEl.classList.add('modo-limpio');
 
-        function generarVistaPrevia() {
-            const estabaLimpio = modoLimpioActivo;
-            if (!estabaLimpio) mockupContainer.classList.add('modo-limpio');
-
-            setTimeout(() => {
-                html2canvas(mockupContainer, { 
-                    backgroundColor: null, 
-                    scale: 2, 
-                    useCORS: true, 
-                    allowTaint: true 
-                }).then(canvas => {
-                    imagenBase64Preview = canvas.toDataURL('image/png');
-                    if (!estabaLimpio) mockupContainer.classList.remove('modo-limpio');
-
-                    const contenedorResultado = document.getElementById('contenedor-imagen-resultado');
-                    contenedorResultado.innerHTML = `<img src="${imagenBase64Preview}" class="max-h-48 rounded-lg shadow-lg border border-slate-800 object-contain" alt="Vista previa diseño">`;
-                    document.getElementById('modal-preview').classList.remove('hidden');
-                }).catch(err => {
-                    if (!estabaLimpio) mockupContainer.classList.remove('modo-limpio');
-                    console.error(err);
-                    alert("No se pudo generar la imagen previa automática.");
-                });
-            }, 100);
+            try {
+                const canvas = await html2canvas(mockupEl, { scale: 2, useCORS: true, backgroundColor: null });
+                const imagenURL = canvas.toDataURL('image/png');
+                const contenedor = document.getElementById('contenedor-imagen-resultado');
+                contenedor.innerHTML = `<img src="${imagenURL}" class="max-h-52 w-auto rounded-lg shadow-lg">`;
+                document.getElementById('modal-preview').classList.remove('hidden');
+            } catch (error) {
+                console.error("Error al generar vista previa:", error);
+                alert("Hubo un error al generar la imagen.");
+            } finally {
+                mockupEl.classList.remove('modo-limpio');
+            }
         }
 
         function cerrarPreview() {
             document.getElementById('modal-preview').classList.add('hidden');
         }
 
-        function enviarPedidoWhatsApp() {
-            const archivoInput = document.getElementById('input-archivo');
-            const nombreNombre = document.getElementById('fact-nombre').value.trim();
+        async function enviarPedidoWhatsApp() {
+            const nombre = document.getElementById('fact-nombre').value.trim();
+            const telefono = document.getElementById('fact-telefono').value.trim();
+            const direccion = document.getElementById('fact-direccion').value.trim();
             const dni = document.getElementById('fact-dni').value.trim();
-            const tel = document.getElementById('fact-telefono').value.trim();
-            const dir = document.getElementById('fact-direccion').value.trim();
+            const textoPersonalizado = document.getElementById('input-texto').value.trim();
+            const ubicacion = document.getElementById('select-ubicacion').value;
+            const marco = document.getElementById('select-marco').value;
 
-            if (archivoInput.files.length === 0) {
-                alert("⚠️ Por favor, sube tu archivo de imagen original antes de enviar.");
-                archivoInput.focus();
-                return;
-            }
-
-            if (!nombreNombre || !dni || !tel || !dir) {
-                alert("⚠️ Por favor, completa todos los datos de facturación y envío.");
+            if (!nombre || !telefono || !direccion) {
+                alert("Por favor, completa al menos tu Nombre, Teléfono y Dirección de Envío.");
                 document.getElementById('fact-nombre').focus();
                 return;
             }
 
-            const estabaLimpio = modoLimpioActivo;
-            if (!estabaLimpio) mockupContainer.classList.add('modo-limpio');
+            const mockupEl = document.getElementById('mockup-container');
+            mockupEl.classList.add('modo-limpio');
 
-            setTimeout(() => {
-                html2canvas(mockupContainer, { 
-                    backgroundColor: null, 
-                    scale: 2, 
-                    useCORS: true, 
-                    allowTaint: true 
-                }).then(canvas => {
-                    if (!estabaLimpio) mockupContainer.classList.remove('modo-limpio');
+            try {
+                const canvas = await html2canvas(mockupEl, { scale: 2, useCORS: true, backgroundColor: '#020617' });
+                const link = document.createElement('a');
+                link.download = `Mockup-${nombre.replace(/\s+/g, '_')}.png`;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            } catch (err) {
+                console.error("No se pudo autodescargar la imagen:", err);
+            } finally {
+                mockupEl.classList.remove('modo-limpio');
+            }
 
-                    const enlaceDescarga = document.createElement('a');
-                    enlaceDescarga.download = `Mockup-${productoActual.replace(/\s+/g, '-')}-${Date.now()}.png`;
-                    enlaceDescarga.href = canvas.toDataURL('image/png');
-                    enlaceDescarga.click();
+            const mensaje = `¡Hola! 👋 Me gustaría encargar este diseño personalizado:%0A%0A` +
+                            `👕 *Soporte:* ${productoActual}%0A` +
+                            `💰 *Precio Estimado:* ${precioActual.toFixed(2)} €%0A` +
+                            `📍 *Ubicación / Envío:* ${ubicacion}%0A` +
+                            `🖼️ *Estilo de Marco:* ${marco}%0A` +
+                            `${textoPersonalizado ? `✍️ *Texto:* "${textoPersonalizado}"%0A` : ``}%0A` +
+                            `📋 *DATOS DE CLIENTE:*%0A` +
+                            `👤 *Nombre:* ${nombre}%0A` +
+                            `🆔 *DNI/NIF:* ${dni || 'No indicado'}%0A` +
+                            `📞 *Teléfono:* ${telefono}%0A` +
+                            `📦 *Dirección:* ${direccion}%0A%0A` +
+                            `_*(Adjunto la imagen del mockup que se acaba de descargar en mi dispositivo)*_`;
 
-                    const texto = document.getElementById('input-texto').value || "Ninguno";
-                    const selectFuente = document.getElementById('select-fuente');
-                    const fuente = selectFuente.options[selectFuente.selectedIndex].text;
-                    const selectColor = document.getElementById('select-color-texto');
-                    const colorTexto = selectColor.options[selectColor.selectedIndex].text;
-                    const ubicacion = document.getElementById('select-ubicacion').value;
-                    const selectMarco = document.getElementById('select-marco');
-                    const estiloMarco = selectMarco.options[selectMarco.selectedIndex].text;
-                    const nombreArchivo = archivoInput.files[0].name;
-
-                    const telefonoWhatsApp = "34650013500";
-
-                    let mensaje = `📋 *NUEVO PEDIDO - ELOI'S CUSTOM GEAR*
-
-👤 *DATOS DE FACTURACIÓN Y ENVÍO:*
-• Nombre: ${nombreNombre}
-• DNI/NIF: ${dni}
-• Teléfono: ${tel}
-• Dirección: ${dir}
-
-🎨 *DETALLES DEL DISEÑO:*
-• Soporte: ${productoActual} (${precioActual.toFixed(2)} €)
-• Ubicación: ${ubicacion}
-• Archivo Original: ${nombreArchivo}
-• Marco / Borde: ${estiloMarco}
-• Texto añadido: "${texto}"
-• Tipografía: ${fuente} (${colorTexto})
-
-⚠️ *¡IMPORTANTE:* El sistema acaba de descargar automáticamente en tu dispositivo la **imagen del Mockup** generada. Por favor, adjúntala aquí junto con tu **archivo original** para proceder con el pago y producción!`;
-
-                    const urlWap = `https://wa.me/${telefonoWhatsApp}?text=${encodeURIComponent(mensaje)}`;
-                    window.open(urlWap, '_blank');
-
-                }).catch(err => {
-                    if (!estabaLimpio) mockupContainer.classList.remove('modo-limpio');
-                    console.error(err);
-                    alert("Hubo un error al preparar los archivos de diseño.");
-                });
-            }, 150);
+            const numeroWhatsApp = "34600000000"; // Cambiar por tu número real de taller
+            window.open(`https://wa.me/${numeroWhatsApp}?text=${mensaje}`, '_blank');
         }
     </script>
 </body>
